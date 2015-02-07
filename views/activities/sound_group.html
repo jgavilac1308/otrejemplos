@@ -1,0 +1,56 @@
+<div class="liz-sound-group full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Ícono de respuesta correcta - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Ícono de respuesta incorrecta - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<div class="liz-sound-group-container clearfix">
+
+	<!--Aquí es donde caen los elementos -->
+	<div class="group-container">
+		<!--ícono de audio-->
+		<div class="icon-sound" data-bind="click: playSound"></div>
+
+		<!-- Elementos de audio -->
+		<audio id="audio-group" preload="auto">
+			<source data-bind="attr: { src: $root.resources + '/' + sound() + '.mp3' }"  type="audio/mpeg">
+		</audio>
+
+		<div class="group" data-bind="sortable: { data: group, options: { cancel: '.prevent' } }">
+			<div class="item prevent" data-bind="attr: { style: $root.getStyles($data) }"> 
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" />
+			</div> <!--/.item-->
+		</div> <!--/.group-->
+
+	</div> <!--/.group-container-->
+
+	<!--pila de objetos-->
+	<div class="items" data-bind="sortable: { data: items }">
+		<div class="item">
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" />
+		</div> <!--/.item-->
+	</div> <!--/.items-->
+
+</div> <!--/.row.liz-sound-group-container-->
+
+ <!--CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-sound-group-->
+

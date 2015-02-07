@@ -1,0 +1,65 @@
+<div class="liz-images-info shadow clearfix" ng-class="isBottom ? '' : 'full-height'">
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img ng-show="watch" src="../resources/common/iconoobservar.png" alt="ícono de observación"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+
+        <!-- Images -->
+        <div class="images">
+            <div ng-click="verify(img)" class="image" ng-repeat="img in images">
+                <img class="img-responsive" src="{{ $root.resources }}/{{ img.src }}.{{ img.imgExt }}" alt="{{ img.alt }}" title="{{ img.title }}"/>
+                <div class="image-text bg-1">{{ img.text }}</div>
+
+                <audio id="audio-{{ img.src }}" preload="auto">
+                    <source src="{{ $root.resources + '/' +  img.src + '.mp3' }}" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <div class="text-block bd-1">
+            <div class="text-block-title bg-1" play="audio-selected" on="click">
+                <img class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+                <h1>{{ selectedImage.text }}</h1>
+            </div>
+
+            <p>{{ selectedImage.text2 }}</p>
+
+            <audio id="audio-selected" preload="auto">
+                <source src="{{ $root.resources + '/' +  selectedImage.src + '.mp3' }}" type="audio/mpeg">
+            </audio>
+        </div>
+
+	</div> <!--.block-content-->
+
+</div>
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

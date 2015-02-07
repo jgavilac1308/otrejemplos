@@ -1,0 +1,69 @@
+<div class="liz-complete-inputs-true-false full-height shadow">
+	<!--Descripción-->
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio ng-if="audio" id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="vertical-align-inner">
+		<div ng-if="aOptions" class="row aOptionsRow">
+			<div class="col-md-4 aOptionsCol" ng-repeat="option in aOptions">
+				<span>{{ option.num }}.&nbsp;{{ option.name }}</span>
+			</div>
+		</div><br/>
+		<table class="inputsFalseTrueContainer">
+			<tr ng-repeat="item in items" class="inputsFalseTrueRow">
+				<td width="9%" class="blockNumber">
+					<span>
+						{{ item.number }}
+					</span>
+				</td>
+				<td width="80%" class="blockText">
+					{{ item.description }}
+				</td>
+				<td class="blockInput">
+					<input type="text" ng-model="item.input" ng-blur="verify(item)" maxlength="1" ng-disabled="item.block">
+					<div ng-show="item.right" class="right-answer scale1"></div>
+					<div ng-show="item.wrong" class="wrong-answer scale1"></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+</div> <!--/.liz-complete-table-inputs-->
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

@@ -1,0 +1,64 @@
+<div class="liz-puzzle4 liz-puzzle5 full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face scale1" src="../resources/common/icon_right.png" alt="icono de bien hecho Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face scale1" src="../resources/common/icon_wrong.png" alt="icono de sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--audio-->
+<audio ng-if="audio" id="puzzle5-instruction" preload="auto">
+	<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg" >
+</audio>
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="puzzle5-instruction" on="click" data-bind="click: $root.playAudio"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+
+
+<!--Actividad-->
+<div class="block-content">
+
+
+	<div class="push-left puzzle2-canvas">
+		<div class="inner-canvas">
+			<img class="img-responsive" data-bind="attr: { src: resources + '/' + canvas + '.png', alt: canvasAlt}">
+
+			<!-- ================================================================================= -->
+			<!-- targets -->
+			<!-- ================================================================================= -->
+			<!-- ko foreach: { data: targets, as: 'target' } -->
+			<div class="target" data-bind="sortable: { data: target._targets, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }, 
+				attr: { style: $root.getStyles(target) }">
+				<div class="target-item prevent" data-bind="text: text"></div>
+			</div> <!--/.target-->
+			<!-- /ko -->
+
+		</div> <!--/.inner-canvas-->
+	</div> <!--/.puzzle2-canvas-->
+	
+	<!--usamos el mismo array de targets para los items-->
+	<div class="items" data-bind="sortable: { data: items }">
+		<div class="push-left item" data-bind="text: text, attr: { id: _id }"></div>
+	</div> <!--/.items-->
+
+</div> <!--/.block-content-->
+
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

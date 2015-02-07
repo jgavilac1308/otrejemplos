@@ -1,0 +1,55 @@
+<div class="liz-one-group-shape full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Ícono de respuesta correcta - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Ícono de respuesta incorrecta - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<div class="block-content clearfix">
+
+	<!--pila de objetos-->
+	<div class="items clearfix" data-bind="sortable: { data: items }">
+		<div class="item">
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" />
+		</div> <!--/.item-->
+	</div> <!--/.items-->
+
+	<!--Aquí es donde caen los elementos -->
+	<div class="group-container">
+		<div class="canvas-container">
+
+			<img class="img-responsive group-container-canvas" data-bind="attr: { src: $root.resources + '/' + canvas + '.png', alt: canvasAlt }" />
+
+			<div class="group" data-bind="sortable: { data: group, options: { cancel: '.prevent' } }">
+				<div class="group-item prevent" data-bind="attr: { style: $root.getStyles($data) }"> 
+					<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" />
+				</div> <!--/.item-->
+			</div> <!--/.group-->
+
+		</div> <!--/.canvas-container-->
+
+	</div> <!--/.group-container-->
+
+</div> <!--/.block-content-->
+
+
+ <!--CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-sound-group-->
+

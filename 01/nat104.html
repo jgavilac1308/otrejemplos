@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="es" ng-app="nat104">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="nat" ng-include src="'../views/common/include.html'"></div>
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			description="La tierra es el planeta donde vives y está girando constantemente, por eso, vemos el día que es cuando sale el sol, y la noche cuando sale la luna."
+			instruction="Haz clic sobre cada unas de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			description="Fases de la luna: la luna al igual que la tierra gira, por eso podemos verla en el cielo de diferentes formas. Se habla de luna llena cuando se puede ver toda la luna formando un círculo, media luna cuando podemos apreciar sólo una parte de ella y luna nueva cuando no es posible ver ni un pedacito de ella."
+			instruction="Haz clic sobre cada unas de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-image-map 
+			options="data"
+			title="Sistema solar"
+			description="El sistema solar consiste en un grupo de nueve planetas incluida la tierra, los cuales giran alrededor de una gran estrella, la cual conocemos como el sol."
+			instruction="Haz clic sobre cada uno de los planetas y descubre su nombre.">
+		</click-image-map>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<multiple-mark 
+			options="data"
+			description="Arrastra el sol, hacia el recuadro para las actividades que haces en el día, y la luna para las actividades que realizas en la noche.">
+		</multiple-mark>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<choose-items options="data" description="Haz clic sobre los seres que necesitan del sol para vivir.">
+			<div class="choose-items-img" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" style="width: 25%">
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}">
+			</div>
+		</choose-items>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<compare-sounds
+			options="data"
+			description="Haz clic sobre el ícono de sonido y selecciona la imagen a la cual corresponde el sonido.">
+		</compare-sounds>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<drop-image-sample
+			options="data"
+			description="Arrastra cada planeta y ubícalo de acuerdo a la muestra.">
+		</drop-image-sample>
+	</script>
+
+	<script type="text/ng-template" id="act5">
+		<drop-image-sample
+			options="data"
+			description="Arrastra cada planeta y ubícalo de acuerdo a la muestra.">
+		</drop-image-sample>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

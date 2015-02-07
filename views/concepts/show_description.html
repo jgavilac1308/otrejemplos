@@ -1,0 +1,60 @@
+<div class="liz-show-description full-height shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono mouse" play="audio-instruction" on="click"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+	</div> <!--/.block-->
+	<div class="block-content">
+
+		<div class="canvas">
+			<img class="img-responsive"src="{{ $root.resources + '/' + canvas + '.png' }}" alt="{{ alt }}">
+
+			<!--elementos-->
+			<div class="items">
+				<div class="item" ng-repeat="item in items" style="{{ $parent.getItemTitleStyles(item) }}">
+
+					<div class="item-title {{ item === $parent.selectedItem ? 'is-selected' : '' }}" 
+						play="audio-{{ item.resource }}" on="click"
+						ng-click="selectItem(item)">{{ item.title }}</div>
+						<!-- ng-click="selectItem(item)">{{ item.isCompleted ? item.text : item.title }}</div> -->
+					<div class="item-line"></div>
+
+					<!--audio-->
+					<audio id="audio-{{ item.resource }}" preload="auto">
+						<source src="{{ $root.resources + '/'  + item.resource + '.mp3' }}" type="audio/mpeg">
+					</audio>
+
+					<!--audio-->
+					<audio id="audio-instruction" preload="auto">
+						<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+					</audio>
+
+
+				</div> <!--/.item-->
+			</div> <!--/.items-->
+
+		</div> <!--/.canvas-->
+
+		<div ng-show="instruction"class="text-box">
+			<div  class="block">
+				<p class="clearfix">
+				<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+				<span>{{ instruction }}</span>
+				</p>
+			</div>
+			<div ng-click="selectItem(item)"class="block-content">{{ selectedItem.isCompleted ? selectedItem.title +'. '+ selectedItem.text:''  }}</div>
+		</div> <!--/.text-box-->
+
+
+		<!-- <div class="text-box">
+			<div class="block" >{{ selectedItem.title }}</div>
+			<div class="block-content">{{ selectedItem.text }}</div>
+		</div> <!--/.text-box-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-parts-->
+

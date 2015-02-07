@@ -1,0 +1,58 @@
+<div class="liz-images-block-description liz-show-images-block-description shadow">
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content clearfix">
+		<div class="row images-block-row">
+			<div class="col-md-3 images-block-col image-block-cursor {{ block === selectedBlock ? 'is-selected' : '' }}" ng-repeat="block in blocks" ng-click="selectBlock(block)">
+				<img ng-show="block.img" src="{{ $root.resources + '/' + block.img }}" alt="{{ block.alt }}" title="{{ block.title }}" class="img-responsive scale1">
+				<div ng-if="block.blockTitle" class="image-block-title">{{ block.blockTitle }}</div>
+			</div>
+		</div>
+
+		<div class="text-box conceptsImagesBox images-block-selected-row">
+			<div class="row block-content">
+				<img ng-show="selectedBlock.audio" class="icon-play-description bg-1 bd-1 bs-3" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-{{selectedBlock.audio}}" on="click"/>
+				<div class="col-md-2 conceptsImagesCol">
+					<img ng-show="selectedBlock.iconImg" src="{{ $root.resources + '/' + selectedBlock.iconImg }}" alt="{{ selectedBlock.iconAlt }}" class="img-responsive scale1 selected-item">
+				</div>
+				<div class="col-md-9 image-description-text">
+					{{ selectedBlock.text }}
+				</div>
+
+				<div class="col-md-11 center-items">
+					<div class="img-examples-container" ng-repeat="img in selectedBlock.imgExamples">
+						<div class="frame bd-1">
+							<img ng-show="selectedBlock.imgExamples" src="{{ $root.resources + '/' + img.src }}" alt="{{ img.alt }}" title="{{ img.title }}" class="img-responsive scale1 img-example">
+							<div class="img-examples-text bg-1"> {{  img.text }}</div>
+						</div>
+					</div>
+				</div>
+
+				<audio ng-show="selectedBlock.audio" id="audio-{{selectedBlock.audio}}" preload="auto">
+					<source src="{{ $root.resources + '/'  + selectedBlock.audio + '.mp3' }}" type="audio/mpeg">
+				</audio>
+			</div>
+		</div>
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

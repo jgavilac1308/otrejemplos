@@ -1,0 +1,56 @@
+<div class="liz-hover-show-text shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img ng-hide="options.eventClick || instruction" src="../resources/common/icono mouse.png" alt="ícono mouse"/>
+		<img ng-show="options.eventClick && !instruction" src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+		<h1 ng-show="titlehead">{{ titlehead }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<div ng-if="mainText" class="fs-20 main-text" ng-bind-html="sanitize(mainText)"></div>	
+		<div class="section2 {{ mainText ? 'section2-text': ''}}">
+			<div class="img-container">
+				<img class="main-img" style="{{ imgStyle }}" ng-show="canvas" src="{{ $root.resources + '/'  + canvas }}" alt="{{ altcanvas }}" title="{{ titlecanvas }}">
+
+				<div class="item-container" hidetext='{{ hidetext }}' popover popover-text="{{ item.text }}" popover-title="{{ item.titlePopover }}" popover-event="{{ event }}" popover-placement="{{ item.placement ? item.placement : 'top' }}"
+					ng-repeat="item in items" style="{{ getTargetsStyles(item) }}{{ item.completed ? item.style : '' }}" ng-mouseover="event === 'mouseover' ? verify(item) : ''" ng-click="event === 'click' ? verify(item) : ''" play="audio-{{ item.audio}}" on="click">{{ item.title }}
+				<!--audio-->
+					<audio ng-if="item.audio" id="audio-{{ item.audio }}" preload="auto">
+						<source src="{{ $root.resources + '/'  + item.audio + '.mp3' }}" type="audio/mpeg">
+					</audio>
+				</div>
+			</div> <!--.img-container-->
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<div class="block bottom" ng-show="instruction">
+	<p class="clearfix">
+	<img ng-hide="options.eventClick" src="../resources/common/icono mouse.png" alt="ícono mouse"/>
+	<img ng-show="options.eventClick" src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

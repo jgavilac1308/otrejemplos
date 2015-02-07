@@ -1,0 +1,76 @@
+<div class="liz-correct-word-in-sentence shadow ">
+
+    <!--Descripción-->
+    <div class="block">
+        <p class="clearfix">
+            <img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+            <img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+            <img ng-show="addicon" class="icon-play-description" src="{{ '../resources/common/' + addicon + '.png' }}" alt="addicon" />
+            <img ng-hide="instruction" src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+            <span>{{ description }}</span>
+        </p>
+    </div>
+    <!--/.block-->
+
+    <!--audio-->
+    <audio id="audio-instruction" preload="auto">
+        <source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg" />
+    </audio>
+
+    <div class="block-content clearfix">
+
+        <div class="row hover-words-row" ng-repeat="op in options">
+
+             <!--<div class="content" ng-repeat="q in group.questions">-->
+            <div  ng-repeat="q in op.questions" class="content" ng-disabled="q.completed" >
+
+                <table>
+                    <tr>
+                        <td>
+                            <span class="number bg-1">{{ q.num }}</span><br /><br />
+                        </td>
+                        <td>
+                            <span id=" {{q.num}}{{$index }}"  ng-repeat="t in q.text" ng-click="verify(q, t, q.num,$index )" >{{t}}&nbsp;</span>
+                            <br />
+                            <br />
+                        </td>
+                        <td>
+                            <div ng-show="q.right" class="right-answer scale1"></div>
+                            <div ng-show="q.wrong" class="wrong-answer scale1"></div><br /><br />
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+    <div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+    <div data-failure></div>
+</div>
+
+
+<div class="block bottom">
+    <p class="clearfix">
+        <img ng-hide="priority" src="../resources/common/icono mouse.png" alt="ícono mouse"/>
+        <span>{{ instruction }}</span>
+    </p>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $("[data-toggle='tooltip']").tooltip();
+    });
+</script>

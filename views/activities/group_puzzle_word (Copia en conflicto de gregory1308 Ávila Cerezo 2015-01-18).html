@@ -1,0 +1,52 @@
+<div class="liz-group-puzzle-word full-height shadow">
+
+    <div class="block">
+        <p class="clearfix">
+            <img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+            <img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+            <img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+            <span>{{ description }}</span>
+        </p>
+    </div>
+
+    <!--audio-->
+    <audio id="audio-instruction" preload="auto">
+        <source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+    </audio>
+
+    <div class="block-content">
+
+        <div ng-repeat="group in groups" class="group bd-1 {{ itemsPerRow === 2 ? 'row-2': '' }}">
+            <div class="section section1">
+
+                <span ng-repeat="target in group.targets" class="drop-container bd-1" ng-class="{ disabled: target.disabled }" data-drop="{{ target.drop }}" ng-model="target.model" jqyoui-droppable="{ onDrop: 'dropCallback(target,group)' }" aria-disabled="false" data-jqyoui-options="{accept:'.{{ target.accept }}'}" >
+                    <div   class="item no-cursor bg-1" ng-show="target.model.text" data-drag="target.drag" data-jqyoui-options="{ revert: 'true' }" ng-model="target"
+                        jqyoui-draggable="{index: {{$index}}, placeholder: 'keep' }">
+                    {{ target.model.text }}
+                    </div>
+                    <span class="answer-icon icon-right" ng-show="target.right"></span>
+                    <span class="answer-icon icon-wrong" ng-show="target.wrong"></span>
+                </span>
+
+            </div>
+
+            <div class="section center-items">
+                <div  ng-repeat="item in group.items" class="item bg-1 {{ item.text }} {{ group.id }}" ng-class="{ disabled: item.drag===false }" ng-show="item.text" data-drag="item.drag" data-jqyoui-options="{ revert: 'invalid', helper: 'clone' }" ng-model="item"
+                        jqyoui-draggable="{index: {{$index}}, placeholder: '{{preserveOriginal}}' , onStop: 'stopCallback(item,group)'}">
+                    {{ item.text }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+    <div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+    <div data-failure></div>
+</div>

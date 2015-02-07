@@ -1,0 +1,39 @@
+<div class="liz-group-inputs full-height shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		
+		<div class="complete-container {{ mainimg ? 'center' : '' }}" ng-show="mainimg" >
+			<img    class="img-responsive" src="{{ $root.resources + '/' + mainimg }}" alt="{{ mainalt }}" title="{{ maintitle }}">	
+		</div>
+
+
+		<div class="group-input" ng-repeat="group in groups">
+			<div class="block">{{ group.title }}</div>
+			<div class="block-content">
+				<input ng-disabled="checkHasExample($index, input)" ng-repeat="input in group.inputs" type="text" ng-model="input.value" ng-change="verify(input)" placeholder="{{input.example}}" value="{{input.example}}">
+			</div> <!--/.block-content-->
+		</div> <!--/.group-input-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-group-inputs-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>

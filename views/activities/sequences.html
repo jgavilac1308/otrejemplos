@@ -1,0 +1,45 @@
+<div class="liz-sequences full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--actividad-->
+<div class="block-content">
+
+	<div class="draggables" data-bind="foreach: { data: draggables }">
+		<div class="draggable" data-bind="draggable: $data">
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }">
+		</div> <!--/.draggable-->
+	</div> <!--/.draggables-->
+
+	<div class="sequence" data-bind="foreach: { data: sequence }">
+		<div class="sequence-item" data-bind="attr: { style: $root.getItemStyles() }, sortable: { data: _sortable, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+			<img class="img-responsive prevent" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }">
+		</div> <!--/.sequence-item-->
+	</div> <!--/.sequence-->
+
+</div> <!--/.block-content-->
+
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

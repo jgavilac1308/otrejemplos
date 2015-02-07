@@ -1,0 +1,46 @@
+<div class="liz-compare-sample full-height shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<div class="block-content">
+
+		<!--Filas-->
+		<div class="groups">
+
+			<div class="group clearfix" ng-repeat="group in groups">
+
+				<div class="sample">
+					<div class="item {{ group.sample.class }}"></div>
+				</div> <!--/.sample-->
+
+				<div class="items clearfix {{ group._completed ? 'completed' : '' }}">
+					<div class="item" ng-repeat="item in group.items" ng-click="$parent.verify(item, group)" style="{{ $parent.getItemStyles(group.items) }}">
+						<div class="{{ item.class }}" ng-hide="item.isRight || item.isWrong"></div>
+
+						<!--íconos de respuesta-->
+						<div class="icon-right" ng-show="item.isRight"></div>
+						<div class="icon-wrong" ng-show="item.isWrong"></div>
+					</div>
+				</div> <!--/.items-->
+
+			</div> <!--/.group-->
+		</div> <!--/.groups-->
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-compare-sample-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

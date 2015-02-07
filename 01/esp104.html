@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="esp104">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="esp" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<letter1 letter="l">Con la letra l se escriben muchas palabras como por ejemplo lámpara, león y luna.</letter1>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes."
+		></click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<choose-items options="data" description="Haz clic sobre la letra l que encuentres en las siguientes letras.">
+			<div class="letter" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)">
+				{{ item.letter }}
+			</div>
+		</choose-items>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<pairs options="options" description="Arrastra cada sílaba hacia la imagen cuyo nombre comienza por la misma sílaba.">
+			<item>
+				<h1 data-bind="html: sil"></h1>
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: resource }" >
+				<h2 data-bind="html: text"></h2>
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<pairs options="options" description="Arrastra cada imagen de arriba hacia la imagen de abajo que es igual y comienza por la misma sílaba.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: resource }" >
+				<h2 data-bind="html: text"></h2>
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: resource }" >
+				<h2 data-bind="html: text"></h2>
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<complete-inputs 
+			inputs="inputs" 
+			description="Haz clic sobre el recuadro en blanco y escribe la sílaba igual a la muestra.">
+		</complete-inputs>
+	</script>
+
+	<script type="text/ng-template" id="act5">
+		<complete-letters 
+			letter="l" options="options" 
+			description="Haz clic sobre las líneas y escribe las letras que hacen falta para completar el nombre de algunos objetos o alimentos que puedes encontrar en tu casa.">
+		</complete-letters>		
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+	
+	<script>
+		// Necesario para activar la recarga en vivo
+		window.brunch = window.brunch || {};
+	</script>
+</body>
+</html>
+

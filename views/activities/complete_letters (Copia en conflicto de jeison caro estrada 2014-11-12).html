@@ -1,0 +1,58 @@
+<div class="liz-complete-letters shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+		<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+	<!--si se ha definido la consonante, entoncesl mostramos las letras arriba-->
+	<div ng-hide="letter === undefined" class="letters">
+		<div ng-repeat="syl in ['a', 'e', 'i', 'o', 'u']" class="syllable">
+			<strong>{{ $parent.letter }}</strong>{{ syl }}
+		</div>
+	</div>
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+	</audio>
+
+	<!--Actividad-->
+	<!--El formulario permite "el salto" entre inputs-->
+	<form class="liz-complete-letters-container">
+		<div data-bind="if: chances() > 0">
+			<div data-bind="foreach: items"> 
+				<div data-bind="attr: { class: 'item per-row-' + $root.itemsPerRow }">
+					<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: alt ? alt : resource }" />
+
+					<div class="item-margin-bottom" data-bind="foreach: name">
+						<div class="input-container" data-bind="if: input"><input type="text"
+							maxlength="1"
+							data-bind="
+							visible: input,
+							value: value,
+							valueUpdate: 'keyup',
+							css: { green: value() === letter, red: value() !== letter && value() !== '' },
+							event: { keyup: $root.verifyAnswer, keypress: $root.clearInput }
+							"/><div class="right-answer" data-bind="visible: value() === letter"></div><div class="wrong-answer" data-bind="visible: value() !== letter && value() !== ''"></div></div><div class="letter" data-bind="visible: !input, text: letter"></div></div>
+				</div> <!--/.item-->
+			</div> <!--/foreach: items-->
+		</div> <!--if: chances > 0-->
+	</form>
+
+</div> <!--/.row.liz-complete-letters-->
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>

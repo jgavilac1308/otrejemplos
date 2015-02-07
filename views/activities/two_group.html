@@ -1,0 +1,58 @@
+<div class="liz-two-group full-height shadow clearfix">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Ícono de respuesta correcta - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Ícono de respuesta incorrecta - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--Parte de arriba donde colocamos el texto de la-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+	<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+</audio>
+<!--Este es el html que muestra  las imagenes -->
+<div class="liz-two-group-container">
+
+	<div class="items" data-bind="sortable: items">
+		<div data-bind="attr: { class: 'item per-row-' + $root.itemsPerRow }">
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src, alt: alt, title: title }" />
+			<p data-bind="visible: text, text: text"></p>
+		</div> <!--/.item-->
+	</div> <!--/.items-->
+
+    <div class="box">
+ 
+        <div class="target">
+			<img class="group-img img-responsive" data-bind="visible: groupImg, attr: { src: $root.resources + '/' + groupImg + '.png', alt: groupAlt }" />
+
+			<div class="target-container" data-bind="sortable: { data: target, options: { cancel: '.prevent' }  }  ">
+				<div data-bind="attr: { class: 'item prevent per-row-' + $root.itemsPerRow }">
+					<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src, alt: alt, title: title }" />
+					<p data-bind="visible: text, text: text"></p>
+				</div> <!--/.item-->
+			</div> <!--/.target-container-->
+		</div> <!--/.target-->
+    </div> <!--/.box-->
+
+</div> <!--/.row.liz-one-group-container-->
+
+ <!--CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-one-group-->
+

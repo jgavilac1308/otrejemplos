@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="soc105">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="soc" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			title="¿Qué es un recurso renovable?"
+			description="Los recursos naturales RENOVABLES son aquellos que no se acaban fácilmente y que con un poco de cuidado podemos seguir utilizando, como por ejemplo: las plantas y los animales. Tu compromiso y el de todas las personas debe ser cuidarlos, pues si no lo hacemos, desaparecerán."
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-images 
+			options="data"
+			title="¿Qué es un recurso no renovable?"
+			description="Los recursos naturales NO RENOVABLES son aquellos cuyos procesos de formación tardan miles de millones de años, son recursos que se acaban en algún momento y por eso debemos cuidarlos."
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+	
+	<script type="text/ng-template" id="act1">
+		<one-group 
+			options="data"
+			title="Renovables"
+			description="Arrastra al recuadro las imágenes de los recursos renovables.">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<one-group 
+			options="data"
+			title="No renovables"
+			description="Arrastra al recuadro las imágenes de los recursos no renovables.">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<pairs options="options" description="Arrastra cada recurso natural hacia el servicio que nos puede proporcionar.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+			</target>
+		</pairs>
+	</script>
+	
+	<script type="text/ng-template" id="act4">
+		<puzzle2 
+			options="data"
+			description="Arrastra cada uno de los círculos sobre los recursos naturales renovables que encuentres en el siguiente paisaje.">
+		</puzzle2>
+	</script>
+
+	<script type="text/ng-template" id="act5">
+		<multiple-selection 
+			options="data"
+			description="En cada recuadro, haz clic sobre el comportamiento adecuado para el cuidado de los recursos renovables y no renovables.">
+		</multiple-selection>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

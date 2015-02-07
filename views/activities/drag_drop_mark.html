@@ -1,0 +1,58 @@
+<div class="liz-drag-drop-mark full-height shadow clearfix">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/happy_face.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/sad_face.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+	<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+</audio>
+
+<!--contenedor de la actividad-->
+<div class="block-content">
+
+	<div class="marks">
+		<div class="right-mark" data-bind="draggable: rightMark"></div>
+		<div class="wrong-mark" data-bind="draggable: wrongMark"></div>
+	</div> <!--/.marks-->
+
+	<div class="items {{ customClass }} " data-bind="foreach: { data: items, as: 'item' }">
+		<div data-bind="attr:{'class': 'item'}">
+			<img class="img-responsive" data-bind="visible: item.resource, attr: { src: $root.resources + '/' + item.resource + '.png', alt: item.alt }">
+			
+			<!--las marcas se ven según la propiedad right. Así se diferencia una de otra-->
+			<div class="target" data-bind="sortable: { data: _target, allowDrop: $root.isContainerFull }">
+				<div class="right-mark" data-bind="visible: right"></div>
+				<div class="wrong-mark" data-bind="visible: !right"></div>
+			</div>
+			<div class="item-number bg-1" data-bind="visible: item.question, text: item.number "></div>
+			<div class="item-question" data-bind="visible: item.question, text: item.question"></div>
+			<p class="bg-1" data-bind="visible: item.text, text: item.text"></p>
+		</div> <!--/.item-->
+	</div> <!--/.items-->
+
+</div> <!--/.block-content-->
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-drag-drop-mark-->

@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="soc103_3">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+    <style>
+
+    .img-scale{
+      /*transition*/
+      -webkit-transition:all 0.4s;
+      -moz-transition:all 0.4s;
+      -o-transition:all 0.4s;
+      transition:all 0.4s;
+    }
+
+    .img-scale:hover{
+      /*transform*/
+      -webkit-transform:scale(1.3);
+      -moz-transform:scale(1.3);
+      -ms-transform:scale(1.3);
+      -o-transform:scale(1.3);
+      transform:scale(1.3);
+    }
+
+    .icon-play-description-C3 {
+
+        border-radius: 50%;
+        border: 3px solid;
+        margin-right: 10px;
+        float: left;
+        margin-top: 10px;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        
+    }
+
+            
+    </style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="soc" ng-include src="'../views/common/include.html'"></div>
+
+	<!--templates-->
+	<script type="text/ng-template" id="comp">
+		<competences-new 
+			options="data"
+			audio="competences"	
+		></competences-new>
+	</script>
+
+  <script type="text/ng-template" id="con1">
+    <transclusion 
+      audio="C1"
+      title="¿Qué es el diálogo?"
+      <!--INICIO-->
+      <div style="text-align: center">
+        <div style="display: inline-block;width: 100%;float:left;font-size: 20px;margin-left: 0px;" >
+          <div class="" style="width: 41%;float: right;margin: 10px;" ng-repeat="item in items">
+            <img class="img-responsive" style="display: inline-block;float:left;" src="{{ $root.resources + '/' + item.src }}" alt="{{ item.alt }}" title="{{ item.title }}">
+          </div>
+          <div style="text-align:left;padding-left:20px;display: inline-block; max-width: 55%;float:left;font-size: 20px;margin-left: 0px;margin-bottom: 20px;" >Es una conversación entre dos o más personas, que dicen sus ideas o sentimientos.<br><br>Para que haya un diálogo adecuado es importante cumplir ciertas reglas que ayudan a tener una buena comunicación.<br><br>En esta lección aprenderás las reglas básicas del diálogo.</div>
+        </div>
+      </div>
+      <!--FIN-->
+    </transclusion>
+  </script>
+
+  <script type="text/ng-template" id="con2">
+    <transclusion 
+      audio="C2"
+      description="Para mantener un buen diálogo, debes tener en cuenta las siguientes reglas básicas:"
+      <!--INICIO-->
+        <div style="text-align: center">
+          
+          <div style="display: inline-block;width: 100%;float:left;font-size: 20px;" >
+            <div class=" border-3px bd-1" style="width: 23%;float: left;margin: 1%;" ng-repeat="item in items">
+              <div class="wid-100 bg-1" style='padding: 10px;display: inline-block;color: white;font-size: 15px;text-align: center;'>{{ item.text }}</div>
+              <img class="img-responsive" style="display: inline-block;float:left;" src="{{ $root.resources + '/' + item.src }}" alt="{{ item.alt }}">
+              <div class="wid-100 bg-1" style='min-height: 200px;padding: 10px;display: inline-block;color: white;font-size: 20px;text-align: -webkit-auto;'>{{ item.text2 }}</div>
+            </div>
+          </div>
+        </div>
+      <!--FIN-->
+    </transclusion>
+  </script>
+
+  <script type="text/ng-template" id="con3">
+    <transclusion 
+      audio="C3"
+      title="Importancia de respetar las reglas básicas del diálogo"
+      <!--INICIO-->
+      <div style="text-align: center">
+        <div style="display: inline-block;width: 100%;float:left;font-size: 20px;margin-left: 0px;" >
+          <div class="" style="width: 51%;float: right;margin: 10px;" ng-repeat="item in items">
+            <img class="img-responsive" style="display: inline-block;float:left;" src="{{ $root.resources + '/' + item.src }}" alt="{{ item.alt }}" title="{{ item.title }}">
+          </div>
+          <div style="text-align:left;padding-left:20px;display: inline-block; max-width: 45%;float:left;font-size: 20px;margin-left: 0px;margin-bottom: 20px;" >El respeto por las reglas básicas del diálogo es muy importante, porque esto permite una buena comunicación, también permite solucionar problemas entre las personas y vivir en paz y armonía.<br><br>El buen diálogo ayuda a mantener unas mejores relaciones con las demás personas.</div>
+        </div>
+      </div>
+      <!--FIN-->
+    </transclusion>
+  </script>
+
+  <script type="text/ng-template" id="act1">
+    <show-name 
+      options="data"
+      description="Haz clic sobre  el ícono de sonido y escucha algunas reglas básicas del diálogo."
+      audio="A1"></show-name>
+  </script>
+
+  <script type="text/ng-template" id="act2">
+   <select-options-positions options="options" description="Selecciona la regla del diálogo representada en cada imagen." audio="A2"> </select-options-positions>
+  </script>
+
+  <script type="text/ng-template" id="act3">
+    <puzzle3 
+      options="data"
+      audio="A3"
+      description="Arma el siguiente rompecabezas y descubre algunas de las reglas básicas para mantener un buen diálogo. Arrastra las piezas del rompecabezas hasta el recuadro para formar la imagen.">
+    </puzzle3>
+  </script>
+	
+  <script type="text/ng-template" id="act4">
+    <choose-items options="data" audio="A4" description="Haz clic sobre las imágenes que representan las normas básicas que debes seguir para lograr un buen diálogo.">
+      <div class="choose-items-img bd-1 border-3px" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" style="width: 30%;margin: 1%;">
+        <img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}">
+        <div class="wid-100 bg-1 item-text-container">{{ item.text }}</div>
+      </div>
+    </choose-items>
+  </script>
+
+  <script type="text/ng-template" id="act5">
+    <drag-drop-multiples options="data" description="Según las buenas prácticas del diálogo arrastra  la frase al recuadro correspondiente." audio="A5">
+      <item>
+        <div data-bind="text: text"></div>
+      </item>
+    </drag-drop-multiples>
+  </script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

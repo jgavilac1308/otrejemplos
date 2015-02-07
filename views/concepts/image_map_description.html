@@ -1,0 +1,68 @@
+<div class="liz-image-map-description shadow">
+
+	<!--Descripción-->
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img ng-hide="instruction" src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img ng-show="watch" src="../resources/common/iconoobservar.png" alt="ícono de observación"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content clearfix">
+
+		
+		<div class="canvas">
+			<img class="img-responsive" src="{{ $root.resources + '/' + canvas + '.png' }}" alt="{{ canvasAlt }}">
+
+			<div class="items">
+				<div class="item btn btn-primary" ng-repeat="item in items" style="{{ getStyles(item) }}" ng-click="selectItem(item)">
+					{{ item.button }}
+				</div> <!--.item-->
+			</div> <!--.items-->
+		</div> <!--.canvas-->
+
+
+		<div class="text-box">
+			<div class="block">
+				<img ng-show="selectedItem" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-selected" on="click"/>
+				<div style="padding: 13px;">{{ selectedItem.title }}</div>
+			</div>
+			<div class="block-content">
+				<div class="inner-text" ng-show="selectedItem.text" ng-bind-html="sanitize(selectedItem.text)"></div>
+				<img ng-show="selectedItem.img" class="img-responsive scale1 selected-item" 
+					src="{{ $root.resources + '/' + selectedItem.img }}" alt="{{ selectedItem.imgAlt }}" title="{{ selectedItem.imgTitle }}">
+
+				<audio id="audio-selected" preload="auto">
+					<source src="{{ $root.resources + '/' + selectedItem.audio + '.mp3' }}" type="audio/mpeg">
+				</audio>
+			</div> <!--/.block-content-->
+		</div> <!--/.text-box-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-image-map-description-->
+
+<div ng-if="isBottom" class="block bottom" ng-show="instruction">
+	<p class="clearfix">
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

@@ -1,0 +1,48 @@
+<div class="liz-drop-out full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Ícono de respuesta correcta - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Ícono de respuesta incorrecta - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<div class="liz-drop-out-container clearfix">
+
+	<!--Aquí es donde caen los elementos -->
+	<div class="group-container">
+		<div class="group" data-bind="sortable: { data: items }">
+			<div class="item" data-bind="attr: { style: $root.getStyles($data) }"> 
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" />
+			</div> <!--/.item-->
+		</div> <!--/.group-->
+	</div> <!--/.group-container-->
+
+
+	<!--pila de objetos-->
+	<div class="outside" data-bind="sortable: { data: outside }">
+		<div class="item">
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" />
+		</div> <!--/.item-->
+	</div> <!--/.items-->
+
+</div> <!--/.row.liz-drop-out-container-->
+
+ <!--CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-drop-out-->
+

@@ -1,0 +1,35 @@
+ <div class="liz-text1 full-height shadow">
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img ng-show="click" src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+		<!--aquí va lo que se ponga dentro de la directiva-->
+		<h1 ng-show="titletop">{{ titletop }}</h1>
+		<p>{{ descriptionTop }}</p>
+		</div>
+	</div>
+	
+		<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content row">
+		
+		<div class="col-md-6" ng-show="block || title" style="float:{{ float }}">
+			<div ng-show="title" class="block">
+				<h1>{{ title }}</h1>
+			</div>
+			<div class="block-content {{ block ? 'no-border' : '' }}" ng-bind-html="sanitize(description)">
+				
+			</div>
+		</div>
+
+		<div class="text-center liz-text1-image" ng-class="title || description ? 'col-md-6' : 'col-md-12'" style="float:{{ float }}">
+			<img class="img-responsive" src="{{ $root.resources + '/' + img }}" alt="{{ alt }}" title="{{ titlemain }}">
+			<p ng-show="imgTitle" style="" ng-bind-html="sanitize(imgTitle)"></p>
+		</div>
+
+	</div>
+</div>

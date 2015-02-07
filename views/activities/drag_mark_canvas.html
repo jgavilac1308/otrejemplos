@@ -1,0 +1,65 @@
+<div class="liz-drag-mark-canvas full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<div class="row">
+	<div class="col-xs-12">
+
+		<div class="block">
+			<p class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+			<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+			<span>{{ description }}</span>
+			</p>
+		</div>
+		
+		<!--audio-->
+		<audio id="audio-instruction" preload="auto">
+			<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+		</audio>
+
+		<!--Actividad-->
+		<div class="block-content">
+			<div class="item-descriptions" data-bind="foreach: items ">
+				<div class="item">
+					<div class="item-draggable" data-bind="draggable: $data">
+						<span data-bind="text: drag"></span>
+					</div>
+					<div class="item-text" data-bind="text: text"></div>
+				</div> <!--.item-->
+			</div> <!--.item-descriptions-->
+
+			<div class="canvas-img">
+				<div class="canvas-img-inner">
+					<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + canvas, alt: alt }">
+
+					<!--targets-->
+					<div class="targets" data-bind="foreach: targets">
+						<div class="target" data-bind="attr: { style: $root.getTargetStyles($data) }">
+							<div class="target-inner" data-bind="sortable: { data: sortable, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' }} ">
+								<div class="item-draggable" data-bind="text: drag"> </div>
+							</div> <!--.target-inner-->
+						</div> <!--.target-->
+					</div> <!--.targets-->
+
+				</div> <!--.canvas-img-inner-->
+			</div> <!--.canvas-img-->
+		</div> <!--/.liz-pairs-container-->
+
+	</div> <!--/.col-->
+</div> <!--/.row-->
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

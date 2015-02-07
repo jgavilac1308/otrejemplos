@@ -1,0 +1,57 @@
+<div class="liz-thousand-numbers full-height shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span> Haz clic sobre cada botón para ver el rango de números. Luego, selecciona cada número, observa su nombre y escucha. </span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<!--Rangos de la izquierda-->
+		<div class="col-xs-2" style="margin-top: 2em">
+			<div class="range {{ range === selectedRange ? 'is-active' : '' }}" ng-click="selectRange(range)"
+				ng-repeat="range in rangesLeft">
+				{{ range[0] }} al {{ range[1] }}
+			</div>
+		</div> <!--/.col-xs-2-->
+
+		<!--tabla de valores-->
+		<div class="col-xs-8">
+			<table class="thousand-numbers-table" ng-show="selectedRange">
+				<tr ng-repeat="array in numberMatrix">
+					<td ng-repeat="num in array" ng-click="chooseNumber(num)"> {{ num }} </td>
+				</tr>
+			</table>
+
+			<p ng-show="numberText !== ''" class="number-text">{{ numberText }}</p>
+		</div> <!--/.col-xs-8-->
+
+		<!--Rangos de la derecha-->
+		<div class="col-xs-2">
+			<div class="range {{ range === selectedRange ? 'is-active' : '' }}" ng-click="selectRange(range)"
+				ng-repeat="range in rangesRight">
+				{{ range[0] }} al {{ range[1] }}
+			</div>
+		</div> <!--/.col-xs-2-->
+	</div> <!--/.block-content-->
+
+	<!--sonido de los números-->
+	<audio id="audio-numbers" preload="auto">
+		<source src="../resources/common/numeros.mp3" type="audio/mpeg">
+	</audio>
+
+</div> <!--/.liz-thousand-numbers-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>

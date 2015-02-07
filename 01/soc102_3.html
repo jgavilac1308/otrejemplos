@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="soc102_3">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+    <style>
+
+    .img-scale{
+      /*transition*/
+      -webkit-transition:all 0.4s;
+      -moz-transition:all 0.4s;
+      -o-transition:all 0.4s;
+      transition:all 0.4s;
+    }
+
+    .img-scale:hover{
+      /*transform*/
+      -webkit-transform:scale(1.3);
+      -moz-transform:scale(1.3);
+      -ms-transform:scale(1.3);
+      -o-transform:scale(1.3);
+      transform:scale(1.3);
+    }
+
+    .icon-play-description-C3 {
+
+        border-radius: 50%;
+        border: 3px solid;
+        margin-left: 10px;
+        margin-top: 10px;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        
+    }
+
+            
+    </style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="soc" ng-include src="'../views/common/include.html'"></div>
+
+	<!--templates-->
+	<script type="text/ng-template" id="comp">
+		<competences-new 
+			options="data"
+			audio="competences"	
+		></competences-new>
+	</script>
+
+	 <script type="text/ng-template" id="con1">
+        <transclusion 
+          audio="C1"
+          title="¿Qué son las emociones?"
+          <!--INICIO-->
+          <div style="text-align: center">
+            <div style="display: inline-block;width:100%;float:left;font-size: 20px;text-align: center;" >
+              <div style="display: inline-block; max-width: 100%;float:left;font-size: 20px;margin-left: 0px;margin-bottom: 20px;text-align: center;" >Las emociones vienen de nosotros, es la manera que respondemos a cada momento de nuestras vidas.</div>
+              <div class=" border-3px bd-1" style="width: 30%;float: left;margin: 0 10% 0 10%;" ng-repeat="item in items">
+                <img class="img-responsive" style="display: inline-block;float:left;" src="{{ $root.resources + '/' + item.src }}" alt="{{ item.alt }}">
+                <div class="wid-100 bg-1" style='padding: 10px;display: inline-block;color: white;font-size: 20px;'>{{ item.text }}</div>
+              </div>
+            </div>
+          </div>
+          <!--FIN-->
+        </transclusion>
+      </script>
+
+  <script type="text/ng-template" id="con2">
+     <transclusion 
+          audio="C2"
+          description="Conoce tus emociones para que puedas comprender tus sentimientos y de esta manera vivas una vida mejor."
+          <!--INICIO-->
+          <div style="text-align: center">
+            
+            <div style="display: inline-block;width: 100%;float:left;font-size: 20px;text-align: center;" >
+              <div style="display: inline-block;width: 100%;float:left;font-size: 20px;margin-left: 0px;margin-bottom: 50px;text-align: center;" > Observa algunas emociones que caracterizan a las personas</div>
+              <div class=" border-3px bd-1 img-scale" style="width: 23%;float: left;margin: 1%;" ng-repeat="item in items">
+                <img class="img-responsive" style="display: inline-block;float:left;" src="{{ $root.resources + '/' + item.src }}" alt="{{ item.alt }}">
+                <div class="wid-100 bg-1" style='padding: 10px;display: inline-block;color: white;font-size: 20px;'>{{ item.text }}</div>
+              </div>
+            </div>
+          </div>
+          <!--FIN-->
+        </transclusion>
+      </script>
+
+
+  <script type="text/ng-template" id="con3">
+   <transclusion 
+        audio="C3"
+        title="Aprende a controlar tus emociones"
+        instruction="Haz clic sobre la imagen y observa la animación presentada.">
+        <!--INICIO-->
+        <div style="text-align: center">
+          <div  style="text-align: -webkit-auto;display: inline-block;width: 100%;float: left;margin: 10px;font-size: 20px;" >Para controlar la tristeza que en algunos momentos puedes sentir;  juega,  ten paciencia (no te desesperes) y nunca dejes de sonreír.</div>
+          <img ng-hide="$parent.itemSelected" ng-click="$parent.itemSelected = true;$parent.$root.isNextEnabled = true"class="img-responsive" style="margin-left: auto;margin-right: auto;" src="{{ $root.resources + '/' + 'aburrido-d7.png' }}" alt="Animación donde se muestra un niño triste">
+          <video ng-if="$parent.itemSelected" class="border-3px bd-1 fadein2" autoplay="false" width="700vw" height="397vw" name="video" style="background: transparent;border-radius: 20px;"><source src="../resources/01/soc/02_3/AnimacionD8.mp4" type="video/mp4"></video>
+        </div>
+        <!--FIN-->
+      </transclusion>
+    </script>
+
+  <script type="text/ng-template" id="con4">
+      <transclusion 
+        audio="C4"
+        title="Aprende a controlar tus emociones"
+        instruction="Haz clic sobre la imagen y observa la animación presentada.">
+        <!--INICIO-->
+        <div style="text-align: center">
+          <div  style="text-align: -webkit-auto;display: inline-block;width: 100%;float: left;margin: 10px;font-size: 20px;" >Para vencer  el miedo que en algunos momentos puedes sentir; ora,  no te quedes solo busca compañía y respira profundo.</div>
+          <img ng-hide="$parent.itemSelected" ng-click="$parent.itemSelected = true;$parent.$root.isNextEnabled = true"class="img-responsive" style="margin-left: auto;margin-right: auto;" src="{{ $root.resources + '/' + 'miedod7.png' }}" alt="Animación donde se muestra un niño con miedo y donde se indica que debe hacer para vivir tranquilo.">
+          <video ng-if="$parent.itemSelected" class="border-3px bd-1 fadein2" autoplay="false" width="700vw" height="397vw" name="video" style="background: transparent;border-radius: 20px;"><source src="../resources/01/soc/02_3/animacion D9.mp4" type="video/mp4"></video>
+        </div>
+        <!--FIN-->
+      </transclusion>
+    </script>
+
+  <script type="text/ng-template" id="con5">
+       <transclusion 
+        audio="C5"
+        title="Aprende a controlar tus emociones"
+        instruction="Haz clic sobre la imagen y observa la animación presentada.">
+        <!--INICIO-->
+        <div style="text-align: center">
+          <div  style="text-align: -webkit-auto;display: inline-block;width: 100%;float: left;margin: 10px;font-size: 20px;" >Para controlar  el cólera, la rabia,  la ira;  respira profundo,  ten paciencia (no te desesperes) y recuerda sonreír en todo momento.</div>
+          <img ng-hide="$parent.itemSelected" ng-click="$parent.itemSelected = true;$parent.$root.isNextEnabled = true"class="img-responsive" style="margin-left: auto;margin-right: auto;" src="{{ $root.resources + '/' + 'rabia-d7.png' }}" alt="Animación donde se muestra un niño con rabia y donde se indica que debe hacer para vivir en paz.">
+          <video ng-if="$parent.itemSelected" class="border-3px bd-1 fadein2" autoplay="false" width="700vw" height="397vw" name="video" style="background: transparent;border-radius: 20px;"><source src="../resources/01/soc/02_3/Animacion D10.mp4" type="video/mp4"></video>
+        </div>
+        <!--FIN-->
+      </transclusion>
+    </script>
+
+   <script type="text/ng-template" id="act1">
+    <show-name 
+      options="data"
+      description="Haz clic sobre cada imagen y escucha la emoción que caracteriza a los personajes presentados en ella."
+      audio="A1"></show-name>
+  </script>
+
+    <script type="text/ng-template" id="act2">
+        <pairs options="options" audio="A2" description="Arrastra cada imagen de la fila superior hacia la emoción con la cual guarda relación.">
+            <item>
+                <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + sil + '.png', alt: alt }" >
+            </item>
+            <target>
+                <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: alt }" >
+                <h1 class='bg-1 fc-W wid-100' data-bind="html: text"></h1>
+            </target>
+        </pairs>
+    </script>
+
+    <<script type="text/ng-template" id="act3">
+     <select-options-positions options="options" description="Selecciona el tipo de emoción que representa cada imagen." audio="A3"> </select-options-positions>
+    </script>
+
+    <script type="text/ng-template" id="act4">
+        <pairs options="options" audio="A4" description="Arrastra cada término hacia la imagen con la cual guarda relación.">
+            <item>
+                <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + sil + '.png', alt: alt }" >
+            </item>
+            <target>
+                <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: alt }" >
+                <h1 class='bg-1 fc-W wid-100' data-bind="html: text"></h1>
+            </target>
+            <item-target>
+              <img class="img-responsive act-5-item-target" style='width: 36%;margin-top: 35%' data-bind="attr: { src: $root.resources + '/' + sil + '.png', alt: alt }" >
+            </item-target>
+        </pairs>
+    </script>
+	
+    <script type="text/ng-template" id="act5">
+    <puzzle4 
+        options="data"
+        audio="A5"
+        description="En la imagen hay niños que expresan diferentes tipos de emoción, arrastra cada palabra  hasta cada niño según la emoción que representa: tristeza, rabia, alegría o miedo.">
+    </puzzle4>
+  </script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

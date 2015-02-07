@@ -1,0 +1,25 @@
+<div class="shadow">
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<span ng-transclude></span>
+		</p>
+	</div>
+
+	<div class="block-content">
+		<audio id="audio-{{ letter }}" preload="auto">
+			<source src="{{ $root.resources + '/'  + letter + '.mp3' }}" type="audio/mpeg">
+		</audio>
+		<div class="big-letters" ng-click="activateNext()" title="{{ letter }} mayúscula, {{ letter }} minúscula" play="audio-{{ letter }}" on="click" >
+			{{ letter | uppercase }}{{ letter }}
+		</div>
+	</div>
+</div>
+
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>Haz click sobre la imagen de la letra</span>
+	</p>
+</div>

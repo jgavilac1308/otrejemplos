@@ -1,0 +1,48 @@
+<div class="liz-complete-inputs-position shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+				<div class="section2">
+					<div ng-show="examples" class="examples-container">
+						<div class="examples bg-1" ng-repeat="example in items"> {{ example.pattern[0] }}</div>
+					</div>
+					<img class="main-img" style=" {{ imgStyle }}" ng-show="canvas" src="{{ $root.resources + '/'  + canvas }}" alt="{{ canvasalt }}">
+					<div class="item-container" ng-repeat="item in items" style="{{ getTargetsStyles(item) }}">
+						<div ng-show="item.title" class="item-title bd-1 bg-1"style=" {{ 'height:' + item.h + 'px;width:' + item.w + 'px;' }}">{{ item.title}}</div>
+						<input type="text" ng-model="item.input" ng-blur="verify(item)" ng-disabled="item.completed"   class="item-input" style=" {{ item.h <= 30 ? 'font-size: 20px;' : 'font-size:' + item.h / 2 + 'px;' }}" >
+						<div  ng-show="item.right" class="right-answer scale1" style=" {{ 'height:' + item.h + 'px;width:' + item.h + 'px;background-size:' + item.h + 'px ' + item.h + 'px;'  }}" ></div>
+						<div  ng-show="item.wrong" class="wrong-answer scale1" style=" {{ 'height:' + item.h + 'px;width:' + item.h + 'px;background-size:' + item.h + 'px ' + item.h + 'px;'  }}" ></div>
+					</div>
+				</div>
+			
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

@@ -1,0 +1,77 @@
+<div class="liz-show-description-images-sound shadow">
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content clearfix">
+		<div class="row">
+			<!--
+            <div class="col-md-4">
+                hola
+				<img class="main-img" ng-show="mainimg" src="{{ $root.resources + '/'  + mainimg }}" alt="{{ mainalt }}" ng-if="mainimg">
+			</div>
+			-->
+			<div class="col-md-8 conceptsImagesMainContent">
+				<div class="row items conceptImagesRow">
+					<div class="col-md-3 item" ng-repeat="item in items" style="{{ getItemStyles() }}">
+
+						<!--si el objeto tiene una clase personalizada, se reemplaza por inner-item-->
+						<div class=" {{ item.customClass ? item.customClass : 'inner-item' }} {{ item === selectedItem ? 'is-selected' : '' }}"
+							>
+
+							<!--audio element-->
+							<audio id="audio-{{ item.src }}" preload="auto">
+								<source src="{{ $root.resources + '/'  + item.src + '.mp3' }}" type="audio/mpeg">
+							</audio>
+						</div> <!--/.inner-item-->
+
+						<div class=" {{ item.customClass ? item.customClass : 'inner-title' }} {{ item === selectedItem ? 'is-selected' : '' }}" ng-show="item.title" ng-click="selectItem(item)"  >{{ item.title }}</div>
+                        <br>
+
+					</div> <!--/.item-->
+				</div> <!-- .items -->
+
+				<div class="text-box conceptsImagesBox">
+					<div class="row block-content">
+						<div class="col-md-2 conceptsImagesCol" ng-repeat="item in selectedItem.imgs">
+
+                            <div class="sonido">
+                                <img  class="icon-play-description bg-1 bd-1 bs-3" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-{{item.src}}" on="click"/>
+                            </div>
+
+                            <div style="display: inline-block" class="titulo">
+                                <h1 >{{item.title}}</h1>
+                                <div class="parrafo"> <p>{{item.text}}</p></div>
+                            </div>
+
+                            <div class="imagen">
+                                <img ng-show="item.img" src="{{ $root.resources + '/' + item.img }}" alt="{{ item.alt }}" class="img-responsive scale1 selected-item" style="float: right">
+                            </div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

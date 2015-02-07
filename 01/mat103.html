@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="mat103">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+	<style>
+
+		.day {
+			font-size: 1.3em !important;
+			background: #000;
+			color: #fff;
+			margin: 0;
+			padding: 20px 12px;
+			
+		}
+
+		/* actividad 1 */
+		.liz-compare-sounds .day{
+			margin-top: 42px;
+			margin-right: 2px;
+			text-align: center;
+		}
+
+
+		/* actividad 2 */
+		.liz-pairs-container .day{
+			font-size: 1.1em !important;
+		}
+
+		.liz-pairs-container .items,
+		.liz-pairs-container .targets {
+			width: 100%;
+		}
+
+		.liz-pairs-container .items .item-container{
+			width: calc(100% / 7);
+		}
+
+
+		@media (max-width: 844px) {
+			.day {
+				font-size: 1.0em !important;
+			}
+		}
+
+		.day.yellow { background: #FFC000; }
+		.day.green { background: #92D050; }
+		.day.blue { background: #00B0F0; }
+		.day.red { background: #FF0000; }
+		.day.purple { background: #604A7B; }
+		.day.pink { background: #FF33CC; }
+		.day.brown { background: #F79646; }
+
+	</style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="mat" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			items-per-row="4"
+			title="Los días de la semana"
+			description="Son los siete días en los que se divide toda la semana."
+			instruction="Haz clic sobre cada uno de los recuadros.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			description="En cada día de la semana hacemos cosas diferentes: estudiamos, trabajamos, nos alimentamos, nos aseamos y también descansamos."
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<compare-sounds
+			options="data"
+			hide-images="true"
+			description="Haz clic sobre cada ícono de sonido y luego selecciona el día de la semana al cual corresponde el sonido.">
+		</compare-sounds>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<pairs options="options" description="Arrastra cada día de la semana de arriba hacia el mismo día de la semana ubicado abajo.">
+			<item>
+				<div data-bind="text: text, attr: { class: textClass }"></div>
+			</item>
+			<target>
+				<div data-bind="text: text, attr: { class: textClass }"></div>
+				<audio data-bind="attr: { id: 'audio-' + audio }" preload="auto">
+					<source data-bind="attr: { src: $root.resources + '/' + audio + '.mp3' }" type="audio/mpeg">
+				</audio>
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<stack-multiple options="data" description="Arrastra a los recuadros en blanco las clases que tienes cada día de la semana según tu horario.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" >
+			</item>
+		</stack-multiple>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<stack-multiple options="data" description="A medida que aparezcan las imágenes, arrástralas a los recuadros en blanco y organízalas de acuerdo a las actividades que realizas cada día de la semana, debes tener en cuenta que sólo puedes colocar dos imágenes por día.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" >
+			</item>
+		</stack-multiple>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

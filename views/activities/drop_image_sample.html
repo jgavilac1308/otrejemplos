@@ -1,0 +1,74 @@
+<div class="liz-drop-image-sample full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+	<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+</audio>
+
+<!--Actividad-->
+<div class="block-content">
+
+	<div class="items" data-bind="sortable: items, attr: { style: 'min-height: ' +  itemsContainerHeight + ';' }">
+		<div class="item" data-bind="attr: { style: $root.getItemStyles($data) }">
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.' + extension, alt: (typeof alt !== 'undefined' ? alt : src) }">
+		</div> <!--/.item-->
+	</div> <!--/.items-->
+
+	<div class="canvas-container">
+		<div class="inner-canvas">
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + canvas + '.png', alt: canvasAlt }">
+
+			<!-- ko foreach: targets -->
+			<audio data-bind="attr: { id: 'audio-' + src }" preload="auto">
+				<source data-bind="attr: { src: $root.resources + '/'  + src + '.mp3' }" type="audio/mpeg">,
+			</audio>
+
+			<div class="target" data-bind="
+				sortable: { data: sortable, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }, 
+					attr: { style: $root.getTargetStyles($data)  
+				}">
+
+				<div class="target-inner prevent">
+					<div class="target-inner-inner" data-bind="attr: { style: $root.getTargetInnerStyles($data) }">
+						<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.' + extension, alt: (typeof alt !== 'undefined' ? alt : src) }">
+					</div> <!--/.target-inner-inner-->
+				</div> <!--/.inner-target-->
+			</div> <!--/.target-->
+			<!-- /ko -->
+
+			<div class="sample" data-bind="if: sample">
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + sample + '.png', alt: sampleAlt}">
+			</div> <!--/.sample-->
+
+		</div> <!--/.inner-canvas-->
+	</div> <!--/.canvas-container-->
+
+
+</div> <!--/.block-content-->
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-drop-image-sample-->

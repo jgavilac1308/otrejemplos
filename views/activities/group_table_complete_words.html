@@ -1,0 +1,58 @@
+<div class="liz-group-table-complete-words shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+			
+			<div ng-show="titleBlock || mainimg "class="text-box">
+				<div class="examples-container">
+					<div class="words-examples bg-1" ng-repeat="item in examples">{{ item }}</div>	
+				</div>
+				<div class="main-img">	
+					<img ng-show="mainimg" src="{{ $root.resources + '/'  + mainimg }}" alt="{{ altimg }}" style="{{ style }}">
+					<button ng-click="verify()"  class="btn-primary">Comprobar</button>
+				</div>
+			</div> <!--/.text-box-->
+
+			</div>
+			<div class="complete-container bd-1" ng-repeat="item in items" style="{{ getStyles() }}">
+					<div ng-show="item.title" class="item-title bg-2">{{ item.title }}</div>				
+
+				<div class="container-input">									
+					<input type="text" ng-model="item.input" ng-disabled="item.completed" class="{{ item.completed ? 'input-completed' : '' }}"/>
+					<div ng-show="item.right" class="right-answer scale1"></div>
+					<div ng-show="item.wrong" class="wrong-answer scale1"></div>
+					</input>							
+				</div>
+
+			</div>
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

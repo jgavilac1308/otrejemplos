@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="soc103">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="soc" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<text1
+			description-top="Un paisaje es lo que vemos en nuestro entorno el cual contiene elementos como: terreno, montañas, edificios, agua, animales, árboles, entre otros."
+			img="campo.png"
+			alt="Paisaje conformado por varias montañas, plantas, flores, vacas, casas, además de las nubes y el sol">
+		</text1>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			title="Elementos naturales"
+			description="Los elementos naturales son todos aquellos que se encuentran en la naturaleza."
+			instruction="Haz clic sobre cada una de las imágenes">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con4">
+		<click-images 
+			options="data"
+			title="Elementos artificiales"
+			description="Los elementos artificiales son los que están hechos por el hombre."
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con5">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<puzzle1 
+			options="data"
+			description="Arrastra cada una de las imágenes a los recuadros y arma un paisaje natural.">
+		</puzzle1>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<puzzle1 
+			options="data"
+			description="Arrastra los elementos artificiales dentro del recuadro y arma un paisaje artificial.">
+		</puzzle1>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<puzzle2 
+			options="data"
+			description="Arrastra cada uno de los círculos sobre los elementos artificiales que veas en el siguiente paisaje.">
+		</puzzle2>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<puzzle3 
+			options="data"
+			description="Arrastra cada una de las imágenes a los recuadros y arma un paisaje artificial.">
+		</puzzle3>
+	</script>
+	
+	<script type="text/ng-template" id="act5">
+		<puzzle3 
+			options="data"
+			description="Arrastra cada una de las imágenes a los recuadros y arma un paisaje natural.">
+		</puzzle3>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

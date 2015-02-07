@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="nat103">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="nat" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<text1
+			description-top="Los animales nacen, crecen, se reproducen y mueren, como todos los seres vivos. De acuerdo a su forma de reproducción los animales pueden ser ovíparos o vivíparos."
+			img="ciclo-de-vida.png"
+			img-title="Ciclo de vida de las aves"
+			alt="Muestra el ciclo de vida de las aves, allí aparece una gallina, la cual pone huevos, de los cuales nacen los pollitos y finalmente estos crecen para repetir nuevamente el ciclo" >
+		</text1>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			description="Los ovíparos son aquellos animales que nacen de los huevos como por ejemplo los peces, las aves y los insectos. Los vivíparos en cambio nacen del vientre de la madre, como por ejemplo los humanos, el perro y el gato."
+			instruction="Haz clic sobre cada unas de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<show-concepts 
+			options="data"
+			instruction="Haz clic sobre cada uno de los círculos y descubre algunos animales acuáticos, aéreos y terrestres."
+			description="Los animales según el medio donde vivan pueden clasificarse en acuáticos, aéreos y terrestres. Los animales acuáticos viven en el agua, los aéreos son aquellos animales que pueden volar y los terrestres incluye aquellos animales que no pueden volar y permanecen todo el tiempo en la tierra.">
+		</show-concepts>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<one-group-shape 
+			options="data"
+			description="Arrastra hasta la figura con forma de huevo los animales ovíparos.">
+		</one-group-shape>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<one-group-shape 
+			options="data"
+			description="Arrastra hasta el círculo los animales vivíparos.">
+		</one-group-shape>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<drag-drop-multiples options="data" description="Arrastra a uno de los recuadros cada uno de los objetos de acuerdo a su ubicación correcta.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: alt }">
+			</item>
+		</drag-drop-multiples>
+	</script>
+
+	<script type="text/ng-template" id="act4_1">
+		<one-group-shape 
+			options="data"
+			description="Arrastra hasta el círculo los animales terrestres.">
+		</one-group-shape>
+	</script>
+
+	<script type="text/ng-template" id="act4_2">
+		<one-group-shape 
+			options="data"
+			description="Arrastra hasta la nube los animales aéreos.">
+		</one-group-shape>
+	</script>
+
+	<script type="text/ng-template" id="act4_3">
+		<one-group-shape 
+			options="data"
+			description="Arrastra hasta la figura con forma de gota los animales acuáticos.">
+		</one-group-shape>
+	</script>
+
+	<script type="text/ng-template" id="act5">
+		<pairs options="options" description="Arrastra cada animal hacia el producto o servicio que nos proporciona.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+			</target>
+		</pairs>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

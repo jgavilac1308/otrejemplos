@@ -1,0 +1,60 @@
+<div class="liz-select-options-table shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner center-items">
+			<img class="main-img" ng-show="mainimg" src="{{ $root.resources + '/'  + mainimg }}" alt="{{ titleBlock }}">
+			<div class="complete-container bd-1 bg-3" ng-repeat="item in items" style="{{ item.style }}" >
+				<div  class="item bg-1" >
+					<div ng-show="item.name" class="item-name">{{ item.name }}</div>
+				</div>
+
+				<div class="words-container bg-3" style="{{ rowsstyle }}" ng-repeat="row in item.list">
+					<div class="words-inner bc-bottom-1" style="{{ rowsstyle }}">
+						<img ng-show="row.img" src="{{ $root.resources + '/'  + row.img }}" alt="{{ row.alt }}" title="{{ row.title }}" style="{{ rowsstyle }}">
+						<p ng-show="row.text">{{ row.text }}</p>
+						<div ng-show="row.answers" class="answers">
+		                    <label class="answer" ng-repeat="a in row.answers">
+		                        <input type="radio" ng-model="row.answers.selectedAnswer" ng-value="a" ng-change="verify(row.answers,a)" ng-disabled="row.answers.completed" ng-checked="row.answers.completed && a.answer"/> {{ a.text }}
+		                    </label>
+		                </div>
+	                </div>
+	                <div  ng-show="row.answers.right" class="right-answer scale1" ></div>
+					<div  ng-show="row.answers.wrong" class="wrong-answer scale1" ></div>
+                </div>
+	
+			</div>
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

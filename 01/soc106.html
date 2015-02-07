@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="soc106">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="soc" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			title="¿Cómo cuidamos nuestro cuerpo?"
+			description="Para cuidar nuestro cuerpo debemos bañarnos TODOS LOS DÍAS luego de levantarnos; si sales a jugar y te ensucias, es saludable bañarte para quitarte la suciedad y liberar a tu cuerpo de los microbios que te pueden causar enfermedades."
+			instruction="Haz clic sobre la imagen.">
+		</click-images>
+	</script>
+	
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			description="No olvides cepillarte los dientes después de cada comida para que no se te dañen."
+			instruction="Haz clic sobre la imagen.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-images 
+			options="data"
+			description="Dedica tiempo a practicar un deporte o jugar con tus amigos, por cada hora de trabajo en el computador o de televisión debes hacer un ejercicio físico como estirar las manos, mover la cabeza o estirar tus pies."
+			instruction="Haz clic sobre la imagen.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con4">
+		<click-images 
+			options="data"
+			description="En el día debes jugar, consumir alimentos, estudiar y ayudar en las actividades de la casa; y en la noche debes dormir bien para descansar. Si descansas puedes recuperar energías para hacer muchas cosas que te gustan."
+			instruction="Haz clic sobre la imagen.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<choose-items options="data" description="Selecciona las imágenes con aquellas actividades que debes realizar para cuidar tu cuerpo.">
+			<div class="choose-items-img" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" style="width: 25%">
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}">
+			</div>
+		</choose-items>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<pairs options="options" description="Arrastra cada parte del cuerpo hacia la imagen que muestra como cuidarla.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+
+				<!--audio element-->
+				<audio data-bind="attr: { id: 'audio-' + src2 }" preload="auto">
+					<source data-bind="attr: { src: $root.resources + '/'  + src2 + '.mp3' }" type="audio/mpeg">
+				</audio>
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<compare-sounds
+			options="data"
+			description="Haz clic sobre el ícono de sonido y selecciona la imagen relacionada con el sonido.">
+		</compare-sounds>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

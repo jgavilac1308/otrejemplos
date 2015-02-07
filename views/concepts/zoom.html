@@ -1,0 +1,61 @@
+<div class="liz-zoom shadow clearfix" ng-class="isBottom ? '' : 'full-height'">
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img ng-show="watch" src="../resources/common/iconoobservar.png" alt="ícono de observación"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		
+		<div ng-show="items" class="text-container">
+
+			<p ng-repeat="item in items ">{{ item.text }}</p>
+			
+		</div>
+
+		<div ng-click="showBig = true" class="main-img" style="{{ mainimgstyles }}">
+			<img class="img-responsive" src="{{ $root.resources + '/' + img }}" alt="{{ alt }}">
+		</div> <!--.main-img-->
+
+		<div ng-show="showBig">
+			<!--se cierra al hacer click sobre el overlay o la imagen-->
+			<div class="overlay"></div>
+
+			<div class="big-img">
+				<img class="img-responsive" src="{{ $root.resources + '/' + bigImg }}" alt="{{ alt }}">
+			</div> <!--.big-img-->
+
+			<button ng-click="complete()" class="close-btn">X</button>
+		</div> 
+
+	</div> <!--.block-content-->
+
+</div>
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

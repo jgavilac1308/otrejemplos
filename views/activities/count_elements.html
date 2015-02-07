@@ -1,0 +1,52 @@
+<div class="liz-count-elements full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--Actividad-->
+<div class="block-content">
+
+	<div class="numbers" data-bind="sortable: { data: numbers }">
+		<div class="number" data-bind="text: number"> </div>
+	</div> <!--/.numbers-->
+
+	<div class="targets" data-bind="foreach: { data: targets }">
+		<div class="target">
+
+			<!--sortable-->
+			<div class="sortable" data-bind="sortable: { data: _sortable, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+				<div class="number prevent" data-bind="text: number"></div>
+			</div> <!--/.sortable-->
+
+			<!--imágenes multiplicadas-->
+			<div class="images" data-bind="foreach: { data: _multiplier }">
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + $parent.src + '.png', alt: $parent.alt }">
+			</div> <!--/.images-->
+
+		</div> <!--/.target-->
+	</div> <!--/.numbers-->
+
+</div> <!--/.block-content-->
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-count-elements-->

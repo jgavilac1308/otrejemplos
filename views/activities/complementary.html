@@ -1,0 +1,33 @@
+<div class="shadow full-height">
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono seleccion"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono tarea"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+	
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+	
+	<div class="block-content text-center" style="display: flex; justify-content: space-around">
+		<a href="{{ options.link }}" target="blank" ng-click="verify(options.link)"><img class="img-responsive inlineb" src="{{ $root.resources + '/complementary.png' }}" alt="imagen que enlaza las actividades complementarias"/></a>
+		<a ng-if="options.link2" href="{{ options.link2 }}" target="blank" ng-show="options.link2" ng-click="verify(options.link2)"><img class="img-responsive inlineb" src="{{ $root.resources + '/complementary2.png' }}" alt="imagen que enlaza las actividades complementarias"/></a>
+		<a ng-if="options.link3" href="{{ options.link3 }}" target="blank" ng-show="options.link3" ng-click="verify(options.link3)"><img class="img-responsive inlineb" src="{{ $root.resources + '/complementary3.png' }}" alt="imagen que enlaza las actividades complementarias"/></a>
+		<a ng-if="options.link4" href="{{ options.link4 }}" target="blank" ng-show="options.link4" ng-click="verify(options.link4)"><img class="img-responsive inlineb" src="{{ $root.resources + '/complementary4.png' }}" alt="imagen que enlaza las actividades complementarias"/></a>
+	</div>
+			
+
+</div> <!--/.full-height.shadow-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

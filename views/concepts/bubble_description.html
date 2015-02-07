@@ -1,0 +1,43 @@
+<div class="liz-bubble-description shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg" />
+	</audio>
+
+	<div class="block-content clearfix">
+		<div class="row bubbleDescriptionRow">
+			<div ng-repeat="item in items" class="col-md-4 bubbleDescriptionItem">
+				<div class="bubbleDescriptionTitle">
+					<img ng-if="item.hoverBubble == false" src="{{ $root.resources + '/' + item.iconSrc + '.png' }}" alt="{{ item.iconAlt }}" />
+					{{ item.title }}
+				</div>
+				<div class="bubbleDescriptionContent" ng-mouseenter="onHoverBubble(item)" ng-mouseleave="onLeaveBubble(item)">
+					<p class="text-center" ng-if="item.hoverBubble == false">
+						{{ item.descriptionText }} <br ng-if="item.descriptionText2">
+						{{ item.descriptionText2 }}
+					</p>
+					<img ng-if="item.hoverBubble" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}" />
+				</div>
+			</div>
+		</div>
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono mouse.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

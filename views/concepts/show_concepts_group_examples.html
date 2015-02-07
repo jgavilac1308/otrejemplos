@@ -1,0 +1,61 @@
+<div class="liz-show-concepts-group-examples shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img ng-show="addicon" class="icon-play-description" src="{{ '../resources/common/' + addicon + '.png' }}" alt="addicon" />
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span ng-bind-html="sanitize(description)"></span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+
+			<div ng-repeat="group in groups" class="group-container bd-1 {{ customClass }}">
+				<div class="textbox1" >
+					<div ng-if="group.titlehtml" class="group-title bg-1" ng-bind-html="sanitize(group.titlehtml)"></div>
+					<div ng-show="group.title" class="group-title bg-1" >{{ group.title }}
+						<div ng-if="group.subtitle" class="group-subtitle" ng-bind-html="sanitize(group.subtitle)"></div>
+					</div>
+					<img class="main-img" ng-show="group.img" src="{{ $root.resources + '/'  + group.img }}" alt="{{ group.imgalt }}" tittle="{{ group.imgtittle || group.imgalt }}">
+				</div> <!--/.text-box-->
+
+					<div ng-if="group.items"class="complete-container" ng-repeat="item in group.items" >
+						<span  class="item">
+							
+							<img  ng-show="item.img" class="img-responsive" src="{{ $root.resources + '/' + item.img }}" alt="{{ item.altimg ? item.altimg : item.img }} " title="{{ item.titleimg ? item.titleimg : '' }}">
+
+						</span>						
+							
+						<span>
+							<div ng-show="item.text" ng-bind-html="sanitize(item.text)" class="item-text"></div>
+						</span>
+						
+					</div>
+				</div> <!--/.text-box-->
+			</div><!--/.group-container-->
+
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

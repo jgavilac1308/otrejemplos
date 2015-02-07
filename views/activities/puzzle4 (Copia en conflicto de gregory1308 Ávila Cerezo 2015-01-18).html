@@ -1,0 +1,74 @@
+<div class="liz-puzzle4 full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face scale1" src="../resources/common/icon_right.png" alt="icono de bien hecho Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face scale1" src="../resources/common/icon_wrong.png" alt="icono de sigue intentándolo"/>
+<!-- END FACES -->
+
+
+<!--Descripción-->
+<div class="block">
+	<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<div>
+			<h1 ng-show="titletop">{{ titletop }}</h1>
+			<p>{{ description }}</p>
+		</div>
+	</div>	
+</div>
+
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+	<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+</audio>
+
+<!--Actividad-->
+<div class="block-content">
+
+	<!--usamos el mismo array de targets para los items-->
+	<div class="items" data-bind="sortable: { data: items }, attr: { style: getItemsContainerStyles()  }">
+		<div class="item" data-bind="attr: { style: $root.getItemsStyles($data) }">
+            <span data-bind="visible: !img, text: text"></span>
+            <img class="img-responsive" data-bind="visible: img, attr: { src: $root.resources + '/' + img ,alt: alt }">
+		</div>
+	</div> <!--/.items-->
+
+
+	<div class="puzzle2-canvas">
+		<div class="inner-canvas">
+			<div class="main-text" data-bind="visible: maintext,html: maintext ? sanitize(maintext) : '',attr: { style: maintextstyle }"></div>
+			<img class="img-responsive" data-bind="visible: canvas,attr: { src: resources + '/' + canvas + extcanvas,alt: altcanvas }">
+
+			<!-- ================================================================================= -->
+			<!-- targets -->
+			<!-- ================================================================================= -->
+			<!-- ko foreach: { data: targets, as: 'target' } -->
+			<div class="target" data-bind="sortable: { data: target._targets, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }, 
+				attr: { style: $root.getTargetsStyles(target) }">
+				<div class="target-item prevent" data-bind="attr: { style: preserveimg ? 'background-color: transparent!important;' : ''  }">
+					<div class="preserve-text align-children" data-bind="text: text, attr: { style: $root.getDroppedStyles()  }"></div>
+					<img class="img-responsive" data-bind="visible: preserveimg, attr: { src: $root.resources + '/' + text ,alt: alt}">
+				</div>
+			</div> <!--/.target-->
+			<!-- /ko -->
+
+		</div> <!--/.inner-canvas-->
+	</div> <!--/.puzzle2-canvas-->
+
+
+</div> <!--/.block-content-->
+
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

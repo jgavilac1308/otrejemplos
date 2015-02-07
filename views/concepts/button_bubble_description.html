@@ -1,0 +1,56 @@
+<div class="liz-button-bubble-description shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg" />
+	</audio>
+
+	<div class="block-content clearfix">
+		<div class="row imageMapOptions">
+			<div class="col-md-4">
+				<img src="{{ $root.resources + '/'  + mainimg }}" alt="{{ alt }}" />
+			</div>
+			<div class="col-md-8 btnBubbleContent">
+				<table class="btnBubbleTable">
+					<tbody>
+						<tr class="btnBubbleRow" ng-repeat="bubble in bubbles">
+							<td class="btnBubbleBtn">
+								<button class="btn" ng-disabled="bubble.activeBtn" data-toggle="button" ng-click="activateBubble(bubble)" id="{{ bubble.btnId }}" play="audio_{{ bubble.audioId }}" on="click">
+									{{ bubble.button }}
+								</button>
+								<!--audio element-->
+								<audio id="audio_{{ bubble.audioId }}" preload="auto">
+									<source src="{{ $root.resources + '/'  + bubble.audio + '.mp3' }}" type="audio/mpeg">
+								</audio>
+							</td>
+							<td class="btnBubbleDescription" ng-if="bubble.displayInfo">
+								<p>
+									{{ bubble.description }}
+								</p>
+								<img src="{{ $root.resources + '/'  + bubble.icon }}" alt="{{ bubble.iconAlt }}" class="btnBubbleDescriptionIcon">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono mouse.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

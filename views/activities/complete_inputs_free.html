@@ -1,0 +1,45 @@
+<div class="liz-complete-inputs-free shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+			<div ng-if="item.resource"  ng-repeat="item in items" class="item">
+				<img class="img-responsive scale1" src="{{ $root.resources + '/' + item.resource + '.png' }}" alt="{{ item.alt ? item.alt : item.resource }} " title="{{ item.title ? item.title : item.alt }}">
+			</div>
+
+			<div class="complete-container" style="{{options.stylequestion}}">
+                <textarea placeholder="Escribe aqui" rows="5" type="text" ng-model="word.input" ng-change="verify(word)" ng-disabled="word.completed"/>
+                <div ng-show="word.right" class="right-answer scale1"></div>
+                <div ng-show="word.wrong" class="wrong-answer scale1"></div>
+                </textarea>
+			</div>
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

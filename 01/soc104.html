@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="soc104">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="soc" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			title="¿Qué es una profesión?"
+			description="Las profesiones y los oficios son ocupaciones de las personas. Una profesión es cuando vas a la universidad y estudias una carrera."
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-images 
+			options="data"
+			title="¿Qué es oficio?"
+			description="Un oficio es una labor que hace una persona sin necesidad de haber tenido que ir a la universidad."
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con4">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<pairs options="options" description="Arrastra cada profesión u oficio hacia su respectiva herramienta de trabajo.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<one-group 
+			options="data" 
+			description="Arrastra al recuadro las imágenes que representan oficios."
+			title="Oficios">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<one-group 
+			options="data"
+			description="Arrastra al recuadro las imágenes que representan profesiones."
+			title="Profesiones">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<one-group 
+			options="data"
+			description="Arrastra al cuadro las profesiones u oficios de las personas que conoces de tu barrio.">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act5">
+		<one-group 
+			options="data"
+			description="Arrastra al círculo las profesiones u oficios que más te gusten.">
+		</one-group>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

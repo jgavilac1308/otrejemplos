@@ -1,0 +1,69 @@
+<div class="liz-image-map-description liz-complete-input-parts full-height shadow">
+	<!--Descripción-->
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio ng-if="audio" id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<table class="table image-table-content">
+			<thead>
+				<tr>
+					<th>{{ mainImageTitle }}</th>
+					<th>{{ imageTitle2 }}</th>
+					<th>{{ imageTitle3 }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="image-table-rows" ng-repeat="item in items">
+					<td class="image-table">
+						<img ng-show="item.mainImg" src="{{ $root.resources + '/' + item.mainImg }}" alt="{{ item.mainAlt }}" class="img-responsive scale1" />
+					</td>
+					<td class="image-table-images-options" ng-repeat="obj in item.cols" ng-disabled="obj.disabled">
+						<img ng-show="obj.img" src="{{ $root.resources + '/' + obj.img }}" title="{{ obj.alt }}" class="img-responsive scale1 image-options" />
+						<div ng-disabled="obj.disabled" class="image-option" ng-repeat="opt in obj.imgOptions" style="{{ getStyles(opt) }}" ng-click="obj.disabled || verify(obj, opt)" ng-class="{'disabled-option': obj.disabled, '{{opt.customClass}}': obj.disabled && opt.correct}"></div>
+						<div ng-show="obj.right" class="right-answer scale1"></div>
+						<div ng-show="obj.wrong" class="wrong-answer scale1"></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div> <!--/.liz-select-table-multiples -->
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

@@ -1,0 +1,48 @@
+<div class="liz-numeric-sequences full-height shadow">
+
+<!-- FACES -->
+<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+
+		<table class="sequences">
+			<tr ng-repeat="seq in sequences">
+				<td ng-repeat="item in seq">
+					<!--elemento estático-->
+					<span ng-show="item.filled">{{ item.number }}</span>
+
+					<!--input a llenar-->
+					<input ng-hide="item.filled" type="text" ng-model="item.input" ng-change="verify(item)" ng-disabled="item.completed">
+				</td>
+			</tr>
+		</table>
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-numeric-sequences-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

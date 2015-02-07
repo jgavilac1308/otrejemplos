@@ -1,0 +1,69 @@
+<div class="liz-images-block-description full-height shadow">
+	<!--Descripción-->
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img ng-hide="hasAudio" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<div class="row images-block-row {{customClass}}">
+			<div ng-if="$index < (blocks.length / 2)" class="col-md-3 images-block-col" ng-repeat="block in blocks" play="{{block.audio}}" on="click" ng-click="verify(block)" ng-class="{'image-block-cursor': block.hasAudio}" style="{{getStyles()}}">
+				<div>
+					<img ng-show="block.img" src="{{ $root.resources + '/' + block.img }}" alt="{{ block.alt }}" title="{{ block.title }}" class="img-responsive scale1" ng-elevate-zoom zoom-image="{{ (hasZoomImage) ? $root.resources + '/' + block.img : '' }}">
+					<div ng-if="block.blockTitle" class="image-block-title">
+						<span>{{ block.blockTitle }}</span>
+					</div>
+
+					<audio id="{{block.audio}}" preload="auto">
+						<source src="{{ $root.resources + '/'  + block.audio + '.mp3' }}" type="audio/mpeg">
+					</audio>
+				</div>
+			</div>
+		</div>
+
+		<div class="row images-block-row {{customClass}}">
+			<div ng-if="$index >= (blocks.length / 2)" class="col-md-3 images-block-col" ng-repeat="block in blocks" play="{{block.audio}}" on="click" ng-click="verify(block)" ng-class="{'image-block-cursor': block.hasAudio}" style="{{getStyles()}}">
+				<div>
+					<img ng-show="block.img" src="{{ $root.resources + '/' + block.img }}" alt="{{ block.alt }}" title="{{ block.title }}" class="img-responsive scale1" ng-elevate-zoom zoom-image="{{ (hasZoomImage) ? $root.resources + '/' + block.img : '' }}" >
+					<div ng-if="block.blockTitle" class="image-block-title">
+						<span>{{ block.blockTitle }}</span>
+					</div>
+
+					<audio id="{{block.audio}}" preload="auto">
+						<source src="{{ $root.resources + '/'  + block.audio + '.mp3' }}" type="audio/mpeg">
+					</audio>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div> <!--/.liz-complete-inputs-->
+
+<div ng-if="isBottom && instruction" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

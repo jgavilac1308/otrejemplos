@@ -1,0 +1,34 @@
+<link rel="stylesheet" type="text/css" href="../app/styles/common/senales.css" />
+<div class="shadow full-height">
+	<div class="block">
+		<p class="clearfix">
+		<div class="evidencesviews"> 
+			<img class="evidenceslast" src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+			<span ><img style="width: 60%; margin-top:-30%;" class="img-circle" src="../resources/common/ayuda.gif" /></span>
+		</div>
+		
+		<div class="evidenceslast">
+			<img ng-show="evidencesSound" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-evidences" on="click"/>
+			<span ><img style="width: 60%; margin-top:-30%;" class="img-circle" src="../resources/common/sonido.gif" /></span>
+		</div>
+		<div class="">
+			<img src="../resources/common/icono tarea.png" alt="ícono mouse"/>
+
+		<span>{{ description }}</span>
+
+		</p>
+		</div>
+		
+	</div>
+
+	<!--audio de la instrucción-->
+	<audio id="audio-evidences" preload="auto">
+		<source src="{{ $root.resources + '/evidences.mp3'  }}" type="audio/mpeg">
+	</audio>
+	
+	<div class="block-content text-center">
+		<img class="img-responsive inlineb" src="../resources/common/evidences2.png" alt="explica como acceder a las actividades de evidencia"/>
+	</div>
+			
+
+</div> <!--/.full-height.shadow-->

@@ -1,0 +1,25 @@
+<div class="block-content" >
+
+	<!--Descripción-->
+	<div ng-show="competencesSound" class="block margin-bottom">
+		<p class="clearfix">
+		<img class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono mouse" play="audio-competences" on="click"/>
+		<span>Haz clic sobre el ícono para escuchar</span>
+		</p>
+	</div> <!--/.block-->
+
+	<div class="shadow ">
+		<div class="block ">Estándares de competencia</div>
+		<div class="block-content">{{ competences1 }}</div>
+	</div>
+	
+		<!--audio-->
+		<audio id="audio-competences" preload="auto">
+			<source src="{{ $root.resources + '/competences.mp3' }}" type="audio/mpeg">
+		</audio>
+
+	<div class="shadow">
+		<div class="block ">Elemento de competencia</div>
+		<div class="block-content ">{{ competences2 }}</div>
+	</div>
+</div> <!--/.full-height.shadow-->

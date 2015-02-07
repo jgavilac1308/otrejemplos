@@ -1,0 +1,39 @@
+<div class="liz-one-group-rule full-height shadow clearfix">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Ícono de respuesta correcta - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Ícono de respuesta incorrecta - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+	<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+</audio>
+
+	<div class="liz-one-group-container">
+			<div class="items" data-bind="sortable: items">
+				<div data-bind="attr: { class: 'item per-row-' + $root.itemsPerRow }">
+					<img  class="img-responsive" data-bind="visible: src,attr: { src: $root.resources + '/' + src, alt: alt, title: title }" />
+				</div>
+
+			</div>
+			<div data-bind="visible: success">
+				<div data-congratulations>
+			</div>
+		</div>
+		
+		<div data-bind="visible: failure">
+			<div data-failure></div>
+		</div>
+    </div> <!--/.liz-one-group-->
+

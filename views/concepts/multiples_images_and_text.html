@@ -1,0 +1,32 @@
+<div class="liz-multiples-images-and-text shadow clearfix" ng-class="isBottom ? '' : 'full-height'">
+	<div class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img ng-show="addicon" src="{{ '../resources/common/' + addicon }}" alt="{{ 'icono ' + addicon.substring(5,13) }}"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<div class="items-container" ng-repeat="item in items" style="{{ item.style }}">
+			<div ng-show="item.maintext" ng-bind-html="sanitize(item.maintext)"></div>
+
+			<div class="item scale1" ng-repeat="item in item.pictures" style="width: {{ 100 / itemsPerRow }}%">
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.resource  }}" alt="{{ item.alt }}" title="{{ item.title }}">
+				<div ng-hide="{{ noafter }}" >{{ item.text }}</div>
+				<div ng-show="{{ noafter }}" class="no-after bg-1" ng-bind-html="sanitize(item.text)"></div>
+			</div>
+		</div>
+
+	</div>
+</div>

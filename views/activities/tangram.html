@@ -1,0 +1,38 @@
+<div class="liz-tangram full-height shadow">
+
+<!-- FACES -->
+<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<div class="block-content">
+		<button class="btn-primary" ng-click="start()">Iniciar</button>
+	</div> <!--/.block-content-->
+
+	<div ng-show="started">
+		<!--pantalla oscura-->
+		<div class="overlay"></div>
+		<div class="canvas-container">
+			<div ng-hide="success || failure" id="kinetic-container"></div>
+		</div>
+	</div>
+
+</div> <!--/.liz-tangram-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

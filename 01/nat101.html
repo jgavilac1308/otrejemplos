@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="nat101">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="nat" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			description="Las plantas y los animales son seres vivos. Las plantas fabrican su propio alimento y no se desplazan, los animales en cambio pueden desplazarse y buscar su alimento, ya que no son capaces de fabricarlo."
+			instruction="Haz clic sobre cada unas de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<one-group
+			options="data" 
+			description="Arrastra al recuadro los animales que encuentres en las siguientes imágenes."
+			title="Animales">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<one-group
+			options="data" 
+			description="Arrastra al recuadro las plantas que encuentres en las siguientes imágenes."
+			title="Plantas">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<puzzle2 
+			options="data"
+			description="Arrastra cada uno de los círculos sobre los elementos naturales que veas en el siguiente paisaje.">
+		</puzzle2>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<one-group
+			options="data" 
+			description="Arrastra hasta el recuadro las imágenes de los animales y las plantas que habitan en tu casa o cerca de ella."
+			title="Animales y plantas">
+		</one-group>
+	</script>
+
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

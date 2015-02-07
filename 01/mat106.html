@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="mat106">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+	
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="mat" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<animation-base time="time" 
+			description="Como lo vimos en la lección anterior los objetos se pueden agrupar por características iguales, cuando un objeto no cumple con estas características decimos que el objeto no pertenece al conjunto." 
+			instruction="Haz clic sobre el botón iniciar para ver la animación." 
+			animation-id="liz-animation-1" 
+		>
+			<div class="set">
+				<img class="img-responsive" src="{{ resources }}/conjunto-de-colores.png" alt="Conjunto conformado por cinco lápices de colores.">
+			</div>
+
+			<img class="img-responsive moving-item" src="{{ resources }}/banano.png" alt="Banano">
+			<div class="block message"> El banano no pertenece al conjunto de lápices de colores </div>
+		</animation-base>
+	</script>
+	
+	<script type="text/ng-template" id="con2">
+		<animation-base time="time" 
+			instruction="Haz clic sobre el botón iniciar para ver la animación." 
+			animation-id="liz-animation-2">
+			<div class="zone-1">
+				<div class="zone">
+					<img class="img-responsive square" src="{{ resources }}/zapatos.png" alt="Par de zapatos de hombre">
+					<div class="set-container">
+						<img class="img-responsive set" src="{{ resources }}/conjunto-zapatos.png" alt="Conjunto conformado por  un par de zapatos de hombre Y tres pares de zapatos de mujer">
+						<img class="img-responsive icon" src="../resources/common/icon_right_s.png" alt="ícono de respuesta incorrecta">
+					</div>
+				</div>
+				<div class="block message">Los zapatos si pertenecen al conjunto de Zapatos.</div>
+			</div>
+
+			<div class="zone-2">
+				<div class="zone">
+					<img class="img-responsive square" src="{{ resources }}/letra.png" alt="letra a minúscula">
+					<div class="set-container">
+						<img class="img-responsive set" src="{{ resources }}/conjunto-numeros.png" alt="Conjunto conformado por los números del uno al siete">
+						<img class="img-responsive icon" src="../resources/common/icon_wrong.png" alt="ícono de respuesta incorrecta">
+					</div>
+				</div>
+				<div class="block message">La letra no pertenece al conjunto de numeros</div>
+			</div>
+
+		</animation-base>
+	</script>
+
+	<script type="text/ng-template" id="act1_1">
+		<sound-group
+			options="data"
+			description="Haz clic sobre el ícono de sonido y luego arrastra al conjunto los elementos que pertenecen a él.">
+		</sound-group>
+	</script>
+
+	<script type="text/ng-template" id="act1_2">
+		<sound-group
+			options="data"
+			description="Haz clic sobre el ícono de sonido y luego arrastra al conjunto los elementos que pertenecen a él.">
+		</sound-group>
+	</script>
+
+	<script type="text/ng-template" id="act2_1">
+		<drop-out
+			options="data"
+			description="Arrastra hacia fuera aquellos elementos que no pertenecen porque no son instrumentos.">
+		</drop-out>
+	</script>
+
+	<script type="text/ng-template" id="act2_2">
+		<drop-out
+			options="data"
+			description="Arrastra hacia fuera aquellos elementos que no pertenecen porque no son medios de transporte.">
+		</drop-out>
+	</script>
+
+	<script type="text/ng-template" id="act3_1">
+		<sound-group
+			options="data"
+			description="Haz clic sobre el ícono de sonido y luego arrastra al conjunto los elementos que pertenecen a él.">
+		</sound-group>
+	</script>
+
+	<script type="text/ng-template" id="act3_2">
+		<sound-group
+			options="data"
+			description="Haz clic sobre el ícono de sonido y luego arrastra al conjunto los elementos que pertenecen a él.">
+		</sound-group>
+	</script>
+	
+	<script type="text/ng-template" id="act4">
+		<drop-out
+			options="data"
+			description="Del conjunto de animales, arrastra hacia fuera aquellos que no pertenecen porque no son domésticos.">
+		</drop-out>
+	</script>
+
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

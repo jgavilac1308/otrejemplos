@@ -1,0 +1,89 @@
+<div class="liz-buy-items shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<div class="row">
+	<div class="col-xs-12">
+
+		<div class="block">
+			<p class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+			<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+			<span>{{ description }}</span>
+			</p>
+		</div>
+		
+		<!--audio-->
+		<audio id="audio-instruction" preload="auto">
+			<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+		</audio>
+
+		<!--Actividad-->
+		<div class="block-content">
+			<div class="products" data-bind="foreach: products">
+				<div class="product" data-bind="attr: { style: $root.getProductStyles() }">
+					<div class="product-img bd-1">
+						<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src, alt: alt }">
+					</div> <!--.product-img-->
+
+					<div class="product-price bg-1"><span data-bind="text: price"></span> pesos</div>
+
+					<!--contador-->
+					<div class="product-counter bd-1" data-bind="visible: !$root.showTotal()">
+						<span data-bind="text: priceSum.counter"></span> pesos
+					</div> <!--.product-counter-->
+
+					<div class="product-sortable" data-bind="sortable: { data: priceSum }"></div>
+				</div> <!--.product-->
+			</div> <!--.products-->
+
+			<div class="money">
+				<!--monedas-->
+				<div class="coins" data-bind="visible: !showTotal(), foreach: coins">
+					<div class="coin" data-bind="draggable: $data">
+						<img class="img-responsive" data-bind="attr: { src: '../resources/activities/' + src + '.jpg', alt: alt, title: title }">
+					</div> <!--.coin-->
+				</div> <!--.coins-->
+
+				<!--billetes-->
+				<div class="bills" data-bind="visible: !showTotal(), foreach: bills">
+					<div class="bill" data-bind="draggable: $data">
+						<img class="img-responsive" data-bind="attr: { src: '../resources/activities/' + src + '.png', alt: alt, title: title }">
+					</div> <!--.bill-->
+				</div> <!--.bills--> 
+			</div> <!--.money-->
+
+			<!--cuadro de total-->
+			<div class="products-total" data-bind="visible: showTotal">
+				<div class="text-group">
+					<span class="bg-1">Total</span><input class="input-primary" type="text" data-bind="value: total">
+				</div>
+				<button class="btn-primary" data-bind="click: verifyTotal">Validar</button>
+			</div> <!--.products-total-->
+
+		</div> <!--.block-content-->
+
+	</div> <!--/.col-->
+</div> <!--/.row-->
+
+</div> <!--/.liz-pairs-->
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></di bd-1v>
+</div>
+

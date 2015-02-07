@@ -1,0 +1,68 @@
+<div class="liz-ten-thousand-numbers full-height shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span> Haz clic sobre cada botón para ver el rango de números. Luego, selecciona cada número, observa su nombre y escucha. </span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<div class="row">
+			<div class="big-ranges col-xs-12">
+				<div class="range-container" ng-repeat="range in bigRanges">
+					<div class="range {{ selectedBigRange === range ? 'active' : '' }}"
+						ng-click="selectBigRange(range)">
+						{{ range[0] }} <br /> al <br /> {{ range[1] }}
+					</div> <!--.range-->
+				</div> <!--.range-container-->
+			</div> <!--.big-ranges-->
+		</div>
+
+		<!--Rangos de la izquierda-->
+		<div class="row" ng-show="selectedBigRange">
+			<div class="col-xs-2">
+				<div class="range {{ range === selectedRange ? 'is-active' : '' }}" ng-click="selectRange(range)"
+					ng-repeat="range in rangesLeft">
+					{{ range[0] }} al {{ range[1] }}
+				</div>
+			</div> <!--/.col-xs-2-->
+
+			<!--tabla de valores-->
+			<div class="col-xs-8">
+				<table class="thousand-numbers-table" ng-show="selectedRange">
+					<tr ng-repeat="array in numberMatrix">
+						<td ng-repeat="num in array" ng-click="chooseNumber(num)"> {{ num }} </td>
+					</tr>
+				</table>
+
+				<p ng-show="numberText !== '' && selectedRange" class="number-text">{{ numberText }}</p>
+			</div> <!--/.col-xs-8-->
+
+			<!--Rangos de la derecha-->
+			<div class="col-xs-2">
+				<div class="range {{ range === selectedRange ? 'is-active' : '' }}" ng-click="selectRange(range)"
+					ng-repeat="range in rangesRight">
+					{{ range[0] }} al {{ range[1] }}
+				</div>
+			</div> <!--/.col-xs-2-->
+		</div> <!--.row-->
+
+	</div> <!--/.block-content-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-ten-thousand-numbers-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>

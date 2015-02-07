@@ -1,0 +1,37 @@
+<div class="liz-complete-inputs full-height shadow">
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+
+	<form>
+		<div class="input-container" ng-repeat="word in words">
+			<div class="input-group">
+				<span class="input-group-addon">{{ word.word }}</span>
+
+				<!-- convert string in array -->
+				<input compare="word" complete="$parent.complete" counter="$parent.rightAnswers" type="text" class="form-control" maxlength="2" >
+
+				<div ng-show="word.right" class="right-answer"></div>
+				<div ng-show="word.wrong" class="wrong-answer"></div>
+			</div> <!--/input-group-->
+		</div> <!--/ng-repeat-->
+	</form>
+
+
+
+</div> <!--/.liz-complete-inputs-->
+
+
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

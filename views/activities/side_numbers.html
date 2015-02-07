@@ -1,0 +1,48 @@
+<div class="liz-side-numbers full-height shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		
+		<div class="numbers-block" ng-repeat="num in numbers">
+
+			<div class="number-input-block">
+				<input type="text" ng-model="num.prev.input" ng-change="$parent.verify(num.prev)" ng-disabled="num.prev.completed">
+				<div ng-show="num.prev.right" class="right-answer scale1"></div>
+				<div ng-show="num.prev.wrong" class="wrong-answer scale1"></div>
+			</div> <!--.number-input-block-->
+
+			<div class="central-number"> {{ num.central }} </div>
+
+			<div class="number-input-block">
+                <input type="text" ng-model="num.next.input" ng-change="$parent.verify(num.next)" ng-disabled="num.next.completed">
+                <div ng-show="num.next.right" class="right-answer scale1"></div>
+                <div ng-show="num.next.wrong" class="wrong-answer scale1"></div>
+			</div> <!--.number-input-block-->
+		</div> <!--.numbers-block-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-side-numbers-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

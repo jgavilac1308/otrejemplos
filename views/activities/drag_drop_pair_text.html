@@ -1,0 +1,59 @@
+<div class="liz-drag-drop-pair-text full-height shadow">
+
+    <!-- FACES -->
+    <img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+    <img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+    <!-- END FACES -->
+
+    <!--elemento necesario para hacer la tranclusión-->
+    <div class="transcluded" ng-transclude></div>
+
+    <div class="block">
+        <p class="clearfix">
+            <img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+            <img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+            <img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+            <h1 ng-show="title">{{ title }}</h1>
+            <span>{{ description }}</span>
+        </p>
+    </div>
+
+    <!--audio-->
+    <audio id="audio-instruction" preload="auto">
+        <source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+    </audio>
+
+    <div class="block-content">
+        <div class="row center-block pair-text-groups">
+            <div class="col-md-7 target-cont" >
+               <div class="targets clearfix" data-bind="foreach: { data: targets }">
+                    <div class="col-md-12 target-container">
+                        <div class="target">
+                            <div class="col-md-6 pull-right items-targets" data-bind="sortable: { data: _items, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+                                <div class="item-target prevent" ></div>        
+                            </div> <!--/.items-targets-->
+                        </div> <!--/.target-->
+                    </div> <!--/.target-container-->
+
+                </div> <!--/.targets-->
+            </div>
+            <div class="col-md-4 item-cont">
+                <div class="items clearfix" data-bind="sortable: items">
+                    <div class="item-container">
+                        <div class="item" data-bind="attr: { id: _items._id }"></div>
+                    </div>
+                </div> <!--/.items-->
+            </div>
+        </div>
+    </div>
+    
+    <!-- CALIFICATIONS -->
+    <div data-bind="visible: success">
+        <div data-congratulations></div>
+    </div>
+
+    <div data-bind="visible: failure">
+        <div data-failure></div>
+    </div>
+
+</div>

@@ -1,0 +1,66 @@
+<div class="liz-puzzle3 full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face scale1" src="../resources/common/icon_right.png" alt="icono de bien hecho Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face scale1" src="../resources/common/icon_wrong.png" alt="icono de sigue intentándolo"/>
+<!-- END FACES -->
+
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+	<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+</audio>
+<!--audio-->
+<audio id="audio-final" preload="auto">
+	<source data-bind="attr: { src: resources + '/' + finalAudio + '.mp3'  }" type="audio/mpeg">
+</audio>
+
+<!--Actividad-->
+<div class="block-content">
+
+	<div class="items-container">
+		<img class="base img-responsive" data-bind="attr: { src: resources + '/' + image + '.png'  }">
+
+		<div class="items" data-bind="foreach: { data: items, as: 'sortable' }">
+			<div class="sortable" data-bind="attr: { style: $root.getSortableStyles(sortable) }, sortable: { data: puzzleBlock, as: 'item' }">
+				<div class="item" data-bind="attr: { style: $root.getItemStyles(item) }"></div>
+			</div>
+		</div> <!--/.items-->
+	</div> <!--/.items-container-->
+
+	<div class="targets">
+		<img class="base img-responsive" data-bind="attr: { src: resources + '/' + image + '.png'  }">
+
+		<div class="items" data-bind="foreach: { data: targets, as: 'sortable' }">
+			<div class="sortable" data-bind="attr: { style: $root.getSortableStyles(sortable) }, sortable: { data: puzzleBlock, as: 'item' }">
+				<div class="item" data-bind="attr: { style: $root.getItemStyles(item) }"></div>
+			</div>
+		</div> <!--/.items-->
+	</div> <!--/.targets-->
+
+	<div class="final-text" data-bind="text: finalText,visible: showFinalText"></div>
+
+</div> <!--/.block-content-->
+
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

@@ -1,0 +1,51 @@
+<div class="liz-replace-with-inputs full-height shadow">
+
+    <!--Descripción-->
+    <div class="block">
+        <p class="clearfix">
+            <img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+            <img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+            <img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+            <span>{{ description }}</span>
+        </p>
+    </div> <!--/.block-->
+
+    <!--audio-->
+    <audio id="audio-instruction" preload="auto">
+        <source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+    </audio>
+
+    <div class="block-content">
+
+        <div ng-show="src" class="img-container">
+            <img class="img-responsive" src="{{ $root.resources }}/{{ src }}.png" alt="{{ alt }}"/>
+        </div>
+
+        <div class="operation-container" ng-class="{ full: !src }">
+            <h1>{{ title }}</h1>
+
+             <div ng-show="addAudio" class="add-audio bg-1">
+               <img class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="add-audio" on="click"/>
+            </div>
+
+            <!--audio-->
+            <audio id="add-audio" preload="auto">
+                <source src="{{ $root.resources + '/'  + addAudio + '.mp3' }}" type="audio/mpeg">
+            </audio>
+
+            <!-- Integrated using $compile -->
+            <div class="operation-content"></div>
+        </div>
+
+    </div> <!--/.block-content-->
+
+</div>
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+    <div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+    <div data-failure></div>
+</div>

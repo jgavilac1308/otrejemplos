@@ -1,0 +1,67 @@
+<div class="liz-complete-text-boxes full-height shadow">
+	<!--Descripción-->
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio ng-if="audio" id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="container-fluid block-content">
+		<div ng-if="src" class="col-md-5 text-boxes-image">
+			<img class="img-responsive" src="{{ $root.resources + '/' + src }}" alt="{{ alt }}" title="{{ alt }}"/>
+		</div>
+		<div class="{{(hasImage) ? 'col-md-7' : 'container-fluid'}} textBoxesContainer" ng-repeat="item in items">
+			<div class="row textBoxesTitleRow">
+				<div class="col-md-1 blockNumber">
+					<span>
+						{{ item.number }}
+					</span>
+				</div>
+				<div class="col-md-10 textBoxesTitle" ng-bind-html="sanitize(item.title)"></div>
+			</div>
+			<div class="row textBoxesInputRow">
+				<div class="col-md-11 pull-right">
+					<textarea class="form-control" cols="80" rows="3" ng-model="item.input" ng-blur="verify(item)" ng-disabled="item.block"></textarea>
+					<div ng-show="item.right" class="right-answer scale1"></div>
+					<div ng-show="item.wrong" class="wrong-answer scale1"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div> <!--/.liz-complete-table-inputs-->
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

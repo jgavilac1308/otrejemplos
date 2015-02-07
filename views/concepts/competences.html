@@ -1,0 +1,20 @@
+<div class="block-content" >
+
+	<!--Descripción-->
+	<div class="block margin-bottom">
+		<p class="clearfix">
+		<img class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono mouse" play="audio-competences" on="click"/>
+		<span>Haz clic sobre el ícono para escuchar</span>
+		</p>
+	</div> <!--/.block-->
+	<!--audio-->
+		<audio id="audio-competences" preload="auto">
+			<source src="{{ $root.resources + '/competences.mp3' }}" type="audio/mpeg">
+		</audio>
+
+	<div class="shadow " ng-repeat="item in options">
+		<div class="block ">{{ item.title }}</div>
+		<div class="block-content">{{ item.text1 }} <br ng-show="item.text2"> <p ng-show="item.text2">{{ item.text2 }}</p> <p ng-show="item.text3">{{ item.text3 }}</p> </div>
+	</div>
+	
+</div> <!--/.full-height.shadow-->

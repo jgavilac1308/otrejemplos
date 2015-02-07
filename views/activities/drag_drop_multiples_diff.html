@@ -1,0 +1,76 @@
+<div class="liz-drag-drop-multiples liz-drag-drop-multiples-diff full-height shadow clearfix">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/happy_face.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/sad_face.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--Elemento transcluido-->
+<div class="transcluded" ng-transclude></div>
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click" data-bind="click: $root.playSound"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+	<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+</audio>
+
+		
+<!--contenido-->
+<div class="block-content">
+	<div data-bind="if: hasCountdown" class="row multiples-diff-countdown-cont">
+		<div class="col-md-3 pull-right multiples-diff-countdown">
+			Tiempo: 
+			<div data-bind="timer: $root.countDown, text: countdownTime">
+				30
+			</div>
+			segundos
+		</div>
+	</div>
+
+	<div class="groups-container clearfix" data-bind="foreach: { data: groups }">
+		<div class="group" data-bind="attr: { style: $root.getGroupWidth(), class: 'group ' + customClass }">
+			<div class="inner-group">
+				<div class="block" data-bind="text: title"></div>
+				<div class="block-content">
+
+					<!--audio-->
+					<audio preload="auto" data-bind="attr: { id: 'audio-' + resource }">
+						<source data-bind="attr: { src: $root.resources + '/' + resource + '.mp3' }" type="audio/mpeg">
+					</audio>
+
+					<div class="items" data-bind="sortable: { data: items }">
+						<div class="item"></div>
+					</div>
+
+				</div> <!--/.block-content-->
+			</div> <!--/.inner-group-->
+		</div> <!--/.group-->
+	</div> <!--/.groups-container-->
+
+	<div data-bind="sortable: { data: items }" class="stack items clearfix">
+		<div class="item" data-bind="attr: { style: _style, id: resource  }"></div>
+	</div> <!--/.items.clearfix-->
+
+</div><!--/.block-content-->
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-one-group-->
+
+

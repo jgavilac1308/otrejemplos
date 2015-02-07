@@ -1,0 +1,59 @@
+<div class="liz-multiple-selection full-heigth shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+
+	<div class="block-content">
+
+		<div class="items clearfix">
+			<div class="item" ng-repeat="item in items" style="width: calc({{ 100/items.length }}% - 10px)">
+
+				<div class="img" ng-show="item.src">
+					<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}">
+				</div> <!--/.img-->
+
+				<!--iconos de correcto/incorrecto-->
+				<div class="icon-right" ng-show="item.isRight"></div>
+				<div class="icon-wrong" ng-show="item.isWrong"></div>
+
+				<!--ocultamos las opciones en caso de que ya se haya dado una respuesta-->
+				<div class="options" ng-hide="item.isRight || item.isWrong">
+					<div class="inner-options">
+
+						<div class="option" ng-repeat="option in item.options" ng-click="$parent.verify(item, option)" style="{{ $parent.getOptionsStyles() }}">
+
+							<!--modo texto-->
+							<button ng-show="option.text" class="btn-primary">{{ option.text }}</button>
+
+							<!--modo imagen-->
+							<p ng-show="option.src">
+								<img class="img-responsive" src="{{ $root.resources + '/' + option.src + '.png' }}" alt="{{ option.alt }}">
+							</p>
+
+						</div> <!--/.option-->
+
+					</div> <!--/.inner-options-->
+				</div> <!--/.options-->
+
+
+			</div> <!--/.item-->
+		</div> <!--/.items-->
+
+	</div> <!--/.block-content-->
+</div> <!--/.liz-compare-sounds-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

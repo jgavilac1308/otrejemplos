@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="soc107">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="soc" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<text1
+			description-top="Vamos a realizar un repaso de algunos de los temas que vimos durante todas las lecciones, ¡Mucha suerte!"
+			img="estudiando.png"
+			alt="Niño estudiando en su computador y con unos libros a su lado" >
+		</text1>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<pairs options="options" description="Arrastra las imágenes de la fila superior hacia la fila inferior de acuerdo a su relación de servicio.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<pairs options="options" description="Arrastra cada parte del cuerpo hacia la imagen que muestra como cuidarla.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+
+				<!--audio element-->
+				<audio data-bind="attr: { id: 'audio-' + src2 }" preload="auto">
+					<source data-bind="attr: { src: $root.resources + '/'  + src2 + '.mp3' }" type="audio/mpeg">
+				</audio>
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act3_1">
+		<one-group 
+			options="data"
+			description="Arrastra al recuadro las imágenes relacionadas con la contaminación."
+			title="Contaminación">
+		</one-group>
+	</script>
+	
+	<script type="text/ng-template" id="act3_2">
+		<one-group 
+			options="data"
+			description="Arrastra al recuadro las imágenes relacionadas con la protección del medio ambiente."
+			title="Protección del medio ambiente">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act4_1">
+		<one-group 
+			options="data"
+			description="Arrastra al recuadro los elementos que puedes encontrar en la zona urbana de tu ciudad."
+			title="Zona urbana">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act4_2">
+		<one-group 
+			options="data"
+			description="Arrastra al recuadro los elementos que puedes encontrar en la zona rural de tu ciudad."
+			title="Zona rural">
+		</one-group>
+	</script>
+
+
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

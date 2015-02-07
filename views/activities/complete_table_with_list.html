@@ -1,0 +1,85 @@
+<div class="liz-complete-table-image-inputs liz-complete-table-with-list full-height shadow">
+	<!--Descripción-->
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio ng-if="audio" id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="list-unstyled center-block listElementsToAdd">
+					<li class="listElementToAdd" ng-repeat="item in items" ng-bind-html="sanitize(item.listValue)">
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-9">
+				<table class="table tableImageInputs">
+					<thead>
+						<tr>
+							<th>{{ textInput1Title }}</th>
+							<th ng-if="textInput2Title">{{ textInput2Title }}</th>
+							<th ng-if="textInput3Title">{{ textInput3Title }}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="tableImageInputsRow" ng-repeat="item in getNumber(number) track by $index">
+							<td ng-init="itemInput1 = getNumber(1)">
+								<input placeholder="Escribe aqui" type="text" ng-model="itemInput1.input" ng-blur="verify(itemInput1, inputs.inputs1, 1)" ng-disabled="itemInput1.block" />
+								<div ng-show="itemInput1.right" class="right-answer scale1"></div>
+								<div ng-show="itemInput1.wrong" class="wrong-answer scale1"></div>
+							</td>
+							<td ng-if="textInput2Title" ng-init="itemInput2 = getNumber(1)">
+								<input placeholder="Escribe aqui" type="text" ng-model="itemInput2.input" ng-blur="verify(itemInput2, inputs.inputs2, 2)" ng-disabled="itemInput2.block" />
+								<div ng-show="itemInput2.right" class="right-answer scale1"></div>
+								<div ng-show="itemInput2.wrong" class="wrong-answer scale1"></div>
+							</td>
+							<td ng-if="textInput3Title" ng-init="itemInput3 = getNumber(1)">
+								<input placeholder="Escribe aqui" type="text" ng-model="itemInput3.input" ng-blur="verify(itemInput3, inputs.inputs3, 3)" ng-disabled="itemInput3.block" />
+								<div ng-show="itemInput3.right" class="right-answer scale1"></div>
+								<div ng-show="itemInput3.wrong" class="wrong-answer scale1"></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div> <!--/.liz-complete-table-inputs-->
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

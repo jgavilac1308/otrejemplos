@@ -1,0 +1,49 @@
+<div class="liz-pairs-squares full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--elemento necesario para hacer la tranclusión-->
+<div class="transcluded" ng-transclude></div>
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+	<!--Actividad-->
+	<div class="squares" data-bind="foreach: { data: pairsArray }">
+		<div class="squares-container clearfix">
+
+			<div class="square1" data-bind="sortable: { data: container1, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+				<div class="item prevent"></div>
+			</div> <!--/.square1-->
+
+			<div class="square2" data-bind="sortable: { data: container2, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+				<div class="item prevent"></div>
+			</div> <!--/.square2-->
+
+		</div> <!--/.squares-container-->
+	</div> <!--/.squares-->
+
+	<div class="stack clearfix" data-bind="sortable: { data: stack, allowDrop: $root.isContainerFull }">
+		<div class="item"></div>
+	</div> <!--/.stack-->
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

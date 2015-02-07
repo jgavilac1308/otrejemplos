@@ -1,0 +1,110 @@
+<div class="liz-show-concepts-text shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img ng-hide="instruction" src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<h1 ng-show="titletop">{{ titletop }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content clearfix">
+
+		<div class="items">
+			<img class="main-img" ng-show="mainimg" src="{{ $root.resources + '/'  + mainimg }}" alt="{{ alt }}" title="{{ titleimg || alt }}" style="{{ getItemStyles2() }}">
+			<div class="item" ng-repeat="item in items" style="{{ getItemStyles(item) }}">
+
+				<!--si el objeto tiene una clase personalizada, se reemplaza por inner-item-->
+				<div ng-show="item.number" class=" {{ item.customClass ? item.customClass : 'inner-item' }} {{ item === selectedItem ? 'is-selected' : '' }}" 
+					>
+					<!--si la actividad tienen configurado NOPLAY se muestra uno de estos 2 item.number-->
+					<div ng-show="noplay" class="inner-item-inner"  ng-click="selectItem(item)" >{{ item.number }}</div>
+
+					<div ng-hide="noplay" class="inner-item-inner"  ng-click="selectItem(item)" play="audio-{{ item.src }}" on="click">{{ item.number }}</div>
+
+					<!--audio element-->
+					<audio  id="audio-{{ item.src }}" preload="auto">
+						<source src="{{ $root.resources + '/'  + item.src + '.mp3' }}" type="audio/mpeg">
+					</audio>
+				</div> <!--/.inner-item-->
+				<div ng-show="noplay && item.title" class=" {{ item.customClass ? item.customClass : 'inner-title' }} " ng-click="selectItem(item)" ng-class="{'image-items': hasImageItems}" >
+					<img class="center-block img-responsive easy_in image-items" ng-if="hasImageItems" src="{{ $root.resources + '/'  + item.itemImage }}" alt="{{ item.itemAlt }}" title="{{ item.itemAlt }}" />
+					<span ng-if="!hasImageItems">{{ item.title }}</span>
+				</div>
+
+
+
+				<div ng-hide="noplay" class=" {{ item.customClass ? item.customClass : 'inner-title' }} {{ item === selectedItem ? 'is-selected' : '' }}" ng-show="item.title" ng-click="selectItem(item)" play="audio-{{ item.src }}" on="click" ng-class="{'image-items': hasImageItems}" >
+					<img class="center-block img-responsive easy_in" ng-if="hasImageItems" src="{{ $root.resources + '/'  + item.itemImage }}" alt="{{ item.itemAlt }}" title="{{ item.itemAlt }}" />
+					<span ng-if="!hasImageItems">{{ item.title }}</span>
+				</div>
+			</div> <!--/.item-->
+		</div> <!--/.items-->
+
+		<div class="text-box">
+			<div class="block">
+				<img ng-show="noplay && selectedItem.src" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-{{ selectedItem.src }}" on="click"/>
+				<div ng-hide="selectedItem.instruction" style="padding: 13px;">{{ selectedItem.title ? selectedItem.title : selectedItem.number }}</div>
+				<div ng-show="selectedItem.instruction" style="padding: 0px;">{{ selectedItem.instruction }}</div>
+			</div>
+
+			<div class="block-content">
+				<div class="inner-text" ng-show="selectedItem.text" ng-bind-html="sanitize(selectedItem.text)"></div>
+
+				<!--steps-->
+				<div class="step" ng-repeat="step in selectedItem.steps">
+					<div class="step-img bd-1">
+						<img ng-show="step.img" class="img-responsive scale1 selected-item" 
+							src="{{ $root.resources + '/' + step.img }}" alt="{{ step.alt }}" title="{{ step.title }}">
+
+						<div class="step-number bg-1">{{ $index + 1 }}</div>
+					</div>
+					<div class="step-text">{{ step.text }}</div>
+				</div>
+
+				<ul ng-show="selectedItem.list">
+					<li ng-repeat="li in selectedItem.list">{{ li }}</li>
+				</ul>
+
+				<div class="item-example" ng-repeat="item in selectedItem.examples">
+					<img ng-show="selectedItem.exaimg" class="img-responsive scale1 selected-item" 
+					src="{{ $root.resources + '/' + item +'.png' }}" alt="{{ item }}">
+					<div class=" {{ item.customClass ? item.customClass : 'inner-example' }} {{ item === selectedItem ? 'is-selected' : '' }}"  >{{ item }}</div>
+				</div> <!--/.item-->
+
+				<img ng-show="selectedItem.imgexamples" ng-repeat="img in selectedItem.imgexamples" class="img-responsive scale1 selected-item img-examples {{ img.class }}"  
+					src="{{ $root.resources + '/' + img.img }}" alt="{{ img.alt }}" title="{{ img.title }}">
+
+				<img ng-show="selectedItem.img" class="img-responsive scale1 selected-item selected-img" style="{{ selectedItem.imgstyle}}"src="{{ $root.resources + '/' + selectedItem.img }}" alt="{{ selectedItem.imgAlt }}" title="{{ selectedItem.imgTitle }}">
+				<div class="img-text bg-1 " ng-show="selectedItem.imgtext" ng-bind-html="sanitize(selectedItem.imgtext)"></div>
+
+				<img ng-show="imgpre" ng-hide="selectedItem || !imgpre" class="img-responsive scale1 selected-item" 
+					src="{{ $root.resources + '/' + imgpre }}" alt="{{ imgpreAlt }}">
+
+				<audio id="audio-{{ item.src }}" preload="auto">
+					<source src="{{ $root.resources + '/' + selectedItem.src + '.mp3' }}" type="audio/mpeg">
+				</audio>
+			</div> <!--/.block-content-->
+		</div> <!--/.text-box-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<div ng-if="instruction" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+
+

@@ -1,0 +1,51 @@
+<div class="liz-compare-sounds full-height shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+
+		
+			<div class="audio" ng-repeat="item in audios" ng-click="selectItem(item)" 
+				style="width: {{ 100/audios.length }}%; left: {{ (100/audios.length) * $index }}%">
+
+				<div class="icon-sound" play="audio-{{ item.resource }}" on="click" ng-hide="( $parent.selectedItem && $parent.selectedItem != item ) || (item.isRight || item.isWrong) || item.noSound"></div>
+				<!--audio element-->
+				<audio id="audio-{{ item.resource }}" preload="auto">
+					<source src="{{ $root.resources + '/'  + item.audio + '.mp3' }}" type="audio/mpeg">
+				</audio>
+			</div> <!--/.audio-->
+		
+
+		<div class="images" ng-show="selectedItem">
+			<div class="image" ng-repeat="item in items" style="width: {{ 100/items.length }}%" ng-click="compareItems(item)">
+				<img ng-hide="$parent.hideImages" class="img-responsive" src="{{ $root.resources + '/' + item.resource + '.' + item.type }}" alt="{{ item.alt }}" title="{{ item.title }}">
+				<div class="{{ item.textClass }}" ng-show="item.text">{{ item.text }}</div>
+			</div> <!--/.image-->
+		</div> <!--/.images-->
+
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-compare-sounds-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

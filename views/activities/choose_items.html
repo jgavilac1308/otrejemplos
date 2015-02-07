@@ -1,0 +1,36 @@
+<div class="liz-choose-items full-height shadow">
+
+	<!-- FACES -->
+	<img data-flash="rightAnswer" class="face scale1" src="../resources/common/icon_right.png" alt="icono de bien hecho Felicitaciones"/>
+	<img data-flash="wrongAnswer" class="face scale1" src="../resources/common/icon_wrong.png" alt="icono de sigue intentándolo"/>
+	<!-- END FACES -->
+
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+			
+				<div class="block-content-inner inlineb {{ itemsfloat ? '': 'row-container'  }}" ng-transclude>
+				
+					<!-- aqui se muestra lo declara dentro de la directiva ejm hijos de la directiva -->
+				</div>
+			
+</div>
+
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

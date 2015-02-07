@@ -1,0 +1,37 @@
+<div class="liz-watch shadow clearfix">
+
+	<div class="block clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<!--audio-->
+		<audio id="audio-instruction" preload="auto">
+			<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+		</audio>
+
+		<!--aquí va lo que se ponga dentro de la directiva-->
+		<div>
+			<h1 ng-show="title">{{ title }}</h1>
+			<p>{{ description }}</p>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<div class="item" ng-repeat="item in items">
+			<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt ? item.alt : item.src }}">
+		</div> <!--/.item-->
+	</div> <!--/.block-content-->
+
+</div>
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img src="../resources/common/iconoobservar.png" alt="ícono de observación"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

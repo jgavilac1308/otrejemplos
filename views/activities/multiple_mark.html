@@ -1,0 +1,51 @@
+<div class="liz-multiple-mark full-height shadow clearfix">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/happy_face.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/sad_face.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--contenedor de la actividad-->
+<div class="block-content">
+
+	<div class="marks" data-bind="foreach: { data: answers, as: 'answer' }">
+		<div class="mark" data-bind="draggable: answer">
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }">
+		</div>
+	</div> <!--/.marks-->
+
+	<div class="items" data-bind="foreach: { data: items, as: 'item' }">
+		<div class="item">
+
+			<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + item.src + '.png', alt: item.alt }">
+			
+			<!--las marcas se ven según la propiedad right. Así se diferencia una de otra-->
+			<div class="target" data-bind="sortable: { data: _target, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+				<img class="img-responsive prevent" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }">
+			</div>
+
+		</div> <!--/.item-->
+	</div> <!--/.items-->
+
+</div> <!--/.block-content-->
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-drag-drop-mark-->

@@ -1,0 +1,50 @@
+<div class="liz-giraffe full-height shadow">
+
+<!-- FACES -->
+<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<div class="answers">
+			<div ng-repeat="answer in answers" class="answer {{ answer.right ? 'right-answer' : 'wrong-answer' }}"></div>
+		</div> <!--.answers-->
+
+		<!--Globos que el estudiante elige-->
+		<div ng-click="verify(balloon)" ng-repeat="balloon in balloons" class="scale1 balloon b{{ $index + 1 }}">
+			{{ balloon.number }}
+		</div> <!--.balloon-->
+
+		<div class="giraffe-img">
+			<img class="img-responsive" src="{{ $root.resources + '/jirafa.png' }}" alt="jirafa">
+		</div> <!--.giraffe-img-->
+
+		<div class="actual-multiplication">
+			{{ table }}x{{ number }}
+		</div> <!--.actual-multiplication-->
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-giraffe-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

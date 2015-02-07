@@ -1,0 +1,56 @@
+<div class="liz-stack-multiple full-height shadow clearfix">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/happy_face.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/sad_face.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--Elemento transcluido-->
+<div class="transcluded" ng-transclude></div>
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+	<audio ng-if="audio" id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+		
+<!--contenido-->
+<div class="block-content">
+
+	<!--conjunto con los grupos definidos-->
+	<div class="groups" data-bind="foreach: { data: groups }">
+
+		<div class="group" data-bind="attr: { style: $root.getGroupStyles() }">
+			<div class="block" data-bind="text: name"></div>
+			<div class="block-content" data-bind="sortable: { data: sortable, allowDrop: $root.isContainerFull }">
+				<div class="item"></div>
+			</div> <!--/.block-content-->
+		</div> <!--/.group-->
+
+	</div> <!--/.groups-->
+
+	<!--donde van los objetos-->
+	<div class="stack" data-bind="sortable: { data: stack }">
+		<div class="item"></div>
+	</div> <!--/.stack-->
+
+</div><!--/.block-content-->
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+</div> <!--/.liz-stack-multiples-->
+
+

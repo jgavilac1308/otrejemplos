@@ -1,0 +1,46 @@
+<div class="liz-click-to-complete-input shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+
+				<div class="section2">	
+					<img class="main-img" ng-show="canvas" src="{{ $root.resources + '/'  + canvas }}" title="{{ titlecanvas }}">
+					<div ng-hide="item.right || item.wrong "  popclick popover-item="item"
+							popover-placement="{{ item.placement ? item.placement : 'top' }}" 
+							ng-repeat="item in items" class="item-target" style="{{ getTargetsStyles(item) }}" 
+							ng-click="selectItem2(item)"></div>
+					<div ng-repeat="item in items" ng-show="item.right" class="right-answer scale1" style="{{ getTargetsStyles2(item) }}"></div>
+					<div ng-repeat="item in items" ng-show="item.wrong" class="wrong-answer scale1" style="{{ getTargetsStyles2(item) }}"></div>
+				</div>
+			
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

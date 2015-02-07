@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="esp103_">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+    <style>
+
+        .a1-letter {
+            font-size: 90px;
+            width: calc(20% - 8px);
+            float: left;
+            border: 2px solid #D44A27;
+            margin: 0 4px;
+            text-align: center;
+            margin-bottom: 50px;
+            cursor: pointer;
+        }
+
+        .insert-enter {
+          -webkit-transform:scale(0);
+          -webkit-transition-property: all;
+          -webkit-transition-timing-function: ease-out-cubic;
+          -webkit-transition-duration: 400ms;
+        }
+        .insert-enter.insert-enter-active {
+          -webkit-transform:scale(1);
+        }
+
+        .answer-icon, .icon-right, .icon-wrong {
+          width: 1.5em;
+          height: 1.5em;
+          background-size: 1.5em;
+          background-repeat: no-repeat;
+          position: absolute;
+          margin: auto;
+          top: 1px;
+          right: 2%;
+          -webkit-animation: scale1 0.5s ease-in forwards;
+          -moz-animation: scale1 0.5s ease-in forwards;
+          animation: scale1 0.5s ease-in forwards;
+        }
+        .icon-right {
+          background-image: url("../resources/common/icon_right.png");
+        }
+        .icon-wrong {
+          background-image: url("../resources/common/icon_wrong.png");
+        }
+
+    </style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="esp" ng-include src="'../views/common/include.html'"></div>
+
+	<!--templates-->
+    <script type="text/ng-template" id="con1">
+        <transclusion
+                description="El abecedario es un conjunto de letras que empleamos para expresar lo que sentimos o pensamos, está formado por veintisiete (27) letras. Aprendiendo esto podrás pronunciar todo lo que a tu alrededor está y escribir todo lo que quieras expresar.">
+            <!--INICIO-->
+            <div style="width: 50%; float: left;">
+                <div class="block clearfix">
+                    <img src="../resources/common/icono%20mouse.png" alt="ícono pasar mouse sobre"/>
+                    <span>Desliza el mouse sobre la imagen.</span>
+                </div>
+            </div>
+            <div style="width: 50%; float: left;">
+                <img src="{{ $root.resources }}nina-tablero.png" alt="" play="audio-abc" on="mouseover" ng-mouseover="activateNext()"/>
+
+                <!--audio-->
+                <audio id="audio-abc" preload="auto">
+                    <source src="{{ $root.resources + 'abecedario.mp3' }}" type="audio/mpeg">
+                </audio>
+            </div>
+            <!--FIN-->
+        </transclusion>
+    </script>
+    <script type="text/ng-template" id="con2">
+        <transclusion
+                description="Haz clic sobre cada uno de los recuadros y repite después de escuchar el sonido.">
+            <!--INICIO-->
+            <div style="width: 50%; float: left; height: 215px; overflow: hidden;">
+                <div class="a1-letter" ng-repeat="l in letters" ng-hide="l.hide" ng-click="remove(l)" play="audio-{{ l.src }}" on="click">
+                    {{ l.letter }}
+                    <span style="background: #D44A27; color: #FFF; font-size: 25px; display: block; width: 100%; ">
+                        {{ l.name }}
+                    </span>
+
+                    <!--audio-->
+                    <audio id="audio-{{ l.src }}" preload="auto">
+                        <source src="{{ $root.resources + '/'  + l.src + '.mp3' }}" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+            <div style="width: 50%; float: left;">
+                <div ng-show="selectedLetter" class="selected-image" style="text-align: center;">
+                    <div style="display: inline-block;">
+                        <img class="img-responsive" src="{{ $root.resources + selectedLetter.src + '.png' }}" alt=""/>
+                        <div ng-bind-html="sanitize(selectedLetter.title)" style="font-size: 34px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="success">
+                <div data-congratulations></div>
+            </div>
+            <!--FIN-->
+        </transclusion>
+    </script>
+
+<script type="text/ng-template" id="con3">
+        <transclusion
+                audio="C2"
+                arrow="true"
+                description="Las letras del abecedario nos sirven para escribir muchas palabras"
+                instruction="Haz clic en cada imagen  y observa como se forma el nombre de cada una de ellas. ">
+            <!--INICIO-->
+            <div 
+           <div  style="width: 100%;height: 451px;float: left;padding-left: 12%;"> 
+                <div ng-repeat="item in $parent.items" class="center-items {{ item === $parent.selectedItem ? 'item-is-selected-1' : '' }}" style="margin: 10px  0 6px 10px;width: 15%;min-height: 60px;float: left;position: relative;border-radius: 5px;cursor: pointer; {{ item.complete ? item.style : '' }}" ng-click="$parent.selectItem(item)"> 
+                         <img class="img-responsive"  src="{{ $root.resources + '/'+ item.img +'.png' }}" alt="{{ item.alt }}" >
+                        <audio id="audio-{{item.audio}}" preload="auto">
+                            <source src="{{ $root.resources + '/'  + item.audio + '.mp3' }}" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+            <div class="bd-1"  style="min-height: 265px;border: 3px solid;background: white;width:95%;float: left;position: absolute;display: inline-block;left: 3%;top: 46%;padding: 10px;">
+                <div style="width:70%;float:left;margin-top: 10%;">
+                    <div ng-repeat="letter in $parent.letters track by $index" ng-show="$parent.itemAnimate > $index" class="bg-1 fc-W scale1" style=";float: left;width: 7vw;height: 7vw;line-height: 7vw;text-align: center;font-size:50px;margin-left:1%;" >{{letter}}</div>
+                </div>
+                <div ng-show="selectedItem"class="" style="display: inline-block; max-width: 30%;float:left;">
+                  <img class="img-responsive"  src="{{ $root.resources + '/'+ selectedItem.img +'.png' }}" alt="{{ selectedItem.alt }}">
+              </div>
+            </div>
+
+            <!-- CALIFICATIONS -->
+            <div ng-show="success"> <div data-congratulations></div></div>
+            <div ng-show="failure"> <div data-failure></div> </div>
+            <!--FIN-->
+        </transclusion>
+    </script>
+
+    <script type="text/ng-template" id="act1">
+        <drop-condition
+            options="data"
+            description="Arrastra a los recuadros las vocales que encuentres en las siguientes letras.">
+        </drop-condition>
+    </script>
+    <script type="text/ng-template" id="act1-2">
+       <transclusion
+              audio="A1-2"
+              arrow="true"
+              description="A continuación encontrarás las letras del abecedario en  desorden, arrastra cada una de ellas y ubícalas en el orden adecuado dentro de cada recuadro.">
+      <!--INICIO-->
+          <div  class="multiple-mark-text" style="width: 100%;height: 300px;float: left;">
+              <table class="table-primary" style="width: 100%;float: left;margin-top: 10px;margin-left: 0px;">
+                  <tr ng-repeat="target in items">
+                      <td ng-repeat="letter in target.letters" class="fc-1" style="position: relative;padding: 0;border: 3px solid #000;width: 11%;height: 80px;" data-drop="{{ letter.drop }}" ng-model="letter.model" jqyoui-droppable="{ onDrop: 'dropCallback(letter)' }" aria-disabled="false" data-jqyoui-options="">
+                        <div ng-show="letter.disabled" style="color: blue;width: 100%; padding: 10px 8px; font-size: 15px;text-align:center;">Respuesta correcta: {{ letter.t }}</div>
+                        <div style="width: 100%;font-size: 50px;text-align: center;">{{ letter.answer }}</div>
+                        <span class="answer-icon icon-right" ng-show="letter.right"></span>
+                        <span class="answer-icon icon-wrong" ng-show="letter.wrong"></span>
+                          
+                      </td>
+                  </tr>
+              </table>     
+          </div>
+
+          <div style="width: 100%;float: left;padding: 10px">
+            <div class="bg-1" style="cursor: move;width: 9%;height: 70px;margin-bottom: 20px;text-align: center;font-size: 50px;color: white;line-height:70px;float: left;margin: 1%;" ng-hide="item.chances === 0" ng-repeat="item in itemsClone" data-drag="true" data-jqyoui-options="{ revert: 'invalid', helper: '' }" ng-model="item"jqyoui-draggable="{index: {{$index}}, placeholder: '{{preserveOriginal}}'}" >{{ item.text }}
+            </div>
+          </div>
+          
+          <!-- CALIFICATIONS -->
+          <div ng-show="success"> <div data-congratulations></div></div>
+          <div ng-show="failure"> <div data-failure></div> </div>
+      <!--FIN-->
+      </transclusion>
+  </script>
+  <script type="text/ng-template" id="act1-3">
+    <group-complete-text  options="options" audio="A1-3" description="Busca en el teclado del computador las letras indicadas y escríbelas en el recuadro correspondiente."></group-complete-text>
+</script>
+
+<script type="text/ng-template" id="act1-4">
+    <group-complete-text  options="options" audio="A1-3" description="Busca en el teclado del computador las letras indicadas y escríbelas en el recuadro correspondiente."></group-complete-text>
+</script>
+<script type="text/ng-template" id="act1-5">
+    <group-complete-text  options="options" audio="A1-3" description="Busca en el teclado del computador las letras indicadas y escríbelas en el recuadro correspondiente."></group-complete-text>
+</script>
+  <script type="text/ng-template" id="act2">
+        <group-complete-sound  options="options" audio="A2" description="Haz clic  sobre cada ícono de sonido, escucha atentamente y luego escribe en el recuadro blanco la letra del abecedario que has escuchado."></group-complete-sound>
+    </script>
+     <script type="text/ng-template" id="act2-1">
+        <group-complete-sound  options="options" audio="A2" description="Haz clic  sobre cada ícono de sonido, escucha atentamente y luego escribe en el recuadro blanco la letra del abecedario que has escuchado."></group-complete-sound>
+    </script>
+      <script type="text/ng-template" id="act2-2">
+        <group-complete-sound  options="options" audio="A2" description="Haz clic  sobre cada ícono de sonido, escucha atentamente y luego escribe en el recuadro blanco la letra del abecedario que has escuchado."></group-complete-sound>
+    </script>
+
+    <script type="text/ng-template" id="act2-3">
+        <pairs options="data" description="{{ description }}">
+            <item>
+                <div>
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+                <span data-bind="html: name" style="font-size: 26px;"></span>
+            </item>
+            <target>
+                <div class="bd-1" style="border: 2px solid; margin-left: 5%;">
+                    <div class="clearfix" style="background: #D44A27;color: #FFF; font-size: 29px; width: 50%; font-family: 'century_gothic';line-height: 65px;">
+                        <div style="width: 50%; float: left;">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                        <div style="width: 50%; float: left; font-family: 'little_daysregular'">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                    </div>
+                </div>
+            </target>
+            <item-target>
+                <div style="width: 50%; float: right;">
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+            </item-target>
+        </pairs>
+    </script>
+    <script type="text/ng-template" id="act2-4">
+        <pairs options="data" description="{{ description }}">
+            <item>
+                <div>
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+                <span data-bind="html: name" style="font-size: 26px;"></span>
+            </item>
+            <target>
+                <div class="bd-1" style="border: 2px solid; margin-left: 5%;">
+                    <div class="clearfix" style="background: #D44A27;color: #FFF; font-size: 29px; width: 50%; font-family: 'century_gothic';line-height: 65px;">
+                        <div style="width: 50%; float: left;">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                        <div style="width: 50%; float: left; font-family: 'little_daysregular'">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                    </div>
+                </div>
+            </target>
+            <item-target>
+                <div style="width: 50%; float: right;">
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+            </item-target>
+        </pairs>
+    </script>
+    <script type="text/ng-template" id="act2-5">
+        <pairs options="data" description="{{ description }}">
+            <item>
+                <div>
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+                <span data-bind="html: name" style="font-size: 26px;"></span>
+            </item>
+            <target>
+                <div class="bd-1" style="border: 2px solid; margin-left: 5%;">
+                    <div class="clearfix" style="background: #D44A27;color: #FFF; font-size: 29px; width: 50%; font-family: 'century_gothic';line-height: 65px;">
+                        <div style="width: 50%; float: left;">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                        <div style="width: 50%; float: left; font-family: 'little_daysregular'">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                    </div>
+                </div>
+            </target>
+            <item-target>
+                <div style="width: 50%; float: right;">
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+            </item-target>
+        </pairs>
+    </script>
+    <script type="text/ng-template" id="act2-6">
+        <pairs options="data" description="{{ description }}">
+            <item>
+                <div>
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+                <span data-bind="html: name" style="font-size: 26px;"></span>
+            </item>
+            <target>
+                <div class="bd-1" style="border: 2px solid; margin-left: 5%;">
+                    <div class="clearfix" style="background: #D44A27;color: #FFF; font-size: 29px; width: 50%; font-family: 'century_gothic';line-height: 65px;">
+                        <div style="width: 50%; float: left;">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                        <div style="width: 50%; float: left; font-family: 'little_daysregular'">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                    </div>
+                </div>
+            </target>
+            <item-target>
+                <div style="width: 50%; float: right;">
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+            </item-target>
+        </pairs>
+    </script>
+     <script type="text/ng-template" id="act2-7">
+        <pairs options="data" description="{{ description }}">
+            <item>
+                <div>
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+                <span data-bind="html: name" style="font-size: 26px;"></span>
+            </item>
+            <target>
+                <div class="bd-1" style="border: 2px solid; margin-left: 5%;">
+                    <div class="clearfix" style="background: #D44A27;color: #FFF; font-size: 29px; width: 50%; font-family: 'century_gothic';line-height: 65px;">
+                        <div style="width: 50%; float: left;">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                        <div style="width: 50%; float: left; font-family: 'little_daysregular'">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                    </div>
+                </div>
+            </target>
+            <item-target>
+                <div style="width: 50%; float: right;">
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+            </item-target>
+        </pairs>
+    </script>
+     <script type="text/ng-template" id="act2-8">
+        <pairs options="data" description="{{ description }}">
+            <item>
+                <div>
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+                <span data-bind="html: name" style="font-size: 26px;"></span>
+            </item>
+            <target>
+                <div class="bd-1" style="border: 2px solid; margin-left: 5%;">
+                    <div class="clearfix" style="background: #D44A27;color: #FFF; font-size: 29px; width: 50%; font-family: 'century_gothic';line-height: 65px;">
+                        <div style="width: 50%; float: left;">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                        <div style="width: 50%; float: left; font-family: 'little_daysregular'">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                    </div>
+                </div>
+            </target>
+            <item-target>
+                <div style="width: 50%; float: right;">
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+            </item-target>
+        </pairs>
+    </script>
+     <script type="text/ng-template" id="act2-9">
+        <pairs options="data" description="{{ description }}">
+            <item>
+                <div>
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+                <span data-bind="html: name" style="font-size: 26px;"></span>
+            </item>
+            <target>
+                <div class="bd-1" style="border: 2px solid; margin-left: 5%;">
+                    <div class="clearfix" style="background: #D44A27;color: #FFF; font-size: 29px; width: 50%; font-family: 'century_gothic';line-height: 65px;">
+                        <div style="width: 50%; float: left;">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                        <div style="width: 50%; float: left; font-family: 'little_daysregular'">
+                            <div data-bind="text: letter"></div>
+                            <div data-bind="text: letter" style="text-transform: uppercase;"></div>
+                        </div>
+                    </div>
+                </div>
+            </target>
+            <item-target>
+                <div style="width: 50%; float: right;">
+                    <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png' }" >
+                </div>
+            </item-target>
+        </pairs>
+    </script>
+    <script type="text/ng-template" id="act3">
+        <complete-letters
+                options="options"
+                description="Haz clic sobre las líneas y escribe las letras que hacen falta para completar el nombre de algunos objetos o alimentos que puedes encontrar en tu casa.">
+        </complete-letters>
+    </script>
+       <script type="text/ng-template" id="act3-1">
+        <complete-letters
+                options="options"
+                description="Haz clic sobre las líneas y escribe las letras que hacen falta para completar el nombre de algunos objetos o alimentos que puedes encontrar en tu casa.">
+        </complete-letters>
+    </script>
+    
+       <script type="text/ng-template" id="act3-2">
+        <complete-letters
+                options="options"
+                description="Haz clic sobre las líneas y escribe las letras que hacen falta para completar el nombre de algunos objetos o alimentos que puedes encontrar en tu casa.">
+        </complete-letters>
+    </script>
+    
+   <script type="text/ng-template" id="act4">
+        <group-complete-letters options="options" audio="A4" description="Completa el abecedario, escribiendo en los recuadros en blanco las letras que hacen falta." mainimg='navidad.png' altimg='Imagen donde se muestra un niño y una niña felices junto a un árbol de navidad' >  </group-complete-letters>       
+    </script>
+     <script type="text/ng-template" id="act4-1">
+        <group-complete-letters options="options" audio="A4" description="Completa el abecedario, escribiendo en los recuadros en blanco las letras que hacen falta." mainimg='navidad.png' altimg='Imagen donde se muestra un niño y una niña felices junto a un árbol de navidad' >  </group-complete-letters>       
+    </script>
+     <script type="text/ng-template" id="act4-2">
+        <group-complete-letters options="options" audio="A4" description="Completa el abecedario, escribiendo en los recuadros en blanco las letras que hacen falta." mainimg='navidad.png' altimg='Imagen donde se muestra un niño y una niña felices junto a un árbol de navidad' >  </group-complete-letters>       
+    </script>
+     <script type="text/ng-template" id="act4-3">
+        <group-complete-letters options="options" audio="A4" description="Completa el abecedario, escribiendo en los recuadros en blanco las letras que hacen falta." mainimg='navidad.png' altimg='Imagen donde se muestra un niño y una niña felices junto a un árbol de navidad' >  </group-complete-letters>       
+    </script>
+
+    <script type="text/ng-template" id="act5">
+        <select-checkbox
+                audio="A5"
+                options="data" description="Forma la palabra que está en la parte superior del recuadro seleccionando las letras correspondientes. " >
+        </select-checkbox>
+    </script>
+    <script type="text/ng-template" id="act5-1">
+        <select-checkbox
+                audio="A5-1"
+                options="data" description="Con ayuda de tus padres forma la palabra que esta en la parte 
+                  superior del recuadro seleccionando las letras correspondiente " >
+        </select-checkbox>
+    </script>
+
+
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+	
+	<script>
+		// Necesario para activar la recarga en vivo
+		window.brunch = window.brunch || {};
+	</script>
+</body>
+</html>
+

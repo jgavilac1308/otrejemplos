@@ -1,0 +1,52 @@
+<div class="liz-greater-lower-than full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+	<img class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" data-bind="click: playAudio"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+	<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+</audio>
+
+<div class="block-content">
+	<div class="clearfix" data-bind="foreach: { data: numbers }">
+		<div class="block-number">
+			<div class="block-number-box" data-bind="text: left"></div>
+
+			<div class="block-number-box symbol-box" data-bind="sortable: { data: sortable, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+				<div class="symbol prevent" data-bind="html: symbol"></div>
+			</div>
+
+			<div class="block-number-box" data-bind="text: right"></div>
+		</div> <!--.block-number-->
+	</div> <!--.clearfix-->
+
+	<div class="symbols">
+		<div class="symbol" data-bind="draggable: lowerSymbol"> &lt; </div>
+		<div class="symbol" data-bind="draggable: greaterSymbol"> &gt; </div>
+	</div> <!--.symbols-->
+</div> <!--.block-content-->
+
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-greater-lower-than-->

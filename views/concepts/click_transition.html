@@ -1,0 +1,46 @@
+<div class="click-transition shadow clearfix" ng-class="isBottom ? '' : 'full-height'">
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+
+	<div class="block-content">
+		<!--Definimos un tamaño adecuado según el número de imágenes, de ese modo se acoplarán usando porcentajes-->
+		<div class="item" ng-repeat="item in options" ng-click="verify(item)" play="audio-{{ item.resource }}" on="click" style="width: {{ 100 / $parent.options.length }}%">
+
+			<!--audio-->
+			<audio id="audio-{{ item.resource }}" preload="auto">
+				<source src="{{ $root.resources + '/'  + item.resource + '.mp3' }}" type="audio/mpeg">
+			</audio>
+
+			<!--img-->
+			<div class="img-container">
+				<img class="img-responsive front" ng-class="item.clicked ? 'hide-transition' : ''" src="{{ $root.resources + '/' + item.resource + '.png' }}" alt="{{ item.alt }}">
+				<img class="img-responsive back" src="{{ $root.resources + '/' + item.resource + '_.png' }}" alt="{{ item.alt2 }}">
+			</div>
+			<p ng-bind-html="sanitize(item.text)"></p>
+		</div>
+	</div>
+</div>
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

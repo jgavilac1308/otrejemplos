@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="mat104">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+	<style>
+
+		.act2-number{
+			font-size: 70px;
+			text-align: center;
+		}
+
+		.act3-number{
+			font-size: 4em;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		.act3-number.purple	{ color: #7030A0; }
+		.act3-number.blue	{ color: #00B0F0; }
+		.act3-number.yellow	{ color: #FFC000; }
+		.act3-number.green	{ color: #00B050; }
+		.act3-number.red	{ color: #FF0000; }
+
+
+	</style>
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="mat" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			description="Estamos rodeados de seres vivos y no vivos, a estos los podemos agrupar por características iguales, por ejemplo gatos con gatos o perros con perros."
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+	
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			description="Muchas veces al contar los elementos de varios conjuntos, nos pueden dar el mismo número."
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<pairs options="options" description="Arrastra cada conjunto de arriba hacia el conjunto de abajo que tiene la misma cantidad.">
+			<item>
+				<img style="max-height: 170px" class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+			<target>
+				<img style="max-height: 170px" class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<pairs options="options" description="Arrastra cada número de arriba hacia el mismo número ubicado abajo.">
+			<item>
+				<div class="act2-number" data-bind="text: number, attr: { style: 'color: ' + color }"></div>
+			</item>
+			<target>
+				<div class="act2-number" data-bind="text: number, attr: { style: 'color: ' + color }"></div>
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<pairs-squares options="options" description="Arrastra a los recuadros en blanco los números que sean iguales.">
+			<item>
+				<div data-bind="text: number, attr: { class: 'act3-number ' + textClass }"></div>
+			</item>
+		</pairs-squares>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<pairs options="options" description="Arrastra cada número hacia el conjunto que contiene la misma cantidad de elementos.">
+			<item>
+				<div style="font-size: 4em; text-align: center" data-bind="text: number"></div>
+			</item>
+			<target>
+				<img style="max-height: 170px" class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" >
+			</target>
+		</pairs>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

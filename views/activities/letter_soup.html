@@ -1,0 +1,63 @@
+<div class="liz-letter-soup full-height shadow">
+
+<!-- FACES -->
+<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+        <img ng-hide="instruction" src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+
+		<div class="letter-soup-groups" ng-class="{ 'pull-left': inverted }" style="{{ groupStyle }}">
+			<div class="letter-soup-group" ng-repeat="group in wordGroups" style="{{ getClueStyles() }}">
+				<div class="group-title">{{ group.title }}</div>
+				<div class="group-word {{ word.completed ? 'completed' : '' }}" ng-repeat="word in group.items">{{ word.front }}</div>
+			</div> <!--.letter-soup-group-->
+		</div> <!--.letter-soup.groups-->
+		
+		<table class="letter-soup-table" ng-class="{ 'pull-right': inverted }" style="{{ tableStyle }}">
+			<tr ng-repeat="row in table">
+				<td 
+					class="{{ cell === startPoint || cell.selected ? 'selected' : '' }} {{ cell.completed ? 'completed' : '' }}" 
+					ng-repeat="cell in row" 
+					ng-mouseover="showPath(cell)"
+					ng-click="searchWord(cell)"
+				>
+					{{ cell.letter }}
+				</td>
+			</tr>
+		</table> <!--/table.letter-soup-table-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-letter-soup-->
+
+<div class="block bottom" ng-show="instruction">
+	<p class="clearfix">
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

@@ -1,0 +1,56 @@
+<div class="liz-drop-boxes full-height shadow">
+
+<!-- FACES -->
+<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+
+		<!--Objetos a arrastrar-->
+		<div class="remaining-items connected" ui-sortable="sortableOptions" ng-model="remaining">
+			<div class="phase-item" ng-repeat="item in remaining">
+				{{ item.word }}
+			</div> <!--.item-->
+		</div> <!--.remaining-items-->
+
+		<div class="drop-boxes-phase">
+			<div class="phase-title"> {{ actualPhase.title }} </div>
+
+			<div class="phase-group" ng-repeat="group in actualPhase.groups">
+				<div class="phase-group-title"> {{ group.title }} </div>
+
+				<div class="phase-group-sortable connected" ui-sortable="sortableOptions" ng-model="group.items">
+					<div class="phase-item" ng-repeat="item in group.items">
+						{{ item.word }}
+					</div> <!--.phase-group-item-->
+				</div> <!--.phase-group-sortable-->
+
+			</div> <!--.phase-group-->
+
+			<button class="btn-primary" ng-click="verify()">Verificar</button>
+		</div> <!--.drop-boxes-phase-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-drop-boxes-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>

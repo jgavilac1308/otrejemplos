@@ -1,0 +1,68 @@
+<div class="liz-group-complete-images shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+			
+			<div ng-show="titleBlock"class="text-box">
+				<div class="block" >{{ titleBlock }}</div>
+				<div class="block-content">
+				<p ng-show="blockText">{{ blockText }}</p>
+				<img class="main-img" ng-show="mainimg" src="{{ $root.resources + '/'  + mainimg }}" alt="{{ titleBlock }}"></div>
+			</div> <!--/.text-box-->
+
+			</div>
+			<div class="complete-container" ng-repeat="item in items" >
+				<span  class="item">
+					<div ng-show="item.name" class="item-name">{{ item.name }}</div>
+				</span>
+
+				<span class="complete-words-container">
+
+					<span ng-repeat="word in item.words">
+						<div ng-show="word.isInput" class="input-container">
+							<span  class="item-img">
+								<img ng-show="word.img" class="img-responsive" src="{{ $root.resources + '/' + word.img + '.png' }}" alt="{{ ord.img }} ">
+							</span>
+							<input type="text" ng-model="word.input" ng-blur="verify(word)" ng-disabled="word.completed"/>
+							<div ng-show="word.right" class="right-answer scale1"></div>
+							<div ng-show="word.wrong" class="wrong-answer scale1"></div>
+							</input>
+						</div>
+						
+						<span  ng-hide="word.isInput" > {{ word.isInput ? "aquivainput" : word.word }}</span>
+						<!-- <span  ng-model="word.word" > {{ word.input ? "aquivainput" : word.word }}</span> -->
+					</span>
+
+				</span>
+			</div>
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

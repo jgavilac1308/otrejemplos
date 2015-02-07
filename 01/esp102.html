@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="esp102">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="esp" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			title="¿Qué son los medios de comunicación?"
+			description="Son aquellos medios que nos ofrecen información sobre todas aquellas cosas que pasan en nuestro país y en el mundo entero."
+			instruction="Haz clic sobre cada una de las imágenes."
+		></click-images>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			title="¿Qué son los medios de comunicación?"
+			description="Son aquellos medios que nos ofrecen información sobre todas aquellas cosas que pasan en nuestro país y en el mundo entero."
+			instruction="Haz clic sobre cada una de las imágenes."
+		></click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<compare-sounds
+			options="data"
+			description="Haz clic sobre el ícono de sonido y selecciona la imagen a la cual corresponde el sonido.">
+		</compare-sounds>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<pairs options="options" description="Arrastra cada medio de comunicación hacia la imagen que presenta su uso." custom-class="side-to-side">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: src1 }" >
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: src2 }" >
+			</target>
+			<item-target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: src1 }" >
+			</item-target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act2_2">
+		<pairs options="options" description="Arrastra cada medio de comunicación hacia la imagen que presenta su uso." custom-class="side-to-side">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: src1 }" >
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: src2 }" >
+			</target>
+			<item-target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: src1 }" >
+			</item-target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<choose-items options="data" description="Haz clic sobre los medios de comunicación que puedes encontrar en tu casa.">
+			<div class="choose-items-img" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" style="width: 16.6666666%">
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}">
+			</div>
+		</choose-items>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+	
+	<script>
+		// Necesario para activar la recarga en vivo
+		window.brunch = window.brunch || {};
+	</script>
+</body>
+</html>
+

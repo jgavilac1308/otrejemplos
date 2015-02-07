@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="es" ng-app="nat107">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+	<style>
+	
+	.con2 strong{
+
+			cursor: pointer;
+		
+	}
+
+	.con2 h1{
+		
+		text-align: center;
+		font-size: 25px;
+	}
+	
+	.img-con2{
+
+		float: left;margin-top: 5px;border-radius: 50%;border: solid #009500;width:310px;margin-left: 25px;
+	}
+
+	.img-con3{
+
+		float: left;margin-top: 5px;border-radius: 50%;border: solid #009500;width:220px;margin-left: 25px;
+	}
+
+	</style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="nat" ng-include src="'../views/common/include.html'"></div>
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes"
+			description="El agua es una sustancia indispensable para los seres vivos, la encontramos en los ríos, mares y lagos. El agua no tiene color, olor, ni sabor."
+		></click-images>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+        <transclusion
+                arrow="true"
+                description="Haz clic sobre las palabras de color."
+        <!--INICIO-->
+        	<div >
+           		<img ng-show="itemclick.indexOf(1) > -1"class="img-con2 scale1" src="{{ $root.resources + '/' + 'vaso.png' }}" alt="Vaso con agua" >
+           		<img ng-show="itemclick.indexOf(2) > -1"class="img-con2 scale1" src="{{ $root.resources + '/' + 'nevera.png' }}" alt="nevera" >
+           		<img ng-show="itemclick.indexOf(3) > -1"class="img-con2 scale1" src="{{ $root.resources + '/' + 'cubos.png' }}" alt="cubo de hielo" >	            
+          	</div>
+        	<div style="height: 400px;">
+	        	
+	            <div class="con2" style="width: 90%;position: absolute;top: 400px;margin-top: 5px;margin-left: 20px;">'<h1>Si pones agua en estado <strong ng-click="verify(1)" >líquido</strong> en tu <strong ng-click="verify(2)" >Congelador</strong> cambia de estado y se convierte en <strong ng-click="verify(3)" >Sólido</strong> .</h1><br><br>'
+	            </div>
+            </div>
+
+        <!--FIN-->
+        </transclusion>
+    </script>
+
+    <script type="text/ng-template" id="con3">
+        <transclusion
+                arrow="true"
+                description="Haz clic sobre las palabras de color."
+        <!--INICIO-->
+        	<div >
+           		<img ng-show="itemclick.indexOf(1) > -1"class="img-con3 scale1" src="{{ $root.resources + '/' + 'vaso.png' }}" alt="Vaso con agua" >
+           		<img ng-show="itemclick.indexOf(2) > -1"class="img-con3 scale1" src="{{ $root.resources + '/' + 'cubos.png' }}" alt="Cubo de hielo" >
+           		<img ng-show="itemclick.indexOf(3) > -1"class="img-con3 scale1" src="{{ $root.resources + '/' + 'fogon1.png' }}" alt="Estufa con una olla en el fogón" >
+           		<img ng-show="itemclick.indexOf(4) > -1"class="img-con3 scale1" src="{{ $root.resources + '/' + 'gaseoso.png' }}" alt="humo saliendo de una olla" >		            
+          	</div>
+        	<div style="height: 350px;">
+	        	
+	            <div class="con2" style="width: 90%;position: absolute;top: 350px;margin-top: 5px;margin-left: 20px;">'<h1>Si pones agua en estado <strong ng-click="verify(1)" >líquido</strong> o <strong ng-click="verify(2)" >Sólido</strong> al <strong ng-click="verify(3)" >fogón</strong> esta se calienta, vemos burbujas y el agua desaparece, convirtiéndose en estado <strong ng-click="verify(4)" >gaseoso</strong> .</h1><br><br>'
+	            </div>
+            </div>
+
+        <!--FIN-->
+        </transclusion>
+    </script>
+
+	<script type="text/ng-template" id="act1">
+		<choose-items options="data" description="Haz clic sobre los objetos que funcionan con gas.">
+			<div class="choose-items-img bd-1 no-padding" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" style="width: 29%;border: solid;margin: 20px;">
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}" >
+			</div>
+		</choose-items>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+        <complete-inputs-description
+                options="data"
+                instruction="Haz clic sobre cada recuadro y escribe sólido, líquido o gaseoso de acuerdo al estado en que se encuentra el agua en cada imagen."
+        </complete-inputs-description>
+    </script>
+
+	<script type="text/ng-template" id="act3">
+		<one-group
+			options="data" 
+			description="Arrastra hacia el congelador los alimentos que necesitan frío para pasar de un estado líquido a sólido."
+			title="Congelador">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<one-group
+			options="data" 
+			description="Arrastra hacia el fogón los materiales o alimentos que necesitan calor para pasar de un estado sólido a líquido."
+			title="Fogón">
+		</one-group>
+	</script>
+
+    <script type="text/ng-template" id="act5">
+		<select-options-positions options="options" description="En cada recuadro, haz clic sobre la respuesta correcta de acuerdo al enunciado."  </select-options-positions>
+	</script>
+
+	<script type="text/ng-template" id="act6">
+		<select-options-positions options="options" description="En cada recuadro, haz clic sobre la respuesta correcta de acuerdo al enunciado."  </select-options-positions>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

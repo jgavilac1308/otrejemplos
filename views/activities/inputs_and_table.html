@@ -1,0 +1,76 @@
+<div class="liz-inputs-and-table shadow clearfix" ng-class="isBottom ? '' : 'full-height'">
+
+	<!-- FACES -->
+	<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+	<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+	<!-- END FACES -->
+	
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<!--audio de la instrucción-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<span>{{ description }}</span>
+		</div>
+	</div>
+	
+	<div class="block-content">
+		<!--inputs-->
+		<div class="inputs">
+			<div class="input-container" ng-repeat="i in inputs" style="{{ getInputStyles() }}">
+				<img ng-show="i.src" class="img-responsive" src="{{ $root.resources + '/' + i.src + '.png' }}" alt="{{ i.alt }}">
+				<label for="input-{{ $index }}">{{ i.text }}</label>
+				<input class="input-primary" id="input-{{ $index }}" ng-change="verify(i)" ng-disabled="i.disabled" type="text" ng-model="i.input">
+			</div> <!--/.input-container-->
+		</div> <!--/.inputs-->
+
+		<!--tabla-->
+		<div class="table-container">
+			<div class="table-description">{{ table.text }}</div>
+			<table>
+				<tr>
+					<th ng-repeat="th in table.head">{{ th }}</th>
+				</tr>
+				<tr>
+					<td ng-repeat="td in table.body">
+						<input class="input-primary" ng-change="verify(td)" ng-disabled="td.disabled" type="text" ng-model="td.input">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div> <!--/.block-content-->
+
+</div>
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

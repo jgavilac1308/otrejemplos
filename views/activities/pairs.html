@@ -1,0 +1,67 @@
+<div class="liz-pairs full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--elemento necesario para hacer la tranclusión-->
+<div class="transcluded" ng-transclude></div>
+
+<div class="row">
+	<div class="col-xs-12">
+
+		<div class="block">
+			<div class="clearfix">
+				<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+				<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+				<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+				<div>
+					<h1 ng-show="titletop">{{ titletop }}</h1>
+					<p>{{ description }}</p>
+				</div>
+			</div>
+		</div>
+		
+		<!--audio-->
+		<audio id="audio-instruction" preload="auto">
+			<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+		</audio>
+
+		<!--Actividad-->
+		<div class="liz-pairs-container {{ customClass }}">
+			<div class="items clearfix" data-bind="sortable: items">
+				<div class="item-container" data-bind="attr: { style: $root.getItemStyles($data) }">
+					<div class="item" data-bind="attr: { style: $root.getInnerStyles($data), id: _items._id }"></div>
+				</div>
+			</div> <!--/.items-->
+
+			<div class="text-center">
+				<div class="targets clearfix" data-bind="foreach: { data: targets }">
+
+					<div class="target-container" data-bind="attr: { style: $root.getTargetStyles() }">
+						<div class="target" data-bind="attr: { style: $root.getInnerStyles($data) }">
+							<div class="items-targets" data-bind="sortable: { data: _items, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+								<div class="item-target prevent" ></div>		
+							</div> <!--/.items-targets-->
+						</div> <!--/.target-->
+					</div> <!--/.target-container-->
+
+				</div> <!--/.targets-->
+			</div> <!--/.text-center-->
+
+		</div> <!--/.liz-pairs-container-->
+
+	</div> <!--/.col-->
+</div> <!--/.row-->
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

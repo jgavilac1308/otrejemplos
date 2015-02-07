@@ -1,0 +1,53 @@
+<div class="liz-click-and-listen full-height shadow">
+
+<!-- FACES -->
+<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+
+		<table class="bd-1">
+			<tr>
+				<th class="bg-1" ng-repeat="heading in headings">{{ heading }}</th>
+			</tr>
+			<tr ng-repeat="item in items">
+				<td class="bd-1" ng-click="verify(item)" play="audio-{{ $index }}" on="click">{{ item.name }}</td>
+				<td class="bd-1 scale-1">
+					<span ng-show="item.completed">{{ item.empty }}</span>
+
+					<!--audio-->
+					<audio id="audio-{{ $index }}" preload="auto">
+						<source src="{{ $root.resources + '/'  + item.audio + '.mp3' }}" type="audio/mpeg">
+					</audio>
+				</td>
+			</tr>
+		</table>
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-click-and-listen -->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

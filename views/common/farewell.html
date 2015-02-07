@@ -1,0 +1,21 @@
+<div class="overlay">
+
+	<div class="course-modal farewell-modal">
+	  <div class="img-farewell">
+	  	<img class="img-responsive" alt="testing" src="../resources/common/despedida.png">
+	  	<img class="img-responsive" id="farewell-kid"alt="testing" src="../resources/common/kid.png">
+	  	<div class="farewell-box-container">
+	  		 	<img class="img-responsive" id="farewell-box"alt="testing" src="../resources/common/box.png">
+				<p id="farewell-box-text">{{ farewell }}</p>
+
+				<!--audio-->
+				<audio id="audio-farewell" preload="auto" controls autoplay style="display: none;">
+					<source src="{{ $root.resources + '/'  + 'F1.mp3' }}" type="audio/mpeg">
+				</audio>
+		</div>
+		</div>
+			<a class="btn-primary-farewell" href="{{ subjectMenu }}">Continuar</a>
+	       
+	</div>
+	
+</div>

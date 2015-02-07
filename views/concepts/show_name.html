@@ -1,0 +1,42 @@
+<div class="liz-show-name shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img ng-hide="instruction" src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+		<div class="block-content clearfix">
+
+			<div class="items" ng-repeat="item in items" ng-click="selectItem(item)" style="{{ getItemStyles() }}" play="audio-{{ item.src }}" on="click">
+				<img class="item {{ itemsPerRow ? 'item-wid-2' : 'img-responsive' }}"  src="{{ $root.resources + '/'  + item.img }}"  alt="{{ item.alt }}" title="{{ item.imgTitle }}" >
+				
+						<!--audio element-->
+						<audio id="audio-{{ item.src }}" preload="auto">
+							<source src="{{ $root.resources + '/'  + item.src + '.mp3' }}" type="audio/mpeg">
+						</audio>
+				
+				<div class="inner-text {{item.isCompleted ? 'completed' :''}}" >
+					<div ng-show="item.isCompleted" ng-bind-html="sanitize(item.text)"></div>
+				</div>
+			</div> <!--/.items-->
+		</div>
+
+</div> <!--/.liz-show-concepts-->
+
+<div class="block bottom" ng-show="instruction">
+	<p class="clearfix">
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

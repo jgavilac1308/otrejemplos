@@ -1,0 +1,100 @@
+<div class="liz-crossword full-height shadow">
+
+<!-- FACES -->
+<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+	
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+		<div class="clues">
+			<h1>Pistas</h1>
+
+			<div class="clearfix">
+				<h2>Horizontales</h2>
+				<p class="clue {{ word === selectedWord ? 'actived' : '' }} {{ word.img ? 'clue-img' : '' }}"
+				ng-repeat="word in words | orderBy: 'number' | filter: { horizontal: true }">
+				<span class="number">{{ word.number }}</span>. <span ng-if="word.clue">{{ word.clue }}</span>
+
+				<!--imagen-->
+				<img ng-if="word.img" class="img-responsive" src="{{ $root.resources + '/' + word.img }}" alt="{{ word.alt }}" title="{{ word.title }}">
+				</p>
+			</div>
+
+			<div class="clearfix">
+				<h2>Verticales</h2>
+				<p class="clue {{ word === selectedWord ? 'actived' : '' }} {{ word.img ? 'clue-img' : '' }}" 
+					ng-repeat="word in words | orderBy: 'number' | filter: { vertical: true }">
+					<span class="number">{{ word.number }}</span>. <span ng-if="word.clue">{{ word.clue }}</span>
+
+					<!--imagen-->
+					<img ng-if="word.img" class="img-responsive" src="{{ $root.resources + '/' + word.img }}" alt="{{ word.alt }}" title="{{ word.title }}">
+				</p>
+			</div>
+		</div> <!--/.clues-->
+
+		<!--tabla del crucigrama-->
+		<div class="crossword-container">
+			<table class="crossword">
+				<tr ng-repeat="row in table">
+					<!--Añadimos varias clases a las celdas según las necesidades-->
+					 <!--able => celda de crucigrama-->
+					 <!--actived => la palabra seleccionada-->
+					 <!--main-actived => la celda seleccionada-->
+					<!--Fuera de eso, añadimos unas clases para poder referenciar el DOM fácilmente-->
+					<td ng-repeat="item in row" ng-click="selectWord(item)"
+						class="c{{ item.x }} r{{ item.y }} {{ !item.empty ? 'able' : '' }} {{ item.actived ? 'actived' : '' }} {{ item.mainCell ? 'main-actived' : '' }}">
+
+						<span class="number" ng-show="item.number">{{ item.number }}</span>
+
+                       <!-- {{
+                        item.init_letter === ' ' ? item.input : "´no"
+
+                        }}-->
+                       <input ng-if="item.init_letter === ' ' " type="text"  ng-model="item.input" ng-change="changeCell(); onClick()" >
+                        <!-- <input type="text"  ng-model="item.input" ng-change="changeCell()" >-->
+
+                        <!--Maria Giraldo - Letra por defecto-->
+                        <div  ng-if="item.init_letter !== ' '" style="width: 35px" >
+                            <span >{{item.init_letter }}</span>
+                        </div>
+
+                       <!--
+                        <input disabled="true" ng-init="scope = { isDisabled: true }" ng-if="item.init_letter !== ' '" type="text"  ng-model="item.init_letter"  >
+-->
+                    </td>
+				</tr>
+			</table>
+
+			<!--Botón de comprobación. Solo funciona 1 vez.-->
+			<div class="verify-button">
+				<button ng-click="verify()" class="btn-primary">Comprobar</button>
+			</div> <!--.verify-button-->
+		</div> <!--.crossword-container-->
+
+
+	</div> <!--/.block-content-->
+</div> <!--/.liz-crossword-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

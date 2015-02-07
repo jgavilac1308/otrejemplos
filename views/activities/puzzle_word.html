@@ -1,0 +1,55 @@
+<div class="liz-puzzle-word full-height shadow">
+
+    <!-- FACES -->
+    <img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png"
+         alt="cara feliz - Felicitaciones"/>
+    <img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png"
+         alt="cara triste - sigue intentándolo"/>
+    <!-- END FACES -->
+
+    <div class="block">
+        <p class="clearfix">
+            <img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+            <img data-bind="visible: audio, click: playAudio" class="icon-play-description"
+                 src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+            <img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+            <span>{{ description }}</span>
+        </p>
+    </div>
+
+    <!--audio-->
+    <audio id="audio-instruction" preload="auto">
+        <source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+    </audio>
+
+    <!--Actividad-->
+    <div class="block-content clearfix">
+
+        <div class="activity-container">
+            <div class="main-img bd-1">
+                <img class="img-responsive" data-bind="attr: { src: resources + '/' + img.src, alt: img.alt }" />
+            </div>
+
+            <div class="sortable-word bd-1" data-bind="foreach: { data: finalWord }">
+                <div class="sortable-letter bd-1" data-bind="sortable: { data: sortable, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }">
+                    <div class="letter prevent bg-1" data-bind="text: letter"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stack" data-bind="sortable: { data: letters }">
+            <div class="letter bg-1" data-bind="text: letter"></div>
+        </div>
+    </div>
+    <!-- .block-content -->
+
+    <!-- CALIFICATIONS -->
+    <div data-bind="visible: success">
+        <div data-congratulations></div>
+    </div>
+
+    <div data-bind="visible: failure">
+        <div data-failure></div>
+    </div>
+
+</div> <!--/.liz-puzzle-word-->

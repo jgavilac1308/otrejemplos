@@ -1,0 +1,58 @@
+
+<link rel="stylesheet" type="text/css" href="../app/styles/common/senales.css" />
+<div class="header clearfix">
+   <a class="container-backlesson" href="{{ lessonsMenu }}">
+		<div class="inicio"><img  style="max-width:100%;height:auto;" src="../resources/common/iconolecciones2.svg" alt="testing"><span class="tooltip1"><img  style="max-width:100%;height:auto;" class="img-rounded" src="../resources/common/retornar guias.gif" alt="testing"></span>
+		</div>
+
+		<p>Volver a lecciones</p>
+	</a>
+
+	<h1>{{ lessonTitle }}</h1>
+	<div class="lesson-logo">
+		<img class="img-responsive" src="../resources/common/iconomatter.png" alt="testing">
+	</div>
+</div> 
+<div id="cuerpo"> 
+	<div id="prev"  ng-click="goPrev()">
+		<div ><h2>atrás</h2>
+        </div>
+		<div class="vertical-align">
+			<div class="vertical-align-inner  infobulle">
+				<svg version="1.1" class="center-v-h img-responsive-h"id="" xmlns="" xmlns:xlink="" x="0px" y="0px" width="53.75px" height="159.75px" viewBox="0 0 53.75 159.75" enable-background="new 0 0 53.75 159.75" xml:space="preserve"> 
+					<g>
+						<polygon  id="icon-back" opacity="1"  points="1.918,72.266 51.607,2.327 51.607,22.603 9.415,80.201 9.415,80.788 51.607,138.383 51.607,158.657 1.918,89.012	 "/>
+						<span ><img style="width:80%;"  class="img-rounded" src="../resources/common/Atras.gif" /></span>
+					</g>
+					<g id="Capa_2"> </g>
+					<image x y width height xlink:href>
+				</svg>
+			</div> <!--/.vertical-align-inner-->
+		</div> <!--/.vertical-align-->
+	</div> <!--/#prev-->
+
+	<div id="main-container"> 
+		<div ng-view></div>
+	</div> <!--/.main-container-->
+
+	<!--Añadimos la clase disabled si aún no se ha activado la siguiente lección-->
+	<div id="next" ng-class="{ disabled: !isNextEnabled }" ng-click="goNext()">
+	<div class="control"><h2>adelante</h2>
+    </div>
+		<div class="vertical-align">
+			<div class="vertical-align-inner control">
+				<svg version="1.1"class="center-v-h img-responsive-h" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="53.75px" height="159.75px" viewBox="0 0 53.75 159.75" enable-background="new 0 0 53.75 159.75" xml:space="preserve">
+
+					<g>
+						<polygon   id="icon-next" opacity="1"  points="1.918,72.266 51.607,2.327 51.607,22.603 9.415,80.201 9.415,80.788 51.607,138.383 51.607,158.657 1.918,89.012" transform="matrix(-1 0 0 1 50 0)"/>
+                        <span ><img style=" width:80%;" class="img-rounded" src="../resources/common/adelante.gif" /></span>
+
+					</g>
+					<g id="Capa_2"> </g>
+				</svg>
+			</div> <!--/.vertical-align-inner-->
+		</div> <!--/.vertical-align-->
+	</div> <!--/#next-->
+
+</div> <!--/#cuerpo-->
+|

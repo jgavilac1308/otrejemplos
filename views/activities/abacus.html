@@ -1,0 +1,90 @@
+<div class="liz-abacus full-height shadow">
+
+	<!-- IMPORTANTE: Usamos esta muestra para obtener el alto de los anillos-->
+	<div class="abcol-ball abcol-sample">a</div>
+
+	<!-- FACES -->
+	<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+	<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+	<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-{{ audioMode }}" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio de la instrucción-->
+	<audio id="audio-base" preload="auto">
+		<source src="{{ $root.resources + '/'  + baseAudio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<!--audio de la instrucción-->
+	<audio id="audio-input" preload="auto">
+		<source src="{{ $root.resources + '/'  + inputAudio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<!--audio de la instrucción-->
+	<audio id="audio-form" preload="auto">
+		<source src="{{ $root.resources + '/'  + formAudio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content clearfix">
+		<div class="modes" ng-hide="mode">
+			<button class="btn-primary" ng-click="selectMode(INPUT_MODE)" ng-disabled="inputChances === 0">Escribir Número</button>
+			<button class="btn-primary" ng-click="selectMode(FORM_MODE)" ng-disabled="formChances === 0">Formar Número</button>
+		</div>
+
+		<!--ábaco-->
+		<div ng-show="mode !== 0" class="abacus">
+			<div class="abcol" ng-repeat="col in columns" style="{{ getColStyles() }}">
+
+				<!--botón en la parte superior. En click, añade un nuevo anillo a la columna-->
+				<div ng-show="mode === FORM_MODE" class="abcol-ball abcol-ball-main" ng-click="addRing(col)">{{ col.ballText }}</div>
+
+				<div class="abcol-container">
+					<!--barra vertical-->
+					<div class="abcol-bar"></div>
+
+					<!--cada uno de los aros dentro del ábaco-->
+					<div class="abcol-ball-container" ng-repeat="ring in col.rings" ng-click="removeRing(col)"
+						style="{{ getBallStyles($index) }}">
+						<div class="abcol-ball">{{ col.ballText }}</div>
+					</div>
+				</div> <!--/.abcol-container-->
+
+				<!--nombre de la unidad-->
+				<div class="abcol-name"> {{ col.name }} </div>
+			</div> <!--/.abcol-->
+		</div> <!--/.abacus-->
+
+
+		<!--controls-->
+		<div ng-show="mode !== 0" class="controls">
+			<div ng-show="mode === INPUT_MODE">
+				<input class="input-primary" type="text" ng-model="userNumber"/>
+			</div>
+
+			<div ng-show="mode === FORM_MODE">
+				<div class="abacus-number">{{ abacusNumber }}</div>
+			</div>
+
+			<!--botón de verificar-->
+			<button class="btn-primary" ng-click="verify()">Verificar</button>
+		</div> <!--/.controls-->
+
+	</div> <!--/.block-content-->
+</div> <!--/.liz-abacus-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

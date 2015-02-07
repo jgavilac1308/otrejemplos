@@ -1,0 +1,63 @@
+<div class="liz-puzzle1 full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face scale1" src="../resources/common/icon_right.png" alt="icono de bien hecho Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face scale1" src="../resources/common/icon_wrong.png" alt="icono de sigue intentándolo"/>
+<!-- END FACES -->
+
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+    <img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+<audio id="audio-instruction" preload="auto">
+    <source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+</audio>
+
+<!--Actividad-->
+<div class="block-content">
+
+<div class="items clearfix" data-bind="sortable: { data: items, as: 'item' }">
+	<div class="item">
+		<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + item.src + '.png', alt: item.alt  }" >
+	</div> <!--/.item-->
+</div> <!--/.items-->
+
+<div class="puzzle1-canvas">
+	<div class="inner-canvas" data-bind="sortable: { data: canvas, as: 'item', options: { cancel: '.item' } }">
+		<div class="item">
+			<img class="img-responsive" data-bind="
+			attr: { 
+				src: $root.resources + '/' + item.src + '.png', 
+				alt: item.alt,
+				style: 'z-index: ' + item.z + ';' +
+					'top: ' + item.t + '%;' +
+					'left: ' + item.l + '%;' + 
+					'width: ' + item.w + '%'
+			}
+			" >
+		</div> <!--/.item-->
+	</div> <!--/.inner-canvas-->
+</div> <!--/.puzzle1-canvas-->
+
+</div> <!--/.block-content-->
+
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

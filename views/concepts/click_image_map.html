@@ -1,0 +1,46 @@
+<div class="liz-click-image-map shadow clearfix" ng-class="isBottom ? '' : 'full-height'">
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+
+	<div class="block-content">
+
+		<div class="canvas-container">
+			<div class="inner-canvas">
+				<img class="img-responsive" src="{{ canvas }}" alt="{{ canvasAlt }}">
+				<div class="target" ng-repeat="target in targets" ng-click="markCompleted(target)" play="audio-{{ target.src }}" on="click"  style="{{ getTargetStyles(target) }}">
+					<!--audio-->
+					<audio id="audio-{{ target.src }}" preload="auto">
+						<source src="{{ $root.resources + '/'  + target.src + '.mp3' }}" type="audio/mpeg">
+					</audio>
+				</div> <!--/.target-->
+			</div> <!--/.inner-canvas-->
+		</div> <!--/.canvas-container-->
+
+
+	</div>
+
+</div>
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

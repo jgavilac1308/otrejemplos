@@ -1,0 +1,44 @@
+<div class="liz-show-hover-words shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg" />
+	</audio>
+
+	<div class="block-content clearfix">
+		<div class="row hover-words-row">
+			<div ng-repeat="item in items" class="col-md-3 hover-words-item">
+				<img src="{{ $root.resources + '/'  + item.img}}" title="{{ item.alt }}" class="img-responsive scale1">
+				<div class="hover-words-container">
+					<span ng-init="onWordReady()" ng-repeat="word in item.words" rel="{{ (word.main) ? 'tooltip' : '' }}" data-toggle="{{ (word.main) ? 'tooltip' : '' }}" data-placement="bottom" class="showTooltip {{ (word.main) ? 'main-word' : '' }}">
+						{{ word.word }}
+					</span>
+				</div>
+			</div>
+		</div>
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono mouse.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		$("[data-toggle='tooltip']").tooltip();
+	});
+</script> 

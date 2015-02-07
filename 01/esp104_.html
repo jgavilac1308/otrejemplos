@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="esp104_">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+    <style>
+    textarea::-webkit-input-placeholder {
+      font-size: 24px!important;
+    }
+    textarea:-moz-placeholder {
+      font-size: 24px!important; 
+    }
+    textarea:-ms-input-placeholder { 
+      font-size: 24px!important; 
+    }
+    </style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="esp" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+      <text1
+      block=true
+      float="right"
+      description='<div class="bg-1 fc-W" style="display: inline-block;padding: 10px;width: 150px;float: left;margin-top: 15px;">Recuerda</div><br><br><br>El abecedario es un conjunto de letras que empleamos para expresar lo que sentimos o pensamos y está formado por veintisiete (27) letras.<br><br>Con las letras podemos comunicarnos, gracias a que con ellas podemos construir diferentes palabras tales como: hola, adiós, amor, entre muchas otras.'
+          img="profesora.png"
+          alt="Estudiante hablando sobre el proceso de colonización española en América y las organizaciones encargadas de administrar el territorio americano" audio="C1">
+      </text1>
+  </script>
+
+	<script type="text/ng-template" id="act1">
+      <group-puzzle-word
+        audio="A1"
+        options="data"
+        description="Arrastra hacia los cuadrados en blanco las letras para formar el nombre de cada imagen.">
+      </group-puzzle-word>
+    </script>
+
+    <script type="text/ng-template" id="act1-2">
+      <group-puzzle-word
+        audio="A1"
+        options="data"
+        description="Arrastra hacia los cuadrados en blanco las letras para formar el nombre de cada imagen.">
+      </group-puzzle-word>
+    </script>
+
+	<script type="text/ng-template" id="act1-3">
+		<complete-letters 
+			 options="options"
+			 audio= "A1-3"
+			description="Escribe las letras que hacen falta para completar el nombre del elemento representado en cada imagen.">
+		</complete-letters>		
+	</script>
+
+	<script type="text/ng-template" id="act1-4">
+		<complete-letters 
+			 options="options"
+			 audio= "A1-3"
+			description="Escribe las letras que hacen falta para completar el nombre del elemento representado en cada imagen.">
+		</complete-letters>		
+	</script>
+
+	<script type="text/ng-template" id="act1-5">
+		<complete-letters 
+			 options="options"
+			 audio= "A1-3"
+			description="Escribe las letras que hacen falta para completar el nombre del elemento representado en cada imagen.">
+		</complete-letters>		
+	</script>
+
+	<script type="text/ng-template" id="act1-6">
+		<complete-letters 
+			 options="options"
+			 audio= "A1-6"
+			description="Escribe correctamente el nombre de los elementos representados en la imagen, teniendo en cuenta la ayuda presentada.">
+		</complete-letters>		
+	</script>
+
+	<script type="text/ng-template" id="act1-7">
+		<complete-letters 
+			 options="options"
+			 audio= "A1-6"
+			description="Escribe correctamente el nombre de los elementos representados en la imagen, teniendo en cuenta la ayuda presentada.">
+		</complete-letters>		
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<group-complete-sound  options="options" audio="A2" description="Haz clic  sobre cada ícono de sonido, escucha atentamente y luego escribe en el recuadro blanco la palabra que has escuchado."></group-complete-sound>
+	</script>
+
+	<script type="text/ng-template" id="act2-2">
+		<group-complete-sound  options="options" audio="A2" description="Haz clic  sobre cada ícono de sonido, escucha atentamente y luego escribe en el recuadro blanco la palabra que has escuchado."></group-complete-sound>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+     <select-options-positions options="options" description="Selecciona el nombre del elemento representado en la imagen." audio="A3"> </select-options-positions>
+    </script>
+
+	<script type="text/ng-template" id="act3-2">
+        <select-options-positions options="options" description="Selecciona  la sílaba que no pertenece al nombre del animal representado en la imagen." audio="A3-2"> </select-options-positions>
+    </script>
+
+    <script type="text/ng-template" id="act3-3">
+        <select-options-positions options="options" description="Selecciona  la sílaba que no pertenece al nombre del animal representado en la imagen." audio="A3-3"> </select-options-positions>
+    </script>
+
+	<script type="text/ng-template" id="act4">
+    <pairs options="options" audio="A4" description="Arrastra  cada palabra a la imagen correspondiente.">
+        <item>
+            <h2 data-bind="html: sil"></h2>
+        </item>
+        <target>
+            <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" >
+        </target>
+        <item-target>
+            <h1 style="padding: 0 5px !important;" data-bind="html: sil"></h1>
+        </item-target>
+    </pairs>
+  </script>
+
+  <script type="text/ng-template" id="act4-2">
+    <pairs options="options" audio="A4" description="Arrastra  cada palabra a la imagen correspondiente.">
+        <item>
+            <h2 data-bind="html: sil"></h2>
+        </item>
+        <target>
+            <img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" >
+        </target>
+        <item-target>
+            <h1 style="padding: 0 5px !important;" data-bind="html: sil"></h1>
+        </item-target>
+    </pairs>
+  </script>
+
+	<script type="text/ng-template" id="act4-3">
+		<drag-drop-multiples options="data" description="Arrastra cada palabra hacia el recuadro correspondiente, clasificándolas según su letra inicial (M o P)." audio="A4-3">
+			<item>
+				<div data-bind="text: text"></div>
+			</item>
+		</drag-drop-multiples>
+	</script>
+
+    <script type="text/ng-template" id="act4-4">
+        <drag-drop-multiples options="data" description="Arrastra cada palabra hacia el recuadro correspondiente, clasificándolas según su letra inicial (S o L)." audio="A4-4">
+            <item>
+                <div data-bind="text: text"></div>
+            </item>
+        </drag-drop-multiples>
+    </script>
+
+    <script type="text/ng-template" id="act4-5">
+        <drag-drop-multiples options="data" description="Arrastra cada palabra hacia el recuadro correspondiente, clasificándolas según su letra inicial (N o T)." audio="A4-5">
+            <item>
+                <div data-bind="text: text"></div>
+            </item>
+        </drag-drop-multiples>
+    </script>
+
+	<script type="text/ng-template" id="act5">
+    <group-complete-text  options="options" audio="A5" description="Busca en el teclado del computador las letras indicadas y escríbelas en el recuadro correspondiente."></group-complete-text>
+    </script>
+
+    <script type="text/ng-template" id="act5-2">
+    <group-complete-text  options="options" audio="A5" description="Busca en el teclado del computador las letras indicadas y escríbelas en el recuadro correspondiente."></group-complete-text>
+    </script>
+
+    <script type="text/ng-template" id="act5-3">
+    <group-complete-text  options="options" audio="A5" description="Busca en el teclado del computador las letras indicadas y escríbelas en el recuadro correspondiente."></group-complete-text>
+    </script>
+
+	<script type="text/ng-template" id="act6">
+      <transclusion
+                audio="A6"
+                arrow="true"
+                description="Con ayuda de tus padres escribe 5 palabras que comiencen por las letras indicadas en la tabla.">
+        <!--INICIO-->
+
+            <table class="table-primary" style="width: 80%;float: left;margin-top: 10px;margin-left: 100px;">
+                <tr style="padding: 20px!important;font-size: 30px;">
+                    <th>b</th>
+                    <th>d</th>
+                    <th>s</th>
+                    <th>c</th>
+                    <th>l</th>
+                    <th>g</th>
+                </tr>
+                <tr ng-repeat="item in items">
+                    <td style="padding: 0;border: 3px solid #000;">
+                        <input type="text" ng-model="item.uno" style="border: none; outline: none; width: 100%; padding: 10px 8px; font-size: 20px;"/>
+                    </td>
+                    <td style="padding: 0;border: 3px solid #000;">
+                        <input type="text" ng-model="item.dos" style="border: none; outline: none; width: 100%; padding: 10px 8px; font-size: 20px;"/>
+                    </td>
+                    <td style="padding: 0;border: 3px solid #000;">
+                        <input type="text" ng-model="item.tres" style="border: none; outline: none; width: 100%; padding: 10px 8px; font-size: 20px;"/>
+                    </td>
+                     <td style="padding: 0;border: 3px solid #000;">
+                        <input type="text" ng-model="item.cuatro" style="border: none; outline: none; width: 100%; padding:10px 8px; font-size: 20px;"/>
+                    </td>
+                     <td style="padding: 0;border: 3px solid #000;">
+                        <input type="text" ng-model="item.cinco" style="border: none; outline: none; width: 100%; padding: 10px 8px; font-size: 20px;"/>
+                    </td>
+                     <td style="padding: 0;border: 3px solid #000;">
+                        <input type="text" ng-model="item.seis" style="border: none; outline: none; width: 100%; padding: 10px 8px; font-size: 20px;"/>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- CALIFICATIONS -->
+            <div ng-show="success"> <div data-congratulations></div></div>
+            <div ng-show="failure"> <div data-failure></div> </div>
+        <!--FIN-->
+        </transclusion>
+    </script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+	
+	<script>
+		// Necesario para activar la recarga en vivo
+		window.brunch = window.brunch || {};
+	</script>
+</body>
+</html>
+

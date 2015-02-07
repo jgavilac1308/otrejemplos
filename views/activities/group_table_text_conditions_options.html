@@ -1,0 +1,66 @@
+<div class="liz-group-table-text-conditions-options shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img ng-show="addicon" class="icon-play-description" src="{{ '../resources/common/' + addicon + '.png' }}" alt="addicon" />
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+
+			<div ng-repeat="group in groups" class="group-container bd-1">
+				<div class="textbox1" >
+					<img class="main-img" ng-show="group.img" src="{{ $root.resources + '/'  + group.img }}" alt="{{ group.imgalt }}" tittle="{{ group.imgtittle }}">
+				</div> <!--/.text-box-->
+
+					<div class="complete-container" ng-repeat="item in group.items" >
+						<span  class="item">
+							<div ng-hide="item.resource" style="{{ getStyles(item.rows) }}" class="item-name">{{ item.name }}</div>
+							<img style="cursor:pointer" play="{{'audio-' + item.name }}" on="click" ng-show="item.resource" class="img-responsive" src="{{ $root.resources + '/' + item.resource + '.png' }}" alt="{{ item.alt ? item.alt : item.resource }} " title="{{ item.title ? item.title : item.alt }}">
+
+							
+							<audio id="{{'audio-' + item.name }}" preload="auto">
+								<source src="{{ $root.resources + '/'  + item.sound + '.mp3' }}" type="audio/mpeg">
+							</audio>
+						</span>
+
+						<span class="complete-words-container">
+							
+							<span>
+								<textarea rows="{{ item.rows ? item.rows : '2' }}" placeholder="Escribe aqui" type="text" ng-model="item.input" ng-change="verify(item)" ng-disabled="item.completed"/>
+								<div ng-show="item.right" class="right-answer scale1"></div>
+								<div ng-show="item.wrong" class="wrong-answer scale1"></div>
+								</textarea>
+							</span>
+						</span>
+					</div>
+				</div> <!--/.text-box-->
+			</div><!--/.group-container-->
+
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

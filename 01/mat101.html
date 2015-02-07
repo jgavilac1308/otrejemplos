@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="mat101">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="mat" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<text1
+			description-top="Con los números podemos saber cuántas cosas hay y si son muchas o pocas."
+			title="¿Qué es muchos?"
+			description="Muchos quiere decir que hay varios."
+			img="nino-con-muchos-globos.png"
+			alt="Niño con cinco globos azules en su mano y que dice: “¡tengo muchos globos!”" >
+		</text1>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<text1
+			title="¿Qué es pocos?"
+			description="Pocos quiere decir que sólo hay unos cuantos."
+			img="nino-con-pocos-globos.png"
+			alt="Niño con un globo azul en su mano y que dice: “¡tengo pocos globos!”" >
+		</text1>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-images 
+			options="data"
+			title="Ejemplos"
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con4">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<multiple-selection 
+			options="data"
+			description="En cada recuadro, haz clic sobre la imagen de arriba o de abajo que tenga muchos objetos.">
+		</multiple-selection>
+	</script>
+	
+	<script type="text/ng-template" id="act2">
+		<multiple-selection 
+			options="data"
+			description="En cada recuadro, haz clic sobre la imagen de arriba o de abajo que tenga pocos objetos.">
+		</multiple-selection>
+	</script>
+
+	<script type="text/ng-template" id="act3_1">
+		<one-group 
+			options="data"
+			title="Muchos"
+			description="Arrastra al recuadro las imágenes con muchos elementos.">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act3_2">
+		<one-group 
+			options="data"
+			title="Pocos"
+			description="Arrastra al recuadro las imágenes con pocos elementos.">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act4_1">
+		<one-group 
+			options="data"
+			title="Muchos animales"
+			description="Arrastra al cuadrado la imagen con muchos animales.">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act4_2">
+		<one-group 
+			options="data"
+			title="Pocos peces"
+			description="Arrastra al cuadrado la imagen con pocos peces.">
+		</one-group>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<div class="liz-puzzle2 full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face scale1" src="../resources/common/icon_right.png" alt="icono de bien hecho Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face scale1" src="../resources/common/icon_wrong.png" alt="icono de sigue intentándolo"/>
+<!-- END FACES -->
+
+
+<!--Descripción-->
+<div class="block">
+	<p class="clearfix">
+	<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+	<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+	<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+	<span>{{ description }}</span>
+	</p>
+</div>
+
+<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+	
+<!--Actividad-->
+<div class="block-content">
+
+	<div class="items" data-bind="sortable: { data: items, as: 'item' }">
+		<div class="item"></div>
+	</div> <!--/.items-->
+
+
+	<div class="puzzle2-canvas">
+		<div class="inner-canvas">
+			<img class="img-responsive" data-bind="attr: { src: resources + '/' + canvas + '.png' }">
+
+			<div class="trap" data-bind="sortable: { data: trap }"></div>
+
+			<!-- ================================================================================= -->
+			<!-- targets -->
+			<!-- ================================================================================= -->
+			<!-- ko foreach: { data: targets, as: 'target' } -->
+			<div class="target" data-bind="sortable: { data: target._targets, allowDrop: $root.isContainerFull, options: { cancel: '.prevent' } }, 
+				attr: { style: $root.getStyles(target) }">
+				<div class="item prevent"></div>
+			</div> <!--/.target-->
+			<!-- /ko -->
+
+		</div> <!--/.inner-canvas-->
+	</div> <!--/.puzzle2-canvas-->
+
+
+</div> <!--/.block-content-->
+
+
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-pairs-->

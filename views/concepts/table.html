@@ -1,0 +1,51 @@
+<div class="liz-table shadow clearfix" ng-class="isBottom ? '' : 'full-height'">
+
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio de la instrucción-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div ng-if="! isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" />
+			<span>{{ instruction }}</span>
+		</div>
+	</div> <!--/.block-->
+	
+	<!--contenido-->
+	<div class="block-content">
+		<table>
+			<tr>
+				<th ng-repeat="h in head">{{ h }}</th>
+			</tr>
+			<tr ng-repeat="row in body">
+				<td ng-repeat="cell in row track by $index">{{ cell }}</td>
+			</tr>
+		</table>
+
+		<button class="btn-primary" ng-click="$root.goNext()">{{ buttonText }}</button>
+
+	</div> <!--/.block-content-->
+
+</div>
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

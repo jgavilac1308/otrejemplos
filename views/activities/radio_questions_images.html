@@ -1,0 +1,64 @@
+
+<div class="liz-radio-questions-images">
+    <!-- FACES -->
+    <!-- <img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+    <img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/> -->
+    <!-- END FACES -->
+
+    <!--Descripción-->
+    <div class="block">
+        <div class="clearfix">
+            <img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+            <img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+            <img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+            <div>
+                <h1 ng-show="titletop">{{ titletop }}</h1>
+                <p>{{ description }}</p>
+            </div>
+        </div>
+    </div> <!--/.block-->
+
+    <!--audio-->
+    <audio id="audio-instruction" preload="auto">
+        <source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+    </audio>
+
+
+    <div class="block-content clearfix">
+        <div ng-if="src" class="main-img" style="max-width:{{ imgwidth + '%;!important' }}">
+            <img class="img-responsive" src="{{ $root.resources + '/' + src }}" alt="{{ alt }}"/>
+        </div>
+
+            <div class="questions"  ng-class="{onlyText: !src}">
+                <div class="question" ng-repeat="q in questions">
+                   <!-- <span class="number bg-1">{{ q.number }}</span>-->
+
+                    <img  class="img-responsive" src="{{ $root.resources + '/' + q.src }}" alt="{{ q.alt }}"/>
+                       <div class="question-text">
+                           <div class="question-text-1">{{ q.question }}</div>
+                        <div class="answers" >
+                            <div class="answer" ng-repeat="a in q.answers">
+                               <div style="display: inline-block">
+                                <input name="{{ q.number }}" type="radio" ng-model="q.selectedAnswer" ng-value="a" ng-change="verify(q)" ng-disabled="q.completed" ng-checked="q.completed && a.answer"/>
+                                {{ a.text }}
+                               </div>
+                            </div>
+                        </div>
+                       </div>
+                        <div ng-show="q.right" class="right-answer scale1"></div>
+                        <div ng-show="q.wrong" class="wrong-answer scale1"></div>
+                </div>
+            </div>
+
+    </div> <!--/.block-content-->
+
+</div> <!--/.liz-radio-questions-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+    <div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+    <div data-failure></div>
+</div>

@@ -1,0 +1,68 @@
+<div class="liz-choose-correct-image-secuence full-height shadow clearfix">
+
+	<!-- FACES -->
+	<img id="right-answer" class="face" src="../resources/common/icon_right.png" alt="Ícono de respuesta correcta - Felicitaciones"/>
+	<img id="wrong-answer" class="face" src="../resources/common/icon_wrong.png" alt="../resources/common/icon_wrong.png" alt="Ícono de respuesta incorrecta - sigue intentándolo"/>
+	<!-- END FACES -->
+
+	<!--Elemento transcluido-->
+	<!-- <div class="transcluded" ng-transclude></div> -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+			
+	<!--contenido-->
+	<div class="block-content">
+
+        <!--  Secuencia - cuadros  de respuesta  -->
+        <div class="row options2">
+
+                <img src="{{ $root.resources + '/'  + options.imgDefault}}" title="{{ item.alt }}" width="200px" height="200px">
+
+                <div  ng-repeat="item in options.answers" class="img">
+                    <img src="{{ $root.resources + '/'  + 'flecha.jpg'}}" title="{{ item.alt }}" width="50px" height="50px">
+                        <!--<img src="{{ $root.resources + '/'  + 'pregunta.png'}}" title="{{ item.alt }}" id="id{{item.id}}" ng-model="pregunta.png">-->
+                    <img  title="{{ item.alt }}" id="id{{item.id}}" ng-src="{{ $root.resources + '/'  + item.imgDefault}}"  width="200px" height="200px">
+
+                </div>
+        </div>
+
+        <!-- imagenes a seleccionar -->
+        <div class="row options">
+
+            <div class="col-md-3 option"  ng-repeat="item in items" ng-click="verify(item)">
+                <div class="img">
+                    <img src="{{ $root.resources + '/'  + item.img}}" title="{{ item.alt }}" width="200px" height="200px">
+                </div>
+
+            </div>
+        </div>
+
+
+    </div><!--/.block-content-->
+
+
+	<!-- CALIFICATIONS -->
+	<div ng-show="success">
+		<div data-congratulations></div>
+	</div>
+
+	<div ng-show="failure">
+		<div data-failure></div>
+	</div>
+
+</div> <!--/.liz-choose-correct-image -->
+
+

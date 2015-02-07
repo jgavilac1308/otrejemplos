@@ -1,0 +1,21 @@
+<div class="liz-image-map-description liz-image-sound shadow">
+
+	<div class="block-content clearfix">
+
+		
+		<div class="canvas">
+			<img class="img-responsive" src="{{ $root.resources + '/' + canvas + '.png' }}" alt="{{ canvasAlt }}">
+
+			<div class="items">
+				<div class="item btn btn-primary" ng-repeat="item in items" style="{{ getStyles(item) }}" ng-click="selectItem(item)" play="{{item.id}}" on="click">
+					{{ item.button }}
+					<audio id="{{item.id}}" preload="auto">
+						<source src="{{ $root.resources + '/'  + item.audio + '.mp3' }}" type="audio/mpeg">
+					</audio>
+				</div> <!--.item-->
+			</div> <!--.items-->
+		</div> <!--.canvas-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-image-map-description-->

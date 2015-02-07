@@ -1,0 +1,55 @@
+<div class="liz-operation-input full-height shadow">
+
+<!-- FACES -->
+<img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+<img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+<!-- END FACES -->
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content">
+
+		<div class="units">
+			<div class="unit" ng-repeat="unit in units">
+				<div class="unit-inner">
+					<img class="img-responsive" src="{{ $root.resources + '/' + unit.src + '.png' }}" alt="{{ unit.alt }}">
+					<input ng-change="verify(unit)" ng-disabled="unit.completed" type="text" ng-model="unit._input">
+				</div> <!--/.unit-inner-->
+			</div> <!--/.unit-->
+		</div> <!--/.units-->
+
+		<div class="total">
+			<div class="total-inner">
+				<img class="img-responsive" src="{{ $root.resources + '/' + total.src + '.png' }}" alt="{{ total.alt }}">
+				<div class="total-inputs">
+					<span class="total-operation"> {{ total.operation }} </span> 
+					<span class="total-equal-sign"> = </span>
+					<input ng-change="verify(total)" ng-disabled="total.completed" type="text" ng-model="total._input">
+				</div> <!--.total-inputs-->
+			</div> <!--/.total-inner-->
+		</div> <!--/.total-->
+
+	</div> <!--/.block-content-->
+</div> <!--/.liz-operation-input-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

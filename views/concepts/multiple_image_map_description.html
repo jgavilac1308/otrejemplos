@@ -1,0 +1,56 @@
+<div class="liz-multiple-image-map-description shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg" />
+	</audio>
+
+	<div class="block-content clearfix">
+        <button id="backToOptions" ng-if="backEnabled" ng-click="goBack()">Atrás</button>
+		<div class="row imageMapOptions" ng-if="displayOptions">
+			<div class="col-md-4">
+				<img src="{{ $root.resources + '/'  + mainimg }}" alt="{{ alt }}" />
+			</div>
+			<div class="col-md-8">
+				<div class="col-md-4 imageMapItem" ng-repeat="map in maps" ng-click="selectMap(map)">
+					<div class="imageMapItemTitle">
+						{{map.title}}
+					</div>
+
+					<div class="imageMapItemImage">
+						<img src="{{ $root.resources + '/'  + map.iconImage }}" alt="{{map.iconAlt}}" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="imageMaps">
+			<image-sound
+				ng-if="map.display"
+				ng-repeat="map in maps" 
+				options="map.data"
+				title="{{map.title}}"
+				instruction="{{map.instruction}}"
+				description="{{map.description}}"
+				audio="{{map.audio}}">
+			</image-sound>
+		</div>
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<div class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono mouse.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

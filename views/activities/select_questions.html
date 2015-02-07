@@ -1,0 +1,68 @@
+<div class="liz-select-questions full-height shadow">
+
+    <!-- FACES -->
+    <img flash="rightAnswer" class="face" src="../resources/common/icon_right.png" alt="Respuesta Correcta"/>
+    <img flash="wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="Respuesta Incorrecta. Sigue intentando"/>
+    <!-- END FACES -->
+
+    <!--Descripción-->
+    <div class="block">
+        <div class="clearfix">
+            <img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+            <img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+            <img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+            <div>
+                <h1 ng-show="titletop">{{ titletop }}</h1>
+                <p>{{ description }}</p>
+            </div>
+        </div>
+    </div> <!--/.block-->
+
+    <!--audio-->
+    <audio id="audio-instruction" preload="auto">
+        <source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+    </audio>
+
+    <div class="block-content clearfix">
+        <div class="main-img" ng-show="src || text">
+             <div class="main-text" ng-bind-html="sanitize(text)"></div>
+            <img ng-click="zoom()" style="{{ bigImg ? 'cursor: -webkit-zoom-in;' : '' }}" class="img-responsive" src="{{ $root.resources + '/' + src }}" alt="{{ alt }}" title="{{ title }}"/>
+        </div>
+
+        <div class="questions {{ src ? '' : 'full' }}" style="{{ stylequestions }}">
+            <div class="question" ng-repeat="q in questions">
+                <div class="question-text">
+                    <span class="number bg-1">{{ q.number }}</span>
+                    <div class="question-text">{{ q.question }}</div>
+                </div>
+
+                <select ng-model="q.selectedAnswer" ng-options="a.text for a in q.answers" ng-change="verify(q)"
+                        ng-disabled="q.completed"></select>
+
+                <div class="feedback bg-3" ng-show="q.feedback">La respuesta correcta es: <strong>{{ q.rightAnswer.text }}</strong></div>
+            </div>
+        </div>
+
+        <div ng-show="showBig">
+            <!--se cierra al hacer click sobre el overlay o la imagen-->
+            <div class="overlay"></div>
+
+            <div class="big-img">
+                <img class="img-responsive" src="{{ $root.resources + '/' + bigImg }}" alt="{{ alt }}">
+            </div> <!--.big-img-->
+
+            <button ng-click="complete()" class="close-btn">X</button>
+        </div> 
+
+    </div> <!--/.block-content-->
+
+</div> <!--/.liz-radio-questions-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+    <div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+    <div data-failure></div>
+</div>

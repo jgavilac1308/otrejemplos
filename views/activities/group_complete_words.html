@@ -1,0 +1,75 @@
+<div class="liz-group-complete-words shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+			
+			<div ng-show="titleBlock || mainimg || examples"class="text-box">
+				<div ng-show="titleBlock" class="block" >{{ titleBlock }}</div>
+				<div class="block-content">
+					<div class="words-examples bg-1" ng-repeat="item in examples">{{ item }}</div>	
+					<p ng-show="blockText">{{ blockText }}</p>
+					<img class="main-img" ng-show="mainimg" src="{{ $root.resources + '/'  + mainimg }}" title="{{ titleBlock }}" style="{{ style }}">
+				</div>
+				
+			</div> <!--/.text-box-->
+
+			</div>
+			<div class="container-fluid complete-container {{customClass}}" ng-repeat="item in items" >
+				<span ng-if="item.name" class="item  {{ itemsrow }}">
+					<div ng-show="item.name" class="item-name {{ itemsrow }}">{{ item.name }}</div>
+				</span>
+
+				<div class="complete-words-container {{ itemsrow }} " ng-class="{'complete-words-no-name': !item.name}">
+
+					<div class="{{ item.resource ? 'col-md-9' : 'col-md-12' }}">
+						<span ng-repeat="word in item.words">
+							<div ng-show="word.isInput" class="input-container">
+								<input type="text" ng-model="word.input" ng-blur="verify(word,item)" ng-disabled="word.completed" value="{{ word.completed ? word.word : ''}}"/>
+								<div ng-show="word.right" class="right-answer scale1"></div>
+								<div ng-show="word.wrong" class="wrong-answer scale1"></div>
+								</input>
+							</div>
+							
+							<span  ng-hide="word.isInput" > {{ word.isInput ? "aquivainput" : word.word }}</span>
+							<!-- <span  ng-model="word.word" > {{ word.input ? "aquivainput" : word.word }}</span> -->
+						</span>
+						<div ng-show="item.callback" class="item-callback fc-1 bg-3">{{ item.callback }}</div>
+					</div>
+
+					<div  class="col-md-3">
+						<img ng-show="item.resource" class="img-responsive" src="{{ $root.resources + '/' + item.resource  }}" alt="{{ item.alt ? item.alt : item.resource }} " title="{{ item.title ? item.title : item.alt }}">
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

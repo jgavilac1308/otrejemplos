@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="es" ng-app="nat105">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+	<style>
+
+	.figure{
+		display: block;
+		cursor: pointer;
+		color: rgba(0, 0, 0, 0);
+		background: #009500;
+		margin: auto;
+		transition: all 0.5s ease-out;
+		-webkit-transition: all 0.5s ease-out;
+	}
+
+	.figure.is-selected{
+		background: #37C25E;
+	}
+
+	.rectangle{
+		margin-top: 0.2em;
+		width: 7.4em;
+		height: 3.5em;
+	}
+
+	.circle{
+		width: 4em;
+		height: 4em;
+		border-radius: 50%;
+	}
+
+	.square{
+		width: 4em;
+		height: 4em;
+	}
+
+	.triangle{
+		font-size: 35px;
+		width: 0px;
+		height: 0px;
+		background: transparent;
+		border-left: 1em solid rgba(0, 0, 0, 0);
+		border-right: 1em solid rgba(0, 0, 0, 0);
+		border-bottom: 1.765em solid #009500;
+	}
+	
+	.triangle.is-selected{
+		background: transparent;
+		border-bottom-color: #37C25E;
+	}
+
+
+	</style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="nat" ng-include src="'../views/common/include.html'"></div>
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<show-concepts 
+			options="data"
+			instruction="Haz clic sobre cada una de las figuras y descubre algunos ejemplos de forma."
+			description="Todos los objetos que hay a nuestro alrededor tienen características que los hacen diferentes, por ejemplo la forma, el tamaño, la textura, el peso y la consistencia.">
+		</show-concepts>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes y descubre algunos ejemplos de tamaño.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes y descubre algunos ejemplos de textura.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con4">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes y descubre algunos ejemplos de peso.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con5">
+		<click-images 
+			options="data"
+			instruction="Haz clic sobre cada una de las imágenes y descubre algunos ejemplos de consistencia.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1_1">
+		<tangram description="Haz clic sobre el botón iniciar para comenzar la actividad."
+			options="data">
+		</tangram>
+	</script>
+
+	<script type="text/ng-template" id="act1_2">
+		<tangram description="Haz clic sobre el botón iniciar para comenzar la actividad."
+			options="data">
+		</tangram>
+	</script>
+
+	<script type="text/ng-template" id="act1_3">
+		<tangram description="Haz clic sobre el botón iniciar para comenzar la actividad."
+			options="data">
+		</tangram>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<drag-drop-multiples options="data" description="Arrastra hasta la casa los objetos grandes y hasta el baúl los objetos pequeños.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: alt }">
+			</item>
+		</drag-drop-multiples>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<one-group
+			options="data" 
+			description="Arrastra hasta el camión los objetos pesados."
+			title="Camión">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<group-inputs
+			options="data" 
+			description="Con la ayuda de tus padres, escribe en cada recuadro tres objetos que cumplan con la propiedad indicada.">
+		</group-inputs>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

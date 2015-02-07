@@ -1,0 +1,77 @@
+<div class=" liz-complete-words liz-complete-words-select full-height shadow">
+	<!--Descripción-->
+	<div ng-if="isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<!--aquí va lo que se ponga dentro de la directiva-->
+			<div>
+				<h1 ng-show="title">{{ title }}</h1>
+				<p>{{ description }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="!isBottom" class="block">
+		<div class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+			<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono seleccion"/>
+			<span>{{ instruction }}</span>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio ng-if="audio" id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="vertical-align-inner">
+		<div ng-repeat="item in items" class="row wordsSelectRow">
+			<div class="col-md-1 blockNumber">
+				<span>
+					{{ item.number }}
+				</span>
+			</div>
+
+
+
+			<div class="col-md-11 wordsSelectText">
+                <!-- Maria Giraldo - Se incluye imagen como parametro del item-->
+                <div ng-if="item.img" class="col-md-5 hover-phrase-image"   class="img-responsive" >
+                    <img src="{{ $root.resources + '/'  + item.img}}" alt="{{item.alt}}" class="img-responsive" />
+                </div>
+                <!--fin-->
+
+                <div  class="word">
+                    <span ng-repeat="word in item.words" >
+                        <div ng-show="word.isInput" class="input-container">
+                            <select ng-options="o as o for o in word.options" ng-model="word.input" ng-change="verify(word)" ng-disabled="word.completed" style="{{options.styleselect}}"></select>
+                            <div ng-show="word.right" class="right-answer scale1"></div>
+                            <div ng-show="word.wrong" class="wrong-answer scale1"></div>
+                        </div>
+
+                        <span ng-hide="word.isInput" > {{ word.isInput ? "aquivainput" : word.word }}</span>
+                        <!-- <span  ng-model="word.word" > {{ word.input ? "aquivainput" : word.word }}</span> -->
+                    </span>
+                </div>
+			</div>
+		</div>
+	</div>
+
+</div> <!--/.liz-complete-table-inputs-->
+
+<div ng-if="isBottom" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>
+
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

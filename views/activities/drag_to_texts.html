@@ -1,0 +1,42 @@
+<div class="liz-drag-to-texts full-height shadow">
+
+    <div class="block">
+        <p class="clearfix">
+            <img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+            <img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+            <img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+            <span>{{ description }}</span>
+        </p>
+    </div>
+
+    <!--audio-->
+    <audio id="audio-instruction" preload="auto">
+        <source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+    </audio>
+
+    <div class="block-content">
+
+        <div class="main-img">
+            <img class="img-responsive" src="{{ $root.resources }}/{{ src }}" alt="{{ alt }}"/>
+        </div>
+        <div class="template-container bd-1"></div>
+    </div>
+       <div class="txt">
+            <div class="items">
+        <div ng-repeat="item in items" class="item bg-1" ng-show="item.text" data-drag="true" data-jqyoui-options="{ revert: 'invalid', helper: 'clone' }" ng-model="items"
+                    jqyoui-draggable="{index: {{$index}}, placeholder: 'keep' }">{{ item.text }}
+        </div>
+    </div>
+       </div>
+    
+
+</div>
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+    <div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+    <div data-failure></div>
+</div>

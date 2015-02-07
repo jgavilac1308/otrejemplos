@@ -1,0 +1,67 @@
+<div class="liz-image-group-drop full-height shadow">
+
+<!-- FACES -->
+<img data-bind="flash: rightAnswer" class="face" src="../resources/common/icon_right.png" alt="cara feliz - Felicitaciones"/>
+<img data-bind="flash: wrongAnswer" class="face" src="../resources/common/icon_wrong.png" alt="cara triste - sigue intentándolo"/>
+<!-- END FACES -->
+
+<!--elemento necesario para hacer la tranclusión-->
+<div class="transcluded" ng-transclude></div>
+
+<div class="row">
+	<div class="col-xs-12">
+
+		<div class="block">
+			<p class="clearfix">
+			<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+			<img data-bind="visible: audio, click: playAudio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar"/>
+			<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+			<span>{{ description }}</span>
+			</p>
+		</div>
+		
+		<!--audio-->
+		<audio id="audio-instruction" preload="auto">
+			<source data-bind="attr: { src: resources + '/' + audio() + '.mp3'  }" type="audio/mpeg">
+		</audio>
+
+		<!--Actividad-->
+		<div class="block-content">
+			<h4 data-bind="text: topText"></h4>
+
+			<div class="clearfix">
+				<div class="main-img">
+					<img class="img-responsive" data-bind="attr: { src: resources + '/' + bg.src, alt: bg.alt }">
+
+					<div class="groups" data-bind="foreach: groups">
+						<div class="group" data-bind="attr: { style: $root.getGroupStyles($data) }">
+							<div class="group-inner" data-bind="sortable: { data: sortable }">
+								<div class="item" data-bind="text: text, attr: { style: $root.getItemStyles($data) }"></div>
+							</div>
+						</div> <!--.group-->
+					</div> <!--.groups-->
+
+				</div> <!--.main-img-->
+
+				<div class="stack" data-bind="sortable: stack">
+					<div class="item" data-bind="text: text"></div>
+				</div> <!--.stack-->
+
+			</div> <!--.clearfix-->
+
+			<h4 data-bind="html: bottomText"></h4>
+		</div> <!--/.block-content-->
+
+	</div> <!--/.col-->
+</div> <!--/.row-->
+
+<!-- CALIFICATIONS -->
+<div data-bind="visible: success">
+	<div data-congratulations></div>
+</div>
+
+<div data-bind="visible: failure">
+	<div data-failure></div>
+</div>
+
+</div> <!--/.liz-image-group-drop-->

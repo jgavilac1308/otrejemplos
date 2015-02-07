@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="mat107">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+	<style>
+
+		.red-circle{
+			width: 5.3em;
+			height: 5.3em;
+			background: #ED1C24;
+			border-radius: 50%;
+		}
+
+		.green-square{
+			width: 5.3em;
+			height: 5.3em;
+			background: #00A651;
+		}
+
+		.blue-triangle{
+			font-size: 50px;
+			width: 0;
+			height: 0;
+			border-left: 1em solid transparent;
+			border-right: 1em solid transparent;
+			border-bottom: 1.732em solid #1970B8;
+		}
+
+		.yellow-rectangle{
+			width: 8.3em;
+			height: 5.3em;
+			background: #FFEC0F;
+		}
+
+	</style>
+	
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="mat" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<text1
+			description-top="En esta lección vamos a realizar un repaso de algunos de los temas que vimos durante todas las lecciones. ¡Mucha suerte!"
+			img="nino-estudiando.png"
+			alt="Niño estudiando en su computador" >
+		</text1>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<compare-sample options="data" description="Selecciona en cada fila, la figura igual a la muestra.">
+		</compare-sample>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<sound-group
+			options="data"
+			description="Haz clic sobre el ícono de sonido y luego arrastra al conjunto los elementos que pertenecen a él.">
+		</sound-group>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<sequences options="data"
+			description="Arrastra y completa la siguiente secuencia con los objetos.">
+		</sequences>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<count-elements
+			options="data"
+			description="Arrastra al recuadro el número que indica la cantidad de elementos.">
+		</count-elements>
+	</script>
+
+	<script type="text/ng-template" id="act5">
+		<count-elements2
+			options="data"
+			description="Haz clic sobre cada recuadro y escribe el número de los siguientes objetos que encuentras en tu casa.">
+		</count-elements2>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

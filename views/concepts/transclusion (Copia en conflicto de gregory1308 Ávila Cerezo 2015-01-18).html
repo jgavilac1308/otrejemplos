@@ -1,0 +1,39 @@
+<div class="liz-transclusion shadow clearfix">
+
+	<div class="block clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono ayuda"/>
+		<img ng-show="audio" class="icon-play-description"src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+        <img ng-hide="instruction || !arrow || addicon" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+        <img ng-hide="instruction || !mouse" ng-show="mouse" src="../resources/common/icono mouse.png" alt="ícono deslizar mouse"/>
+        <img ng-show="addicon" src="{{ '../resources/common/'+ addicon + '.png' }}" alt="ícono observar "/>
+		<div>
+			<h1 ng-show="title">{{ title }}</h1>
+			<p ng-bind-html="sanitize(description)"></p>
+		</div>
+	</div>
+	
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<!--la transclusión se da acá-->
+	<div class="block-content clearfix" ng-transclude></div>
+</div>
+
+<div ng-show="instruction" class="block bottom">
+<div ng-show="addAudio" class="add-audio bg-1">
+               <img class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="add-audio" on="click"/>
+            </div>
+
+            <!--audio-->
+            <audio id="add-audio" preload="auto">
+                <source src="{{ $root.resources + '/'  + addAudio + '.mp3' }}" type="audio/mpeg">
+            </audio>
+	<p class="clearfix">
+	<img ng-hide="mouse" src="../resources/common/icono seleccion.png" alt="ícono seleccionar"/>
+
+	<img ng-show="mouse" src="../resources/common/icono mouse.png" alt="ícono deslizar mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

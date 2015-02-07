@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="es" ng-app="nat106">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+	<style>
+
+	
+
+	</style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="nat" ng-include src="'../views/common/include.html'"></div>
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+        <show-concepts-text
+                options="data"
+                instruction="Haz clic sobre los círculos y descubre los estados de la materia."
+                description="La materia es todo aquello que podemos ver y tocar, pero también son materia las cosas que no podemos tocar como por ejemplo el aire. La materia la podemos encontrar en tres estados: líquido, sólido y gaseoso."
+                noplay="true"
+        </show-concepts-text>
+    </script>
+
+	<script type="text/ng-template" id="act1">
+		<pairs options="options" description="Arrastra cada líquido hacia el recipiente que lo contiene.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<pairs options="options" description="Arrastra cada elemento sólido de arriba hacia el elemento sólido de abajo que tiene la misma forma.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src1 + '.png', alt: alt1 }" >
+			</item>
+			<target>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src2 + '.png', alt: alt2 }" >
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<choose-items options="data" description="Haz clic sobre los objetos que funcionan con gas.">
+			<div class="choose-items-img bd-1 no-padding" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" style="width: 29%;border: solid;margin: 20px;">
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}" >
+				<div class="bg-1" style="width: 100%;padding: 10px 0 10px 0 ;text-align: center;color: white;font-size: 25px">{{ item.title }}</div>
+			</div>
+		</choose-items>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+        <complete-inputs-description
+                options="data"
+                instruction="Haz clic sobre cada recuadro y escribe el estado de la materia que representa cada imagen."
+        </complete-inputs-description>
+    </script>
+
+    <script type="text/ng-template" id="act5">
+		<group-inputs
+			options="data" 
+			description="Con la ayuda de tus padres, escribe en cada recuadro tres ejemplos de materiales que puedes encontrar en estado sólido, líquido y gaseoso.">
+		</group-inputs>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

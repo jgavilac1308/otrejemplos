@@ -1,0 +1,63 @@
+<div class="liz-group-complete-text shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+			
+			</div>
+
+				<div class="complete-container" ng-show="options.img" >
+						<p ng-repeat="img in options.img" ng-show="img.text">{{ img.text }}</p>
+						<a ng-show="img.link" ng-repeat="img in options.img" href="{{ img.link }}" target="blank"><img class="img-responsive" src="{{ $root.resources + '/' + img.resource + '.png' }}" alt="{{ img.alt ? img.alt : img.resource }} " title="{{ img.title ? img.title : '' }}"></a>	
+						<img  ng-hide="img.link" ng-repeat="img in options.img" class="img-responsive" src="{{ $root.resources + '/' + img.resource + '.png' }}" alt="{{ img.alt ? img.alt : img.resource }} " title="{{ img.title ? img.title : '' }}" style="{{ img.style }} ">				
+											
+				</div>
+			
+				<div class="complete-container {{ customClass }}" style="{{getStyles()}}" ng-repeat="item in items" >
+					<span  class="item">
+						<div ng-hide="item.resource" class="item-name">{{ item.name }}</div>
+						<img style="cursor:pointer" play="{{'audio-' + item.name }}" on="click" ng-show="item.resource" class="img-responsive" src="{{ $root.resources + '/' + item.resource + '.png' }}" alt="{{ item.alt ? item.alt : item.resource }} " title="{{ item.title ? item.title : item.alt }}">
+
+						<!--audio-->
+						<audio id="{{'audio-' + item.name }}" preload="auto">
+							<source src="{{ $root.resources + '/'  + item.sound + '.mp3' }}" type="audio/mpeg">
+						</audio>
+					</span>
+
+					<div class="complete-words-container">
+						<textarea rows="3" placeholder="Escribe aqui" type="text" ng-model="item.input" ng-blur="verify(item)" ng-disabled="item.completed"/>
+						<div ng-show="item.right" class="right-answer scale1"></div>
+						<div ng-show="item.wrong" class="wrong-answer scale1"></div>
+						</textarea>
+					</div>
+				</div>
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

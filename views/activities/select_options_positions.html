@@ -1,0 +1,69 @@
+<div class="liz-select-options-positions shadow full-height clearfix">
+
+	<!--Descripción-->
+	<div class="block">
+		<p class="clearfix">
+		<div class="help">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+        <span class="tooltip8">
+		<img  class="img-rounded" style="width:100%;" src="../resources/common/ayuda.gif"/>
+		</span>
+		</div>
+		<div class="lastear">
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+        <span class="tooltip6">
+		<img  class="img-rounded" style="width:100%;" src="../resources/common/sonido.gif"/>
+		</span>
+		</div>
+		<div class="select">
+		<img src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+        <span class="tooltip6"><img  class="img-rounded" style="width:100%;" src="../resources/common/click.gif"/>
+        </span>
+		</div>
+		<span>{{ description }}</span>
+		</p>
+	</div>
+
+			
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content vertical-align">
+
+		<div class="vertical-align-inner">
+
+				<div class="section2">	
+					<img class="main-img" ng-show="canvas" src="{{ $root.resources + '/'  + canvas }}" title="{{ titlecanvas }}">
+					<div class="replace-canvas" ng-hide="canvas" style="{{ canvasStyle }}"></div>
+						<div ng-repeat="item in items" class="item-target {{ item.img || item.name ? item.h >= 100 ? 'border-3px bd-1' : '' : 'bg-1' }} {{ selectindividual ? 'item-border' : '' }} {{ item.completed ? 'bd-disabled' : 'bd-1' }}" style="{{ getTargetsStyles(item) }}" >
+
+							<img class="main-img" ng-show="item.img" src="{{ $root.resources + '/'  + item.img }}" title="{{ item.titleimg }}" alt="{{ item.altimg }}">
+
+							<span ng-hide="item.img"  ng-bind-html="sanitize(item.name)" ></span>
+							<div class="item-title" ng-hide="!item.title" > {{ item.title }}</div>
+
+							<select ng-if="!selectindividual" ng-model="item.selectedAnswer" ng-options="a.text for a in item.options" ng-change="verify(item) " ng-disabled="item.completed"></select>
+
+							<div ng-if="selectindividual" ng-click="verify2(a,item)" ng-repeat="a in item.options"class="items-select-individual {{ item.completed ? 'is-disable' : 'bg-1' }} {{ a.istrue ? 'is-true' : '' }} {{ a.isfalse ? 'is-false' : '' }}" style="width: {{ (100 - (itemsPerRow*4)) / itemsPerRow }}%">{{ a.text }}</div>
+
+		                    <div  ng-show="item.right" class="right-answer scale1" ></div>
+							<div  ng-show="item.wrong" class="wrong-answer scale1" ></div>
+						</div>				
+				</div>
+			
+		</div>
+	</div>
+		
+
+</div> <!--/.row.liz-complete-words-->
+
+<!-- CALIFICATIONS -->
+<div ng-show="success">
+	<div data-congratulations></div>
+</div>
+
+<div ng-show="failure">
+	<div data-failure></div>
+</div>

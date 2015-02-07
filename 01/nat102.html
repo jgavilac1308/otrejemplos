@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="nat102">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+	<style>
+
+		/* Actividad 5 */
+		.act-5-target{
+			border: 3px solid #009500;
+			min-height: 200px;
+		}
+
+		.act-5-target-title{
+			background: #009500;
+			color: #fff;
+			padding: 0.4em;
+			font-size: 1.1em;
+		}
+
+		.act-5-item-target{
+			margin-top: 4em;
+		}
+
+	</style>
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="nat" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<click-images 
+			options="data"
+			description="Las plantas son seres vivos que nacen, crecen, se alimentan, se reproducen y mueren. Para crecer sanas y fuertes, las plantas necesitan del suelo, el aire, el agua, la luz y de las personas que deben protegerlas y cuidarlas para el beneficio de todos. ¿Cómo cuidas las plantas?"
+			instruction="Haz clic sobre cada unas de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<show-parts 
+			options="data"
+			title="Las partes de las plantas"
+			description="Haz clic sobre cada uno de los círculos y descubre las partes de la planta y su función.">
+		</show-parts>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-images 
+			options="data"
+			description="La mayoría de las plantas pueden reproducirse por medio de las semillas, es decir, una planta produce muchas semillas de las que más tarde nacen nuevas plantas. Otras plantas, utilizan algunas de sus partes para reproducirse, por ejemplo tallos, raíces, ramas y hojas."
+			instruction="Haz clic sobre cada unas de las imágenes.">
+		</click-images>
+	</script>
+
+	<script type="text/ng-template" id="con4">
+		<show-concepts 
+			options="data"
+			instruction="Haz clic sobre cada círculo y descubre la clasificación de las plantas."
+			description="Las plantas cuando son pequeñas son muy similares entre ellas, pero a medida que van creciendo se van diferenciando en características tales como la forma, el tamaño, los frutos, las flores, y también en sus usos. Las plantas de acuerdo a sus características pueden clasificarse en hierbas, arbustos y árboles.">
+		</show-concepts>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<choose-items options="data" description="Selecciona las imágenes que representan los elementos que las plantas necesitan para poder vivir.">
+			<div class="choose-items-img" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" style="width: 16.666%">
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}">
+			</div>
+		</choose-items>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<one-group 
+			options="data"
+			title="Canasta"
+			description="Arrastra al recuadro los frutos que tienen semillas.">
+		</one-group>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<puzzle4 
+			options="data"
+			description="Arrastra cada parte de la planta sobre el círculo que la señala en la imagen.">
+		</puzzle4>
+	</script>
+
+	<script type="text/ng-template" id="act4">
+		<pairs options="options" description="Arrastra cada parte de la planta hacia la función con la cual esta relacionada.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" >
+			</item>
+			<target>
+				<div style="min-height: 5em; display: flex; align-items: center; justify-content: center; ">
+					<p data-bind="text: title"></p>
+				</div>
+			</target>
+		</pairs>
+	</script>
+
+	<script type="text/ng-template" id="act5">
+		<pairs options="options" description="Arrastra hasta el recuadro la imagen relacionada con los servicios que nos proporcionan las plantas.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" >
+			</item>
+			<target>
+				<div class="act-5-target">
+					<div class="act-5-target-title" data-bind="text: title"></div>
+				</div>
+			</target>
+			<item-target>
+				<img class="img-responsive act-5-item-target" data-bind="attr: { src: $root.resources + '/' + src + '.png', alt: alt }" >
+			</item-target>
+		</pairs>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+

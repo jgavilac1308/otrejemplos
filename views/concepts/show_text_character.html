@@ -1,0 +1,51 @@
+<div class="liz-show-text-character shadow">
+
+	<!--Descripción-->
+	<div class="block">
+		<div class="clearfix">
+		<img src="../resources/common/iconoayuda.png" alt="ícono mouse"/>
+		<img ng-show="audio" class="icon-play-description" src="../resources/common/icono-oido.png" alt="ícono escuchar" play="audio-instruction" on="click"/>
+		<h1 ng-show="title">{{ title }}</h1>
+		<p>{{ description }}</p>
+		</div>
+	</div> <!--/.block-->
+
+	<!--audio-->
+	<audio id="audio-instruction" preload="auto">
+		<source src="{{ $root.resources + '/'  + audio + '.mp3' }}" type="audio/mpeg">
+	</audio>
+
+	<div class="block-content clearfix">
+
+		<div class="items" style="{{ itemsStyle }}">
+			<div class="item" ng-repeat="item in items" style="{{ getItemStyles() }}">
+
+				<!--si el objeto tiene una clase personalizada, se reemplaza por inner-item-->
+				<div ng-show="item.number" class=" {{ item.customClass ? item.customClass : 'inner-item' }} {{ item === selectedItem ? 'is-selected' : '' }}" 
+					><div class="inner-item-inner"  ng-click="selectItem(item)" play="audio-{{ item.src }}" on="click">{{ item.number }}</div>
+					
+
+					<!--audio element-->
+					<audio id="audio-{{ item.src }}" preload="auto">
+						<source src="{{ $root.resources + '/'  + item.src + '.mp3' }}" type="audio/mpeg">
+					</audio>
+				</div> <!--/.inner-item-->
+				
+				<div class=" {{ item.customClass ? item.customClass : 'inner-title' }} {{ item === selectedItem ? 'is-selected' : '' }}" ng-show="item.title" ng-click="selectItem(item)" play="audio-{{ item.src }}" on="click" >{{ item.title }}</div>
+			</div> <!--/.item-->
+		</div> <!--/.items-->
+
+		<div class="text-box" style="{{ itemsStyle }}">
+			<img class="main-img"ng-show="mainimg" src="{{ $root.resources + '/'  + mainimg }}" alt="{{ alt }}" style="{{ imgStyle }}">
+		</div> <!--/.text-box-->
+
+	</div> <!--/.block-content-->
+
+</div> <!--/.liz-show-concepts-->
+
+<div ng-show="instruction" class="block bottom">
+	<p class="clearfix">
+	<img ng-hide="priority" src="../resources/common/icono seleccion.png" alt="ícono mouse"/>
+	<span>{{ instruction }}</span>
+	</p>
+</div>

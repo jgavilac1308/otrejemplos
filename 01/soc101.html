@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" ng-app="soc101">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/app.css">
+
+</head>
+<body>
+	<!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<!-- Solo se cambia la clase según la actividad -->
+	<div id="container" class="soc" ng-include src="'../views/common/include.html'"></div>
+
+
+	<!--templates-->
+	<script type="text/ng-template" id="con1">
+		<text1
+			description-top="Debemos procurar conservar nuestros espacios limpios y organizados, así mismo comprometernos con el cuidado y la preservación del medio ambiente."
+			title="¿Qué es el medio ambiente?"
+			description="El medio ambiente es todo aquello que nos rodea (seres vivos, objetos, agua, suelo, aire) es importante contribuir al cuidado de nuestro medio ambiente evitando dañarlo o contaminarlo."
+			img="concept1.png"
+			alt="Niño y niña caminando por el campo, rodeados de flores y animales">
+		</text1>
+	</script>
+
+	<script type="text/ng-template" id="con2">
+		<click-images 
+			options="data"
+			title="¿Cómo puedo cuidar mi entorno y medio ambiente?"
+			description="Desde nuestro hogar podemos ayudar a la conservación y preservación de nuestro entorno y medio ambiente. En casa podemos mantener siempre nuestro lugar de estudio organizado y libre de basura."
+			instruction="Haz clic sobre cada una de las imágenes."
+		></click-images>
+	</script>
+
+	<script type="text/ng-template" id="con3">
+		<click-transition 
+			options="data"
+			description="Podemos ahorrar agua cerrando la llave mientras nos cepillamos los dientes o nos enjabonamos."
+			instruction="Haz clic sobre la imagen."
+		></click-transition>
+	</script>
+
+	<script type="text/ng-template" id="con4">
+		<click-transition 
+			options="data"
+			description="Cuando no estemos usando un bombillo, el televisor, el computador o la radio debemos apagarlos para así no consumir mucha energía."
+			instruction="Haz clic sobre cada una de las imágenes."
+		></click-transition>
+	</script>
+
+	<script type="text/ng-template" id="con5">
+		<click-images 
+			options="data"
+			description="Cuando estemos en la calle es importante evitar arrojar basuras al suelo, así reduciremos la contaminación."
+			instruction="Haz clic sobre la imagen."
+		></click-images>
+	</script>
+
+	<script type="text/ng-template" id="act1">
+		<choose-items options="data" description="Haz clic sobre las imágenes que estén relacionadas con el cuidado y la preservación del medio ambiente.">
+			<div class="choose-items-img" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" style="width: 16.6666666%">
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.jpg' }}" alt="{{ item.alt }}" title="{{ item.title }}">
+			</div>
+		</choose-items>
+	</script>
+
+	<script type="text/ng-template" id="act2">
+		<choose-items options="data" description="Haz clic sobre las imágenes que estén relacionadas con el cuidado y la preservación del medio ambiente.">
+			<div class="choose-items-img" ng-repeat="item in data.items" ng-click="$parent.$$prevSibling.verify(item)" 
+				play="audio-{{ item.src }}" on="click"
+				style="width: 33.333%">
+
+				<img class="img-responsive" src="{{ $root.resources + '/' + item.src + '.png' }}" alt="{{ item.alt }}">
+
+				<!--audio-->
+				<audio id="audio-{{ item.src }}" preload="auto">
+					<source src="{{ $root.resources + '/'  + item.src + '.mp3' }}" type="audio/mpeg">
+				</audio>
+			</div>
+		</choose-items>
+	</script>
+
+	<script type="text/ng-template" id="act3">
+		<drag-drop-multiples options="data" description="Arrastra a uno de los recuadros cada uno de los objetos de acuerdo a su ubicación correcta.">
+			<item>
+				<img class="img-responsive" data-bind="attr: { src: $root.resources + '/' + resource + '.png', alt: alt }">
+			</item>
+		</drag-drop-multiples>
+	</script>
+
+	<script type="text/ng-template" id="act4_1">
+		<one-group options="data" description="Arrastra al recuadro las imágenes relacionadas con la contaminación."> </one-group>
+	</script>
+
+	<script type="text/ng-template" id="act4_2">
+		<one-group options="data" description="Arrastra al recuadro las imágenes relacionadas con la protección del medio ambiente."> </one-group>
+	</script>
+
+	<script src="../scripts/vendor.js"></script>
+	<script src="../scripts/app.js"></script>
+
+	<script>
+		// Requerido para activar el autoreload
+		window.brunch = window.brunch || {};
+	</script>
+
+</body>
+</html>
+
